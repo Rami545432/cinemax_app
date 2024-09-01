@@ -1,6 +1,5 @@
-import 'package:cinemax_app/core/utils/sub_bar.dart';
 import 'package:cinemax_app/features/home/presentaion/views_models/widgets/categoty_section.dart';
-import 'package:cinemax_app/features/home/presentaion/views_models/widgets/film_card_list_builder.dart';
+import 'package:cinemax_app/features/home/presentaion/views_models/widgets/popular_movies_bloc_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:cinemax_app/core/utils/search_box.dart';
 import 'package:cinemax_app/features/home/presentaion/views_models/widgets/horizental_film_card.dart';
@@ -31,17 +30,7 @@ class HomeViewBody extends StatelessWidget {
         SizedBox(
           height: 32,
         ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24),
-          child: SubBar(
-            title: 'Most popular',
-            textbutton: 'See All',
-          ),
-        ),
-        SizedBox(
-          height: 16,
-        ),
-        FilmCardListView(),
+        PopularMoivesBlocBuilder(),
       ],
     );
   }

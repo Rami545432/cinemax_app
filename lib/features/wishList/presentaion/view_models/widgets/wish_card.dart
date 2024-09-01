@@ -1,5 +1,3 @@
-
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cinemax_app/features/wishList/presentaion/view_models/widgets/wish_card_column_comp.dart';
 import 'package:flutter/material.dart';

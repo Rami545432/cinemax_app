@@ -14,7 +14,6 @@ class AddwishlistCubit extends Cubit<AddwishlistState> {
     emit(
       AddwishlistLoaded(items: wishList),
     );
-    print('added  ${wishList.length}');
   }
 
   void removeWishList(WishModel item) {
@@ -22,6 +21,5 @@ class AddwishlistCubit extends Cubit<AddwishlistState> {
     emit(
       AddwishlistRemoved(wishList: wishList.toList()),
     );
-    print('removed  ${wishList.length}');
   }
 }

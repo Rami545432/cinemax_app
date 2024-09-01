@@ -1,8 +1,6 @@
-
 import 'package:cinemax_app/core/utils/app_styles.dart';
 import 'package:cinemax_app/core/utils/rating.dart';
 import 'package:flutter/material.dart';
-
 
 class WishCardColumnComponets extends StatelessWidget {
   const WishCardColumnComponets({

@@ -15,7 +15,9 @@ class FetchNewsetMoviesCubit extends Cubit<FetchNewsetMoviesState> {
     );
     var results = await fetchNewstMovieCase.call();
     results.fold((failure) {
-     emit(FetchNewsetMoviesFailure(errorMessage: failure.errorMessage),);
+      emit(
+        FetchNewsetMoviesFailure(errorMessage: failure.errorMessage),
+      );
     }, (movies) {
       emit(
         FetchNewsetMoviesSuccess(

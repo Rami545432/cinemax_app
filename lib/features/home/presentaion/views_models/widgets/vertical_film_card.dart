@@ -1,38 +1,48 @@
+import 'package:cinemax_app/constant.dart';
 import 'package:cinemax_app/core/utils/app_colors.dart';
 import 'package:cinemax_app/core/utils/app_styles.dart';
 import 'package:cinemax_app/core/utils/go_router.dart';
 import 'package:cinemax_app/core/utils/rating.dart';
+import 'package:cinemax_app/features/home/domian/entites/entity.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class VerticalFilmCard extends StatelessWidget {
-  const VerticalFilmCard({super.key});
-
+  const VerticalFilmCard({super.key, required this.movieEntity});
+  final MovieEntity movieEntity;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context).push(Approuter.kDetailView);
+        GoRouter.of(context).push(Approuter.kDetailView, extra: movieEntity);
       },
       child: Column(
         children: [
-          const Stack(
+          Stack(
             children: [
-              Image(
-                image: AssetImage('assets/images/SpiderMan.png'),
-                width: 135,
-                height: 178,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Image(
+                  image: NetworkImage('$baseImageUrl${movieEntity.image}'),
+                  width: 135,
+                  height: 178,
+                ),
               ),
               Positioned(
-                left: 75,
+                left: MediaQuery.of(context).size.width * 0.185,
                 top: 10,
-                child: Rating(),
+                child: Rating(
+                  movieEntity: movieEntity,
+                ),
               ),
             ],
           ),
           Container(
-            decoration: BoxDecoration(color: AppPrimaryColors.soft),
-            width: 135,
+            decoration: BoxDecoration(
+              color: AppPrimaryColors.soft,
+              borderRadius: BorderRadius.circular(6),
+            ),
+            width: MediaQuery.of(context).size.width * 0.33,
             height: 56,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -40,14 +50,14 @@ class VerticalFilmCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Spider-Man No..',
+                    movieEntity.moviTtitle,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: AppStyles.textstyle14
                         .copyWith(fontWeight: FontWeight.w600),
                   ),
-                  const Text(
-                    'Action',
+                  Text(
+                    getGenreName(movieEntity.gener[0]),
                     style: AppStyles.textstyle12,
                   ),
                 ],

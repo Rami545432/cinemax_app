@@ -11,13 +11,12 @@ import 'core/utils/functions/statues_bar.dart';
 import 'core/utils/go_router.dart';
 
 void main() async {
-   WidgetsFlutterBinding.ensureInitialized();
-   await hiveInitialize();
+  WidgetsFlutterBinding.ensureInitialized();
+  await hiveInitialize();
   runApp(const MyApp());
   setStatuesBarColor();
- 
+
   serviceLocator();
-  
 
   Bloc.observer = SimpleBlocObserver();
 }

@@ -1,11 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cinemax_app/constant.dart';
 import 'package:cinemax_app/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
 class FilmCastInfo extends StatelessWidget {
   const FilmCastInfo({
-    super.key,
+    super.key, required this.actorName, required this.actorImage,
   });
+final String actorName,actorImage;
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +19,11 @@ class FilmCastInfo extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(32),
             child: CachedNetworkImage(
+              errorWidget: (context, url, error) {
+                return const Icon(Icons.cancel_rounded);
+              },
                 imageUrl:
-                    'https://image.tmdb.org/t/p/w500//k21WcVCo5TAhKPEAMXSO5g9HC21.jpg'),
+                    '$baseImageUrl$actorImage'),
           ),
         ),
         const SizedBox(
@@ -28,7 +33,7 @@ class FilmCastInfo extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Jay DeVon Johnson',
+              actorName,
               style:
                   AppStyles.textstyle14.copyWith(fontWeight: FontWeight.w600),
             ),

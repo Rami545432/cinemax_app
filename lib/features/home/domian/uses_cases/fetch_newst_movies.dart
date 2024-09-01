@@ -6,13 +6,11 @@ import 'package:dartz/dartz.dart';
 import '../entites/entity.dart';
 
 class FetchNewstMovieCase extends UseCase<List<MovieEntity>, NoParam> {
- final HomeRepo homeRepo;
+  final HomeRepo homeRepo;
 
   FetchNewstMovieCase({required this.homeRepo});
   @override
   Future<Either<Failure, List<MovieEntity>>> call([NoParam? parameter]) {
-   return homeRepo.fetchNewsetMovies();
-    
+    return homeRepo.fetchNewsetMovies();
   }
 }
-

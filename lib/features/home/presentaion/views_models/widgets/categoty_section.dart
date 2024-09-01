@@ -1,7 +1,11 @@
 import 'package:cinemax_app/constant.dart';
 import 'package:cinemax_app/core/utils/app_styles.dart';
+import 'package:cinemax_app/features/home/domian/entites/entity.dart';
+import 'package:cinemax_app/features/home/presentaion/manger/fetch_popular_movie_cubit/fetch_popular_movies_cubit.dart';
 import 'package:cinemax_app/features/home/presentaion/views_models/widgets/category_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class CategoriesSections extends StatefulWidget {
   const CategoriesSections({super.key});
@@ -17,7 +21,8 @@ class _CategoriesSectionsState extends State<CategoriesSections> {
       _selectedIndex = index;
     });
   }
-
+@override
+  
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -43,8 +48,17 @@ class _CategoriesSectionsState extends State<CategoriesSections> {
                 for (int i = 0; i < buttonTexts.length; i++)
                   CategoryButton(
                       text: buttonTexts[i],
-                      onTap: () {
+                      onTap: () async {
                         _onButtonPressed(i);
+                        await Hive.box<MovieEntity>(popularBox).clear();
+                        // ignore: use_build_context_synchronously
+                        await BlocProvider.of<FetchPopularMoviesCubit>(context)
+                            .fetchPopularMovie(
+                          getGenreId(
+                            buttonTexts[i],
+                          ),
+                        );
+                        
                       },
                       isSelected: _selectedIndex == i),
               ],

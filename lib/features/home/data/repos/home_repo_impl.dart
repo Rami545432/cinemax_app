@@ -2,6 +2,7 @@ import 'package:cinemax_app/core/utils/errors/errors.dart';
 import 'package:cinemax_app/features/home/data/data_soureces/local_home_data_source.dart';
 import 'package:cinemax_app/features/home/data/data_soureces/remote_home_data_source.dart';
 import 'package:cinemax_app/features/home/domian/entites/entity.dart';
+import 'package:cinemax_app/features/home/domian/entites/movie_details_entity.dart';
 import 'package:cinemax_app/features/home/domian/repos/home_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -13,13 +14,13 @@ class HomeRepoImpl extends HomeRepo {
   HomeRepoImpl(
       {required this.remoteHomeDataSource, required this.localHomeDataSource});
   @override
-  Future<Either<Failure, List<MovieEntity>>> fetchMostPopularMovies() async {
+  Future<Either<Failure, List<MovieEntity>>> fetchMostPopularMovies(dynamic generId) async {
     try {
       var cachedMovies = localHomeDataSource.fetchMostPopularMovies();
       if (cachedMovies.isNotEmpty) {
         return right(cachedMovies);
       }
-      var movies = await remoteHomeDataSource.fetchMostPopularMovies();
+      var movies = await remoteHomeDataSource.fetchMostPopularMovies(generId);
       return right(movies);
     } catch (e) {
       if (e is DioException) {
@@ -42,6 +43,25 @@ class HomeRepoImpl extends HomeRepo {
       }
       var movie = await remoteHomeDataSource.fetchNewsetMovies();
       return right(movie);
+    } catch (e) {
+      if (e is DioException) {
+        ServerFailure.fromDioError(e);
+      }
+      return left(
+        ServerFailure(
+          errorMessage: e.toString(),
+        ),
+      );
+    }
+  }
+  
+  @override
+  Future<Either<Failure, List<MovieDetailsEntity>>> fetchMoviesDetails(int movieid) async{
+   
+   try {
+     
+      var movies = await remoteHomeDataSource.fetchMovieDetails(movieid);
+      return right(movies);
     } catch (e) {
       if (e is DioException) {
         ServerFailure.fromDioError(e);

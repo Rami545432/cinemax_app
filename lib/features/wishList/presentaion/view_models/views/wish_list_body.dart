@@ -1,7 +1,6 @@
 import 'package:cinemax_app/core/utils/main_app_bar.dart';
 import 'package:flutter/material.dart';
 
-
 class WishListBody extends StatelessWidget {
   const WishListBody({super.key});
 
@@ -14,10 +13,8 @@ class WishListBody extends StatelessWidget {
             height: 8,
           ),
           MainAppBar(title: 'WishList'),
-     
         ],
       ),
     );
   }
 }
-

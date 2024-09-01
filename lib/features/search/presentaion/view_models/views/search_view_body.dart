@@ -1,8 +1,8 @@
 import 'package:cinemax_app/core/utils/app_styles.dart';
 import 'package:cinemax_app/core/utils/row_category_buttons.dart';
 import 'package:cinemax_app/core/utils/sub_bar.dart';
-import 'package:cinemax_app/features/home/presentaion/views_models/widgets/film_card_list_builder.dart';
 import 'package:cinemax_app/features/search/presentaion/view_models/widgets/film_search_result_card.dart';
+import 'package:cinemax_app/features/search/presentaion/view_models/widgets/search_film_card_list_view.dart';
 import 'package:cinemax_app/features/search/presentaion/view_models/widgets/search_text_field.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +38,7 @@ class NoSearchViewBody extends StatelessWidget {
           SizedBox(
             height: 16,
           ),
-          FilmCardListView(),
+          SearchCardListView(),
         ],
       ),
     );

@@ -6,10 +6,16 @@ import 'package:cinemax_app/features/auth/presentaion/views_models/views/sign_in
 import 'package:cinemax_app/features/auth/presentaion/views_models/views/sign_up_view.dart';
 import 'package:cinemax_app/features/auth/presentaion/views_models/views/verify_account_view.dart';
 import 'package:cinemax_app/features/home/data/repos/home_repo_impl.dart';
+import 'package:cinemax_app/features/home/domian/entites/entity.dart';
+import 'package:cinemax_app/features/home/domian/entites/movie_details_entity.dart';
 import 'package:cinemax_app/features/home/domian/uses_cases/fetch_most_popular.dart';
+import 'package:cinemax_app/features/home/domian/uses_cases/fetch_movie_details.dart';
 import 'package:cinemax_app/features/home/domian/uses_cases/fetch_newst_movies.dart';
+import 'package:cinemax_app/features/home/presentaion/manger/fetch_movie_details_cubit/fetch_movie_details_cubit.dart';
 import 'package:cinemax_app/features/home/presentaion/manger/fetch_newst_movies_cubit/fetch_newset_movies_cubit.dart';
 import 'package:cinemax_app/features/home/presentaion/manger/fetch_popular_movie_cubit/fetch_popular_movies_cubit.dart';
+import 'package:cinemax_app/features/home/presentaion/views_models/views/see_all_view.dart';
+import 'package:cinemax_app/features/home/presentaion/views_models/widgets/youtube_player.dart';
 import 'package:cinemax_app/features/onBoarding/presentaion/view_models/widgets/page_view.dart';
 import 'package:cinemax_app/features/home/presentaion/views_models/views/home_view.dart';
 import 'package:cinemax_app/features/home/presentaion/views_models/views/movie_details_view.dart';
@@ -31,6 +37,8 @@ abstract class Approuter {
   static const String kHomeview = '/homeview';
   static const String kDetailView = '/detailview';
   static const String kWishListView = '/wishlistview';
+  static const String kYoutubePlayer = '/youtubePlayerVideo';
+  static const String kSeeAllView = '/seeAllview';
 
   static final GoRouter router = GoRouter(routes: [
     GoRoute(
@@ -41,19 +49,17 @@ abstract class Approuter {
       path: kHomeview,
       builder: (context, state) => MultiBlocProvider(providers: [
         BlocProvider(
-          create: (context) => FetchNewsetMoviesCubit(
-            FetchNewstMovieCase(
-              homeRepo: getIt.get<HomeRepoImpl>(),
-            ),
-          )..fetchNewsetMovies()
-        ),
+            create: (context) => FetchNewsetMoviesCubit(
+                  FetchNewstMovieCase(
+                    homeRepo: getIt.get<HomeRepoImpl>(),
+                  ),
+                )..fetchNewsetMovies()),
         BlocProvider(
-          create: (context) => FetchPopularMoviesCubit(
-            FetchMostPopularUseCase(
-              homeRepo: getIt.get<HomeRepoImpl>(),
-            ),
-          )..fetchPopularMovie()
-        ),
+            create: (context) => FetchPopularMoviesCubit(
+                  FetchMostPopularUseCase(
+                    homeRepo: getIt.get<HomeRepoImpl>(),
+                  ),
+                )..fetchPopularMovie('')),
       ], child: const HomeView()),
     ),
     GoRoute(
@@ -90,11 +96,37 @@ abstract class Approuter {
     ),
     GoRoute(
       path: kDetailView,
-      builder: (context, state) => const MovieDetailsView(),
+      builder: (context, state) => BlocProvider(
+        create: (context) => FetchMovieDetailsCubit(
+          FetchMovieDetailsUseCase(
+            homeRepo: getIt.get<HomeRepoImpl>(),
+          ),
+        ),
+        child: MovieDetailsView(
+          movieEntity: state.extra as MovieEntity,
+        ),
+      ),
     ),
     GoRoute(
       path: kWishListView,
       builder: (context, state) => const WishListView(),
+    ),
+    GoRoute(
+      path: kYoutubePlayer,
+      builder: (context, state) => YoutubeVideoPlayer(
+        movieDetailsEntity: state.extra as MovieDetailsEntity,
+      ),
+    ),
+    GoRoute(
+      path: kSeeAllView,
+      builder: (context, state) => BlocProvider(
+        create: (context) => FetchMovieDetailsCubit(
+          FetchMovieDetailsUseCase(homeRepo: getIt.get<HomeRepoImpl>()),
+        ),
+        child: SeeAllView(
+          movieEntity: state.extra as List<MovieEntity>,
+        ),
+      ),
     ),
   ]);
 }

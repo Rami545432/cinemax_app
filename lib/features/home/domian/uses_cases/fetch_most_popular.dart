@@ -5,15 +5,12 @@ import 'package:dartz/dartz.dart';
 
 import '../entites/entity.dart';
 
-class FetchMostPopularUseCase extends UseCase<List<MovieEntity>, NoParam> {
- final HomeRepo homeRepo;
+class FetchMostPopularUseCase extends UseCase<List<MovieEntity>, dynamic> {
+  final HomeRepo homeRepo;
 
   FetchMostPopularUseCase({required this.homeRepo});
   @override
-  Future<Either<Failure, List<MovieEntity>>> call([NoParam? parameter]) {
-   return homeRepo.fetchMostPopularMovies();
-   
-    
+  Future<Either<Failure, List<MovieEntity>>> call([dynamic parameter]) {
+    return homeRepo.fetchMostPopularMovies(parameter!);
   }
 }
-

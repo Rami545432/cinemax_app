@@ -3,8 +3,8 @@ import '../../domian/entites/entity.dart';
 class MovieModel extends MovieEntity {
   bool? adult;
   String? backdropPath;
-  List<num>? genreIds;
-  num? id;
+  List<int>? genreIds;
+  int? id;
   String? originalLanguage;
   String? originalTitle;
   String? overview;
@@ -38,14 +38,17 @@ class MovieModel extends MovieEntity {
           rating: voteAverage!,
           date: releaseDate!,
           image: posterPath!,
-          horizentalImage: backdropPath??posterPath,
+          horizentalImage: backdropPath ?? posterPath,
         );
 
   factory MovieModel.fromJson(Map<String, dynamic> json) => MovieModel(
         adult: json['adult'] as bool?,
         backdropPath: json['backdrop_path'] as String?,
-        genreIds: (json['genre_ids'] as List<dynamic>?)?.map((gener) => gener as num).toList() ?? [],
-        id: json['id'] as num?,
+        genreIds: (json['genre_ids'] as List<dynamic>?)
+                ?.map((gener) => gener as int)
+                .toList() ??
+            [],
+        id: json['id'] as int?,
         originalLanguage: json['original_language'] as String?,
         originalTitle: json['original_title'] as String?,
         overview: json['overview'] as String?,
