@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 
 class TrailerButton extends StatelessWidget {
   const TrailerButton({
-    super.key, this.onTap,
+    super.key,
+    this.onTap,
   });
-final Function()? onTap;
+  final Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

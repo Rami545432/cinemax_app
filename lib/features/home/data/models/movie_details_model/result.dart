@@ -50,12 +50,13 @@ class Result {
         'published_at': publishedAt?.toIso8601String(),
         'id': id,
       };
-      static String? getTrailerKey(List<Result> results) {
+  static String? getTrailerKey(List<Result> results) {
     for (var result in results) {
       if (result.type == 'Trailer') {
         return result.key;
       }
     }
+
     return null; // Return null if no trailer is found
   }
 }

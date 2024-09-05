@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class CastContainer extends StatelessWidget {
   const CastContainer({super.key, required this.movieDetailsEntity});
-final MovieDetailsEntity movieDetailsEntity;
+  final MovieDetailsEntity movieDetailsEntity;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -24,12 +24,16 @@ final MovieDetailsEntity movieDetailsEntity;
             height: 60,
             child: ListView.builder(
               padding: EdgeInsets.zero,
-              itemCount: movieDetailsEntity.actorName.length ,
+              itemCount: movieDetailsEntity.actorName.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-                return  Padding(
+                return Padding(
                   padding: const EdgeInsets.only(right: 12),
-                  child: FilmCastInfo(actorName:movieDetailsEntity.actorName[index].name??'', actorImage: movieDetailsEntity.actorName[index].profilePath??'',),
+                  child: FilmCastInfo(
+                      actorName: movieDetailsEntity.actorName[index].name ?? '',
+                      actorImage:
+                          movieDetailsEntity.actorName[index].profilePath ??
+                              ''),
                 );
               },
             ),

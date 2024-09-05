@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cinemax_app/constant.dart';
-import 'package:cinemax_app/features/home/domian/entites/entity.dart';
+import 'package:cinemax_app/features/home/domian/entites/movie_details_entity.dart';
 import 'package:flutter/material.dart';
 
 class OpacityDeatailMovieImage extends StatelessWidget {
@@ -8,7 +8,7 @@ class OpacityDeatailMovieImage extends StatelessWidget {
     super.key,
     required this.movieEntity,
   });
-  final MovieEntity movieEntity;
+  final MovieDetailsEntity? movieEntity;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,7 +25,12 @@ class OpacityDeatailMovieImage extends StatelessWidget {
       child: Opacity(
         opacity: 0.2,
         child: CachedNetworkImage(
-            fit: BoxFit.cover, imageUrl: '$baseImageUrl${movieEntity.image}'),
+            errorWidget: (context, url, error) {
+              return const Text('NO IMAGE');
+            },
+            fit: BoxFit.cover,
+            imageUrl:
+                '$baseImageUrl${movieEntity?.image ?? movieEntity?.image}'),
       ),
     );
   }

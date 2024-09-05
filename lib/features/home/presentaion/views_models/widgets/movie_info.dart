@@ -17,7 +17,7 @@ class MovieInfo extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         MovieYearPublished(
-          movieDetailsEntity:movieDetailsEntity,
+          movieDetailsEntity: movieDetailsEntity,
         ),
         const CustomVerticalDivider(),
         MovieDurationTime(
@@ -25,7 +25,7 @@ class MovieInfo extends StatelessWidget {
         ),
         const CustomVerticalDivider(),
         MovieGener(
-          movieDetailsEntity:movieDetailsEntity,
+          movieDetailsEntity: movieDetailsEntity,
         ),
       ],
     );

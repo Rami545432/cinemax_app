@@ -34,11 +34,11 @@ class MovieModel extends MovieEntity {
   }) : super(
           movieId: id!,
           moviTtitle: title!,
-          gener: genreIds!,
+          gener: genreIds!.isNotEmpty ? genreIds : [27],
           rating: voteAverage!,
           date: releaseDate!,
-          image: posterPath!,
-          horizentalImage: backdropPath ?? posterPath,
+          image: posterPath ?? '',
+          horizentalImage: backdropPath ?? posterPath ?? '',
         );
 
   factory MovieModel.fromJson(Map<String, dynamic> json) => MovieModel(

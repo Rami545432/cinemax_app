@@ -26,7 +26,7 @@ class SeeAllViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
+      padding: const EdgeInsets.symmetric(horizontal: 0),
       child: CustomScrollView(
         slivers: [
           const SliverToBoxAdapter(
@@ -36,11 +36,8 @@ class SeeAllViewBody extends StatelessWidget {
             itemCount: movieEntity.length,
             itemBuilder: (context, index) {
               // BlocProvider.of
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: SeeAllFilmCard(
-                  movieEntity: movieEntity[index],
-                ),
+              return SeeAllFilmCard(
+                movieEntity: movieEntity[index],
               );
             },
           )

@@ -10,9 +10,9 @@ class MovieYearPublished extends StatelessWidget {
   final MovieDetailsEntity? movieDetailsEntity;
   @override
   Widget build(BuildContext context) {
-    return  IconTextRow(
+    return IconTextRow(
       iconData: Icons.calendar_month,
-      text: movieDetailsEntity?.date.toString()??'2020',
+      text: movieDetailsEntity?.date.toString() ?? '2020',
     );
   }
 }

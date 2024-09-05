@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cinemax_app/constant.dart';
-import 'package:cinemax_app/features/home/domian/entites/entity.dart';
-import 'package:flutter/widgets.dart';
+import 'package:cinemax_app/features/home/domian/entites/movie_details_entity.dart';
+import 'package:flutter/material.dart';
 
 class MoiveDetailsImage extends StatelessWidget {
   const MoiveDetailsImage({
@@ -9,7 +9,7 @@ class MoiveDetailsImage extends StatelessWidget {
     required this.movieEntity,
   });
 
-  final MovieEntity movieEntity;
+  final MovieDetailsEntity movieEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +18,9 @@ class MoiveDetailsImage extends StatelessWidget {
       right: 85,
       left: 85,
       child: CachedNetworkImage(
+        errorWidget: (context, url, error) {
+          return const Icon(Icons.error_outline_sharp);
+        },
         height: 287,
         width: 205,
         imageUrl: '$baseImageUrl${movieEntity.image}',

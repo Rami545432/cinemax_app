@@ -4,7 +4,7 @@ import 'package:hive/hive.dart';
 void saveMoviesData(
   List<MovieEntity> movies,
   String boxname,
-) async {
+)  {
   var popularMovies = Hive.box<MovieEntity>(boxname);
-  await popularMovies.addAll(movies);
+   popularMovies.addAll(movies);
 }

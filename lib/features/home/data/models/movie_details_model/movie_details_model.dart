@@ -37,7 +37,6 @@ class MovieDetailsModel extends MovieDetailsEntity {
   int? voteCount;
   Credits? credits;
   Videos? videos;
- 
 
   MovieDetailsModel({
     this.adult,
@@ -69,18 +68,18 @@ class MovieDetailsModel extends MovieDetailsEntity {
     this.credits,
     this.videos,
   }) : super(
-            moviTtitle: title??'title',
-            gener: genres?.map((gener)=>gener.id).whereType<int>().toList()??[],
-            rating: voteAverage??2,
-            date: releaseDate??'1',
-            image: posterPath??'3',
-            movieId: id??10859,
-            duration: runtime??5,
-            actorName:credits?.cast??[],
-            
-            storyLine: overview??'over',
-            videoKey:
-                videos?.results??[]);
+            moviTtitle: title ?? 'title',
+            gener: genres!.isNotEmpty
+                ? genres.map((gener) => gener.id).whereType<int>().toList()
+                : [27],
+            rating: voteAverage ?? 2,
+            date: releaseDate ?? '1',
+            image: posterPath ?? backdropPath ?? '',
+            movieId: id ?? 10859,
+            duration: runtime ?? 5,
+            actorName: credits?.cast ?? [],
+            storyLine: overview ?? 'over',
+            videoKey: videos?.results ?? []);
 
   factory MovieDetailsModel.fromJson(Map<String, dynamic> json) {
     return MovieDetailsModel(

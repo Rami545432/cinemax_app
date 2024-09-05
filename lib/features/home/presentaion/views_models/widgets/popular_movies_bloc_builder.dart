@@ -1,3 +1,4 @@
+import 'package:cinemax_app/core/utils/app_colors.dart';
 import 'package:cinemax_app/core/utils/go_router.dart';
 import 'package:cinemax_app/core/utils/sub_bar.dart';
 import 'package:cinemax_app/features/home/presentaion/manger/fetch_popular_movie_cubit/fetch_popular_movies_cubit.dart';
@@ -22,8 +23,10 @@ class PopularMoivesBlocBuilder extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: SubBar(
                     onPressed: () {
-                      GoRouter.of(context)
-                          .push(Approuter.kSeeAllView, extra:  state.movies,);
+                      GoRouter.of(context).push(
+                        Approuter.kSeeAllView,
+                        extra: state.movies,
+                      );
                     },
                     title: 'Most popular',
                     textbutton: 'See All',
@@ -37,8 +40,8 @@ class PopularMoivesBlocBuilder extends StatelessWidget {
             ],
           );
         }
-        return const Center(
-          child: CircularProgressIndicator(),
+        return  Center(
+          child: CircularProgressIndicator(color: AppPrimaryColors.blueAccent,),
         );
       },
     );

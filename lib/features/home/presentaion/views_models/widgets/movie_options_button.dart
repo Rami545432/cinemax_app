@@ -10,15 +10,16 @@ import 'package:share_plus/share_plus.dart';
 
 class FilmFeaturesOptions extends StatelessWidget {
   const FilmFeaturesOptions({super.key, required this.movieDetailsEntity});
-final MovieDetailsEntity movieDetailsEntity;
+  final MovieDetailsEntity movieDetailsEntity;
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-         TrailerButton(
+        TrailerButton(
           onTap: () {
-            GoRouter.of(context).push(Approuter.kYoutubePlayer,extra: movieDetailsEntity);
+            GoRouter.of(context)
+                .push(Approuter.kYoutubePlayer, extra: movieDetailsEntity);
           },
         ),
         CircleButton(
@@ -27,7 +28,8 @@ final MovieDetailsEntity movieDetailsEntity;
         ),
         CircleButton(
           onPressed: () async {
-            await Share.share('https://www.themoviedb.org/movie/${movieDetailsEntity.movieId}');
+            await Share.share(
+                'https://www.themoviedb.org/movie/${movieDetailsEntity.movieId}');
           },
           color: AppPrimaryColors.blueAccent,
           icon: FontAwesomeIcons.arrowUpRightFromSquare,
@@ -37,4 +39,3 @@ final MovieDetailsEntity movieDetailsEntity;
     );
   }
 }
-

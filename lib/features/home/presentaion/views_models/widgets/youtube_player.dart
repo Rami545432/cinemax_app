@@ -13,12 +13,14 @@ class YoutubeVideoPlayer extends StatefulWidget {
 
 class _YoutubeVideoPlayerState extends State<YoutubeVideoPlayer> {
   late YoutubePlayerController youtubePlayerController;
-  
+
   @override
   void initState() {
     youtubePlayerController = YoutubePlayerController(
-        initialVideoId: Result.getTrailerKey(widget.movieDetailsEntity.videoKey).toString(),
-        flags: const YoutubePlayerFlags(),);
+      initialVideoId:
+          Result.getTrailerKey(widget.movieDetailsEntity.videoKey).toString(),
+      flags: const YoutubePlayerFlags(),
+    );
     super.initState();
   }
 

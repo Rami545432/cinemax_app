@@ -16,14 +16,14 @@ class SubBar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text(
-          'Most Popular',
+         Text(
+          title,
           style: AppStyles.textstyle16,
         ),
         TextButton(
           onPressed: onPressed,
           child: Text(
-            'See All',
+            textbutton,
             style: AppStyles.textstyle14.copyWith(
               color: AppPrimaryColors.blueAccent,
             ),

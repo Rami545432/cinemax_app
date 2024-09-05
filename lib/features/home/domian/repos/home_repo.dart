@@ -5,8 +5,9 @@ import 'package:dartz/dartz.dart';
 import '../entites/entity.dart';
 
 abstract class HomeRepo {
-  Future<Either<Failure, List<MovieEntity>>> fetchMostPopularMovies(dynamic generId);
+  Future<Either<Failure, List<MovieEntity>>> fetchMostPopularMovies(
+      dynamic generId);
   Future<Either<Failure, List<MovieEntity>>> fetchNewsetMovies();
-    Future<Either<Failure, List<MovieDetailsEntity>>> fetchMoviesDetails(int movieid);
-
+  Future<Either<Failure, List<MovieDetailsEntity>>> fetchMoviesDetails(
+      int movieid);
 }

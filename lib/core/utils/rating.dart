@@ -1,11 +1,13 @@
 import 'dart:ui';
 
 import 'package:cinemax_app/features/home/domian/entites/entity.dart';
+import 'package:cinemax_app/features/home/domian/entites/movie_details_entity.dart';
 import 'package:flutter/material.dart';
 
 class Rating extends StatelessWidget {
-  const Rating({super.key, this.movieEntity});
+  const Rating({super.key, this.movieEntity, this.movieDetailsEntity});
   final MovieEntity? movieEntity;
+  final MovieDetailsEntity? movieDetailsEntity;
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -14,7 +16,7 @@ class Rating extends StatelessWidget {
         filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
         child: SizedBox(
           height: 24,
-          width: MediaQuery.of(context).size.width*0.15,
+          width: MediaQuery.of(context).size.width * 0.15,
           child: Row(
             children: [
               const Icon(

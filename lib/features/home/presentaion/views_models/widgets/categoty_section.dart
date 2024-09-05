@@ -21,8 +21,8 @@ class _CategoriesSectionsState extends State<CategoriesSections> {
       _selectedIndex = index;
     });
   }
-@override
-  
+
+  @override
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -58,7 +58,6 @@ class _CategoriesSectionsState extends State<CategoriesSections> {
                             buttonTexts[i],
                           ),
                         );
-                        
                       },
                       isSelected: _selectedIndex == i),
               ],

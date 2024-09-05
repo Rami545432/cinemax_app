@@ -11,6 +11,6 @@ class FetchMovieDetailsUseCase extends UseCase<List<MovieDetailsEntity>, int> {
   @override
   // ignore: avoid_renaming_method_parameters
   Future<Either<Failure, List<MovieDetailsEntity>>> call([int? movieId]) {
-    return homeRepo.fetchMoviesDetails(movieId! );
+    return homeRepo.fetchMoviesDetails(movieId!);
   }
 }

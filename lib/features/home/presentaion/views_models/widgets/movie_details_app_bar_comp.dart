@@ -1,4 +1,4 @@
-import 'package:cinemax_app/features/home/domian/entites/entity.dart';
+import 'package:cinemax_app/features/home/domian/entites/movie_details_entity.dart';
 import 'package:cinemax_app/features/home/presentaion/views_models/widgets/movie_detail_app_bar.dart';
 import 'package:flutter/widgets.dart';
 
@@ -8,7 +8,7 @@ class MovieDetaisAppBarComp extends StatelessWidget {
     required this.movieEntity,
   });
 
-  final MovieEntity movieEntity;
+  final MovieDetailsEntity movieEntity;
 
   @override
   Widget build(BuildContext context) {

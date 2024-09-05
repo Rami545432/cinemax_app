@@ -14,12 +14,12 @@ class VerticalFilmCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context).push(Approuter.kDetailView, extra: movieEntity);
+      GoRouter.of(context).push(Approuter.kDetailView, extra: movieEntity.movieId);
       },
       child: Column(
         children: [
           Stack(
-            children: [
+          children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: Image(

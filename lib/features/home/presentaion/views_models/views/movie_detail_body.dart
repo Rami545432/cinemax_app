@@ -1,4 +1,3 @@
-import 'package:cinemax_app/features/home/domian/entites/entity.dart';
 import 'package:cinemax_app/features/home/presentaion/manger/fetch_movie_details_cubit/fetch_movie_details_cubit.dart';
 import 'package:cinemax_app/features/home/presentaion/views_models/widgets/movie_data_and_sharing.dart';
 import 'package:cinemax_app/features/home/presentaion/views_models/widgets/movie_details_app_bar_comp.dart';
@@ -9,9 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MovieDetailsBody extends StatelessWidget {
-  const MovieDetailsBody({super.key, required this.movieEntity});
-  final MovieEntity movieEntity;
-
+  const MovieDetailsBody({super.key,});
+  
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FetchMovieDetailsCubit, FetchMovieDetailsState>(
@@ -22,10 +20,10 @@ class MovieDetailsBody extends StatelessWidget {
             children: [
               Stack(
                 children: [
-                  MovieDetaisAppBarComp(movieEntity: movieEntity),
-                  MoiveDetailsImage(movieEntity: movieEntity),
+                  MovieDetaisAppBarComp(movieEntity: state.movies[0]),
+                  MoiveDetailsImage(movieEntity: state.movies[0]),
                   MovieDataAndSharing(
-                      movieEntity: movieEntity,
+                      // movieEntity: state.movies[0],
                       movieDetailsEntity: state.movies[0]),
                 ],
               ),

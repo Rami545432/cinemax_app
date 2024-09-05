@@ -11,11 +11,11 @@ class MovieGener extends StatelessWidget {
   final MovieDetailsEntity? movieDetailsEntity;
   @override
   Widget build(BuildContext context) {
-    return  Row(
+    return Row(
       children: [
         IconTextRow(
           iconData: Icons.theaters,
-          text:getGenreName(movieDetailsEntity?.gener[0]??27),
+          text: getGenreName(movieDetailsEntity?.gener[0] ?? 27),
         ),
       ],
     );

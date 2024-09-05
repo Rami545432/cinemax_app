@@ -14,7 +14,8 @@ class HomeRepoImpl extends HomeRepo {
   HomeRepoImpl(
       {required this.remoteHomeDataSource, required this.localHomeDataSource});
   @override
-  Future<Either<Failure, List<MovieEntity>>> fetchMostPopularMovies(dynamic generId) async {
+  Future<Either<Failure, List<MovieEntity>>> fetchMostPopularMovies(
+      dynamic generId) async {
     try {
       var cachedMovies = localHomeDataSource.fetchMostPopularMovies();
       if (cachedMovies.isNotEmpty) {
@@ -54,12 +55,11 @@ class HomeRepoImpl extends HomeRepo {
       );
     }
   }
-  
+
   @override
-  Future<Either<Failure, List<MovieDetailsEntity>>> fetchMoviesDetails(int movieid) async{
-   
-   try {
-     
+  Future<Either<Failure, List<MovieDetailsEntity>>> fetchMoviesDetails(
+      int movieid) async {
+    try {
       var movies = await remoteHomeDataSource.fetchMovieDetails(movieid);
       return right(movies);
     } catch (e) {

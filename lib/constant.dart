@@ -40,7 +40,8 @@ class SimpleBlocObserver implements BlocObserver {
   @override
   void onTransition(Bloc bloc, Transition transition) {}
 }
-
+const recommendedBox= 'recommendedBox';
+const trendBox = 'trendBox';
 const movieDetailtBox = 'detweeasaw';
 const popularBox = 'popularbosso';
 const newsetBox = 'newst';
@@ -89,6 +90,7 @@ String getGenreName(int id) {
       return "Unknown Genre";
   }
 }
+
 dynamic getGenreId(String genre) {
   switch (genre) {
     case "All":

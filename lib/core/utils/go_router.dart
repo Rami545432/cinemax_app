@@ -1,3 +1,5 @@
+import 'package:cinemax_app/core/utils/bloc_provieders_views/newst_provieder.dart';
+import 'package:cinemax_app/core/utils/bloc_provieders_views/search_provider.dart';
 import 'package:cinemax_app/core/utils/get_it.dart';
 import 'package:cinemax_app/features/auth/presentaion/views_models/views/initial_auth_view.dart';
 import 'package:cinemax_app/features/auth/presentaion/views_models/views/new_password_view.dart';
@@ -8,18 +10,18 @@ import 'package:cinemax_app/features/auth/presentaion/views_models/views/verify_
 import 'package:cinemax_app/features/home/data/repos/home_repo_impl.dart';
 import 'package:cinemax_app/features/home/domian/entites/entity.dart';
 import 'package:cinemax_app/features/home/domian/entites/movie_details_entity.dart';
-import 'package:cinemax_app/features/home/domian/uses_cases/fetch_most_popular.dart';
+
 import 'package:cinemax_app/features/home/domian/uses_cases/fetch_movie_details.dart';
-import 'package:cinemax_app/features/home/domian/uses_cases/fetch_newst_movies.dart';
 import 'package:cinemax_app/features/home/presentaion/manger/fetch_movie_details_cubit/fetch_movie_details_cubit.dart';
-import 'package:cinemax_app/features/home/presentaion/manger/fetch_newst_movies_cubit/fetch_newset_movies_cubit.dart';
-import 'package:cinemax_app/features/home/presentaion/manger/fetch_popular_movie_cubit/fetch_popular_movies_cubit.dart';
+
 import 'package:cinemax_app/features/home/presentaion/views_models/views/see_all_view.dart';
 import 'package:cinemax_app/features/home/presentaion/views_models/widgets/youtube_player.dart';
 import 'package:cinemax_app/features/onBoarding/presentaion/view_models/widgets/page_view.dart';
-import 'package:cinemax_app/features/home/presentaion/views_models/views/home_view.dart';
 import 'package:cinemax_app/features/home/presentaion/views_models/views/movie_details_view.dart';
-import 'package:cinemax_app/features/search/presentaion/view_models/views/search_view.dart';
+import 'package:cinemax_app/features/search/data/repos/search_repo_impl.dart';
+import 'package:cinemax_app/features/search/domain/use_case/search_actor_use_case.dart';
+import 'package:cinemax_app/features/search/presentaion/view_models/manger/search_actor_cubit/seach_actor_cubit.dart';
+import 'package:cinemax_app/features/search/presentaion/view_models/views/search_actors_view.dart';
 import 'package:cinemax_app/features/splash/presentaion/views_models/views/splash_view.dart';
 import 'package:cinemax_app/features/wishList/presentaion/view_models/views/wish_list_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,6 +41,7 @@ abstract class Approuter {
   static const String kWishListView = '/wishlistview';
   static const String kYoutubePlayer = '/youtubePlayerVideo';
   static const String kSeeAllView = '/seeAllview';
+  static const String kActorSearchView = '/actorSearchview';
 
   static final GoRouter router = GoRouter(routes: [
     GoRoute(
@@ -47,20 +50,7 @@ abstract class Approuter {
     ),
     GoRoute(
       path: kHomeview,
-      builder: (context, state) => MultiBlocProvider(providers: [
-        BlocProvider(
-            create: (context) => FetchNewsetMoviesCubit(
-                  FetchNewstMovieCase(
-                    homeRepo: getIt.get<HomeRepoImpl>(),
-                  ),
-                )..fetchNewsetMovies()),
-        BlocProvider(
-            create: (context) => FetchPopularMoviesCubit(
-                  FetchMostPopularUseCase(
-                    homeRepo: getIt.get<HomeRepoImpl>(),
-                  ),
-                )..fetchPopularMovie('')),
-      ], child: const HomeView()),
+      builder: (context, state) => const NewstMoiveProvider(),
     ),
     GoRoute(
       path: kOnBoarding1,
@@ -92,7 +82,7 @@ abstract class Approuter {
     ),
     GoRoute(
       path: kSearchView,
-      builder: (context, state) => const SearchView(),
+      builder: (context, state) => const SearchMultiProviders(),
     ),
     GoRoute(
       path: kDetailView,
@@ -103,7 +93,7 @@ abstract class Approuter {
           ),
         ),
         child: MovieDetailsView(
-          movieEntity: state.extra as MovieEntity,
+          movieEntity: state.extra as int,
         ),
       ),
     ),
@@ -119,13 +109,16 @@ abstract class Approuter {
     ),
     GoRoute(
       path: kSeeAllView,
+      builder: (context, state) => SeeAllView(
+        movieEntity: state.extra as List<MovieEntity>,
+      ),
+    ),
+    GoRoute(
+      path: kActorSearchView,
       builder: (context, state) => BlocProvider(
-        create: (context) => FetchMovieDetailsCubit(
-          FetchMovieDetailsUseCase(homeRepo: getIt.get<HomeRepoImpl>()),
-        ),
-        child: SeeAllView(
-          movieEntity: state.extra as List<MovieEntity>,
-        ),
+        create: (context) => SearchActorCubit(
+            SearchActorUseCase(searchRepo: getIt.get<SearchRepoImpl>())),
+        child: const SearchActorsView(),
       ),
     ),
   ]);

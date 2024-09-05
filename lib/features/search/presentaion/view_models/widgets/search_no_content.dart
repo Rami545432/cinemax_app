@@ -16,9 +16,13 @@ class SearchListNoContent extends StatelessWidget {
         const SizedBox(
           height: 16,
         ),
-        const Text(
-          'We Are Sorry, We Can Not Find The Movie :(',
-          style: AppStyles.textstyle16,
+        const SizedBox(
+          width: 300,
+          child: Text(
+            textAlign: TextAlign.center,
+            'We Are Sorry, We Can Not Find The Movie :(',
+            style: AppStyles.textstyle16,
+          ),
         ),
         const SizedBox(
           height: 8,

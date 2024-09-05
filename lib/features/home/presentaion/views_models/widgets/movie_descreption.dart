@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class MovieDescreption extends StatefulWidget {
   const MovieDescreption({super.key, required this.movieDetailsEntity});
-final MovieDetailsEntity movieDetailsEntity;
+  final MovieDetailsEntity movieDetailsEntity;
   @override
   State<MovieDescreption> createState() => _MovieDescreptionState();
 }
@@ -29,22 +29,23 @@ class _MovieDescreptionState extends State<MovieDescreption> {
             height: 8,
           ),
           Text(
-            maxLines: isClicked ? widget.movieDetailsEntity.storyLine.length : 2,
+            maxLines:
+                isClicked ? widget.movieDetailsEntity.storyLine.length : 2,
             overflow: isClicked ? TextOverflow.ellipsis : TextOverflow.visible,
-          widget.movieDetailsEntity.storyLine ,
+            widget.movieDetailsEntity.storyLine,
           ),
-          if(widget.movieDetailsEntity.storyLine.length>3)
-          SecondaryButton(
-            onTap: () {
-              setState(() {
-                isClicked = !isClicked;
-              });
-            },
-            text: isClicked ? 'Less' : 'More',
-            style: AppStyles.textstyle14.copyWith(
-                fontWeight: FontWeight.w400,
-                color: AppPrimaryColors.blueAccent),
-          ),
+          if (widget.movieDetailsEntity.storyLine.length > 3)
+            SecondaryButton(
+              onTap: () {
+                setState(() {
+                  isClicked = !isClicked;
+                });
+              },
+              text: isClicked ? 'Less' : 'More',
+              style: AppStyles.textstyle14.copyWith(
+                  fontWeight: FontWeight.w400,
+                  color: AppPrimaryColors.blueAccent),
+            ),
         ],
       ),
     );

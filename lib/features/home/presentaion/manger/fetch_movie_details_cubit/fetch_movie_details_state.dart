@@ -7,7 +7,6 @@ class FetchMovieDetailsInitial extends FetchMovieDetailsState {}
 
 class FetchMovieDetailsSuccess extends FetchMovieDetailsState {
   final List<MovieDetailsEntity> movies;
-  
 
   FetchMovieDetailsSuccess({required this.movies});
 }

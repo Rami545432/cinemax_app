@@ -13,6 +13,6 @@ class MovieDurationTime extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconTextRow(
         iconData: Icons.access_time_filled_sharp,
-        text: '${movieDetailsEntity?.duration.toString()??180} Minutes');
+        text: '${movieDetailsEntity?.duration.toString() ?? 180} Minutes');
   }
 }

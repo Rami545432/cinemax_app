@@ -5,25 +5,30 @@ import 'package:flutter/material.dart';
 
 class FilmCastInfo extends StatelessWidget {
   const FilmCastInfo({
-    super.key, required this.actorName, required this.actorImage,
+    super.key,
+    required this.actorName,
+    required this.actorImage,
   });
-final String actorName,actorImage;
+  final String actorName, actorImage;
 
   @override
   Widget build(BuildContext context) {
     return Row(
+    
       children: [
-        SizedBox(
+        Container(
+          margin: const EdgeInsets.only(bottom: 10),
           width: 50,
           height: 50,
           child: ClipRRect(
+            
             borderRadius: BorderRadius.circular(32),
             child: CachedNetworkImage(
-              errorWidget: (context, url, error) {
-                return const Icon(Icons.cancel_rounded);
-              },
-                imageUrl:
-                    '$baseImageUrl$actorImage'),
+              
+                errorWidget: (context, url, error) {
+                  return const Icon(Icons.cancel_rounded);
+                },
+                imageUrl: '$baseImageUrl$actorImage'),
           ),
         ),
         const SizedBox(

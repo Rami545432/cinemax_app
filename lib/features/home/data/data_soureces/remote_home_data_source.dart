@@ -26,7 +26,6 @@ class RemoteHomeDataSourceImpl extends RemoteHomeDataSource {
         MovieModel.fromJson(movie),
       );
       saveMoviesData(movies, popularBox);
-      
     }
     return movies;
   }

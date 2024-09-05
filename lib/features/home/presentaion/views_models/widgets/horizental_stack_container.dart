@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cinemax_app/constant.dart';
 import 'package:cinemax_app/core/utils/app_styles.dart';
 import 'package:cinemax_app/core/utils/go_router.dart';
@@ -10,24 +11,27 @@ class HorzientalStackContainer extends StatelessWidget {
     super.key,
     required this.movieEntity,
   });
-  final MovieEntity movieEntity;
+  final MovieEntity? movieEntity;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context).push(Approuter.kDetailView, extra: movieEntity);
+        GoRouter.of(context).push(Approuter.kDetailView, extra: movieEntity!.movieId);
       },
       child: Stack(children: [
         Container(
-          margin: const EdgeInsets.all(10),
           height: 154,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              fit: BoxFit.fill,
-              image:
-                  NetworkImage('$baseImageUrl${movieEntity.horizentalImage}'),
-            ),
+          margin: const EdgeInsets.all(10),
+          child: ClipRRect(
             borderRadius: BorderRadius.circular(16),
+            child: CachedNetworkImage(
+                width: 400,
+                fit: BoxFit.fill,
+                errorWidget: (context, url, error) {
+                  return const Icon(Icons.error);
+                },
+                imageUrl:
+                    '$baseImageUrl${movieEntity?.horizentalImage ?? movieEntity?.image}'),
           ),
         ),
         Positioned(
@@ -38,7 +42,7 @@ class HorzientalStackContainer extends StatelessWidget {
             child: Text(
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              movieEntity.moviTtitle,
+              movieEntity!.moviTtitle,
               style: AppStyles.textstyle16,
               textAlign: TextAlign.left,
             ),
@@ -52,7 +56,7 @@ class HorzientalStackContainer extends StatelessWidget {
             child: Text(
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              'On ${movieEntity.date}',
+              'On ${movieEntity!.date}',
               style: AppStyles.textstyle16,
               textAlign: TextAlign.start,
             ),
