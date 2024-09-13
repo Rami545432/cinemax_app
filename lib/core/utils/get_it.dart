@@ -3,7 +3,7 @@ import 'package:cinemax_app/features/home/data/data_soureces/local_home_data_sou
 import 'package:cinemax_app/features/home/data/data_soureces/remote_home_data_source.dart';
 import 'package:cinemax_app/features/home/data/repos/home_repo_impl.dart';
 import 'package:cinemax_app/features/search/data/data_sources/local_search_data_source.dart';
-import 'package:cinemax_app/features/search/data/data_sources/remote_data_source.dart';
+import 'package:cinemax_app/features/search/data/data_sources/remote_search_data_source.dart';
 import 'package:cinemax_app/features/search/data/repos/search_repo_impl.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';

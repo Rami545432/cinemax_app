@@ -8,12 +8,6 @@ import 'package:cinemax_app/features/home/presentaion/views_models/views/home_vi
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
-
-
-
-
-
 class NewstMoiveProvider extends StatelessWidget {
   const NewstMoiveProvider({
     super.key,
@@ -22,6 +16,7 @@ class NewstMoiveProvider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
+      
       BlocProvider(
           create: (context) => FetchNewsetMoviesCubit(
                 FetchNewstMovieCase(
@@ -37,4 +32,3 @@ class NewstMoiveProvider extends StatelessWidget {
     ], child: const HomeView());
   }
 }
-

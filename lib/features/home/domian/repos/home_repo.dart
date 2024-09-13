@@ -6,7 +6,7 @@ import '../entites/entity.dart';
 
 abstract class HomeRepo {
   Future<Either<Failure, List<MovieEntity>>> fetchMostPopularMovies(
-      dynamic generId);
+      dynamic generId,{int page=10});
   Future<Either<Failure, List<MovieEntity>>> fetchNewsetMovies();
   Future<Either<Failure, List<MovieDetailsEntity>>> fetchMoviesDetails(
       int movieid);

@@ -29,4 +29,12 @@ class MovieEntity {
     required this.image,
     required this.horizentalImage,
   });
+  @override
+   bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is MovieEntity && other.movieId == movieId; // Compare IDs
+  }
+
+  @override
+  int get hashCode => movieId.hashCode;
 }

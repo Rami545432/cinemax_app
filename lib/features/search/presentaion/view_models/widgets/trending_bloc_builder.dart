@@ -1,3 +1,4 @@
+import 'package:cinemax_app/core/utils/app_colors.dart';
 import 'package:cinemax_app/features/search/presentaion/view_models/manger/recommended_movies_cubit/recommended_movies_cubit.dart';
 import 'package:cinemax_app/features/search/presentaion/view_models/manger/trending_movie_cubit/trending_movie_cubit.dart';
 import 'package:cinemax_app/features/search/presentaion/view_models/widgets/film_search_result_card.dart';
@@ -24,7 +25,11 @@ class TrendingBlocBuilder extends StatelessWidget {
         if (state is TrendingMovieFailure) {
           return Text(state.errorMessage);
         }
-        return Container();
+        return Center(
+          child: CircularProgressIndicator(
+            color: AppPrimaryColors.blueAccent,
+          ),
+        );
       },
     );
   }

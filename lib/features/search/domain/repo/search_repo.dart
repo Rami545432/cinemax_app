@@ -7,5 +7,5 @@ abstract class SearchRepo {
   Future<Either<Failure, List<MovieEntity>>> searchMovies(String query);
   Future<Either<Failure, List<ActorEntity>>> searchActor(String query);
   Future<Either<Failure, List<MovieEntity>>> fetchTrendingMovies();
-  Future<Either<Failure, List<MovieEntity>>> fetchRecommmendedMovies(int id);
+  Future<Either<Failure, List<MovieEntity>>> fetchRecommmendedMovies(int id,);
 }

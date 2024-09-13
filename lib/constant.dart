@@ -12,8 +12,11 @@ List<String> buttonTexts = [
   'All',
   'Comedy',
   'Animation',
-  'Documentary',
+  'History',
+  'Family',
+  'Drama',
 ];
+
 
 class SimpleBlocObserver implements BlocObserver {
   @override
@@ -43,7 +46,7 @@ class SimpleBlocObserver implements BlocObserver {
 const recommendedBox= 'recommendedBox';
 const trendBox = 'trendBox';
 const movieDetailtBox = 'detweeasaw';
-const popularBox = 'popularbosso';
+const popularBox = 'popularsdasdbosadsaasdaso';
 const newsetBox = 'newst';
 const baseImageUrl = 'https://image.tmdb.org/t/p/w500/';
 String getGenreName(int id) {

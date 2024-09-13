@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class Failure {
   final String errorMessage;
@@ -35,6 +36,7 @@ class ServerFailure extends Failure {
             errorMessage: 'Oops there is an error please try again');
     }
   }
+
   factory ServerFailure.fromResponse(int statuesCode, dynamic response) {
     if (statuesCode == 500) {
       return ServerFailure(
@@ -50,5 +52,23 @@ class ServerFailure extends Failure {
       );
     }
     return ServerFailure(errorMessage: 'Threr was an error');
+  }
+}
+
+class FireBaseFailure extends Failure {
+  FireBaseFailure({required super.errorMessage});
+  factory FireBaseFailure.fromAuthException(FirebaseAuthException e) {
+    if (e.code == 'weak-password') {
+      return FireBaseFailure(errorMessage: 'Too weak Passowrd');
+    } else if (e.code == 'email-already-in-use') {
+      return FireBaseFailure(
+          errorMessage: 'The account already exists for that email.  ');
+    }
+    if (e.code == 'user-not-found') {
+      FireBaseFailure(errorMessage: 'No user found for that email.');
+    } else if (e.code == 'wrong-password') {
+      FireBaseFailure(errorMessage: 'Wrong password provided for that user.');
+    }
+    return FireBaseFailure(errorMessage: e.toString());
   }
 }

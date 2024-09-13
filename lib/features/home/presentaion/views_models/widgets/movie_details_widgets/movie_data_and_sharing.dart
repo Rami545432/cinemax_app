@@ -1,5 +1,5 @@
-import 'package:cinemax_app/core/utils/rating.dart';
 import 'package:cinemax_app/features/home/domian/entites/movie_details_entity.dart';
+import 'package:cinemax_app/features/home/presentaion/views_models/widgets/movie_details_widgets/movie_details_rating.dart';
 import 'package:cinemax_app/features/home/presentaion/views_models/widgets/movie_info.dart';
 import 'package:cinemax_app/features/home/presentaion/views_models/widgets/movie_options_button.dart';
 import 'package:flutter/widgets.dart';
@@ -28,7 +28,7 @@ class MovieDataAndSharing extends StatelessWidget {
           const SizedBox(
             height: 8,
           ),
-          Rating(movieDetailsEntity: movieDetailsEntity,),
+           MovieDetailRating(movieDetailsEntity: movieDetailsEntity,),
           const SizedBox(
             height: 24,
           ),

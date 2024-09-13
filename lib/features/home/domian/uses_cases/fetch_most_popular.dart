@@ -10,7 +10,7 @@ class FetchMostPopularUseCase extends UseCase<List<MovieEntity>, dynamic> {
 
   FetchMostPopularUseCase({required this.homeRepo});
   @override
-  Future<Either<Failure, List<MovieEntity>>> call([dynamic parameter]) {
-    return homeRepo.fetchMostPopularMovies(parameter!);
+  Future<Either<Failure, List<MovieEntity>>> call([dynamic parameter,int page=10]) {
+    return homeRepo.fetchMostPopularMovies(parameter!,page: page);
   }
 }

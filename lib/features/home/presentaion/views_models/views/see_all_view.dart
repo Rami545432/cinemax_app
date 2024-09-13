@@ -1,47 +1,36 @@
-import 'package:cinemax_app/core/utils/main_app_bar.dart';
-import 'package:cinemax_app/features/home/domian/entites/entity.dart';
-import 'package:cinemax_app/features/home/presentaion/views_models/widgets/see_all_film_card.dart';
+import 'package:cinemax_app/constant.dart';
+import 'package:cinemax_app/core/utils/cubits/gener_cubit.dart';
+import 'package:cinemax_app/features/home/presentaion/manger/fetch_popular_movie_cubit/fetch_popular_movies_cubit.dart';
+import 'package:cinemax_app/features/home/presentaion/views_models/views/see_all_view_body.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SeeAllView extends StatelessWidget {
-  const SeeAllView({super.key, required this.movieEntity});
-  final List<MovieEntity> movieEntity;
+class SeeAllView extends StatefulWidget {
+  const SeeAllView({
+    super.key,
+  });
 
   @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: SeeAllViewBody(
-          movieEntity: movieEntity,
-        ),
-      ),
-    );
-  }
+  State<SeeAllView> createState() => _SeeAllViewState();
 }
 
-class SeeAllViewBody extends StatelessWidget {
-  const SeeAllViewBody({super.key, required this.movieEntity});
-  final List<MovieEntity> movieEntity;
+class _SeeAllViewState extends State<SeeAllView> {
+  @override
+  void initState() {
+    BlocProvider.of<FetchPopularMoviesCubit>(context).fetchPopularMovie(
+      getGenreId(
+        buttonTexts[context.read<GenerCubit>().state],
+      ),
+    );
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 0),
-      child: CustomScrollView(
-        slivers: [
-          const SliverToBoxAdapter(
-            child: MainAppBar(title: 'See All'),
-          ),
-          SliverList.builder(
-            itemCount: movieEntity.length,
-            itemBuilder: (context, index) {
-              // BlocProvider.of
-              return SeeAllFilmCard(
-                movieEntity: movieEntity[index],
-              );
-            },
-          )
-        ],
+    return const SafeArea(
+      child: Scaffold(
+        body: SeeAllViewBody(),
       ),
     );
   }

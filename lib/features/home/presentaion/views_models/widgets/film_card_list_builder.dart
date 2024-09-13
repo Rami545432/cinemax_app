@@ -8,14 +8,14 @@ class FilmCardListView extends StatelessWidget {
     required this.movieEntity,
   });
   final List<MovieEntity> movieEntity;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 235,
-      width: 400,
       child: ListView.builder(
         padding: const EdgeInsets.symmetric(horizontal: 23),
-        itemCount: 9,
+        itemCount: 6,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return Padding(

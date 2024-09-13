@@ -1,7 +1,7 @@
 import 'package:cinemax_app/core/utils/errors/errors.dart';
 import 'package:cinemax_app/features/home/domian/entites/entity.dart';
 import 'package:cinemax_app/features/search/data/data_sources/local_search_data_source.dart';
-import 'package:cinemax_app/features/search/data/data_sources/remote_data_source.dart';
+import 'package:cinemax_app/features/search/data/data_sources/remote_search_data_source.dart';
 import 'package:cinemax_app/features/search/domain/entities/search_entity.dart';
 import 'package:cinemax_app/features/search/domain/repo/search_repo.dart';
 import 'package:dartz/dartz.dart';

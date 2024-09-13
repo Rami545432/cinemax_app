@@ -5,6 +5,10 @@ abstract class RecommendedMoviesState {}
 
 class RecommendedMoviesInitial extends RecommendedMoviesState {}
 
+class RecommendedMoviesLoading extends RecommendedMoviesState {}
+
+class RecommendedMoviesPaginationLoading extends RecommendedMoviesState {}
+
 class RecommendedMoviesSuccess extends RecommendedMoviesState {
   final List<MovieEntity> movies;
 

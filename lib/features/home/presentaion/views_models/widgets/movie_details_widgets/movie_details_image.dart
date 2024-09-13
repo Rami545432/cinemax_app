@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 class MoiveDetailsImage extends StatelessWidget {
   const MoiveDetailsImage({
     super.key,
-    required this.movieEntity,
+    required this.movieDetailsEntity,
   });
 
-  final MovieDetailsEntity movieEntity;
+  final MovieDetailsEntity movieDetailsEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class MoiveDetailsImage extends StatelessWidget {
         },
         height: 287,
         width: 205,
-        imageUrl: '$baseImageUrl${movieEntity.image}',
+        imageUrl: '$baseImageUrl${movieDetailsEntity.image}',
       ),
     );
   }

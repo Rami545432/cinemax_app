@@ -10,7 +10,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 abstract class RemoteDataSource {
   Future<List<MovieEntity>> searchMovies(String query);
   Future<List<MovieEntity>> fetchTrendingMovies();
-  Future<List<MovieEntity>> fetchRecommmendedMovies(int movieId);
+  Future<List<MovieEntity>> fetchRecommmendedMovies(int movieId,
+      );
   Future<List<ActorEntity>> searchActors(String query);
 }
 
@@ -23,23 +24,26 @@ class RemoteSearchDataSourceImpl extends RemoteDataSource {
     List<MovieEntity> suggestions = [];
     var data = await apiService.searchMovie(query);
     for (var movie in data['results']) {
-      suggestions.add(
-        MovieModel.fromJson(movie),
-      );
+      if (movie['poster_path'] != null) {
+        suggestions.add(MovieModel.fromJson(movie));
+      }
     }
     return suggestions;
   }
 
   @override
-  Future<List<MovieEntity>> fetchRecommmendedMovies(int movieId) async {
+  Future<List<MovieEntity>> fetchRecommmendedMovies(int movieId,
+      ) async {
     List<MovieEntity> movies = [];
     var data = await apiService.getRecommendedMovies(movieId);
     for (var movie in data['results']) {
-      movies.add(
-        MovieModel.fromJson(movie),
-      );
+      if (movie['poster_path'] != null) {
+        movies.add(
+          MovieModel.fromJson(movie),
+        );
+      }
       saveMoviesData(movies, recommendedBox);
-     await Hive.box<MovieEntity>(recommendedBox).clear();
+      await Hive.box<MovieEntity>(recommendedBox).clear();
     }
     return movies;
   }
@@ -49,11 +53,13 @@ class RemoteSearchDataSourceImpl extends RemoteDataSource {
     List<MovieEntity> movies = [];
     var data = await apiService.getTrendingMovies();
     for (var movie in data['results']) {
-      movies.add(
-        MovieModel.fromJson(movie),
-      );
+      if (movie['poster_path'] != null) {
+        movies.add(
+          MovieModel.fromJson(movie),
+        );
+      }
       saveMoviesData(movies, trendBox);
-     await Hive.box<MovieEntity>(trendBox).clear();
+      await Hive.box<MovieEntity>(trendBox).clear();
     }
     return movies;
   }
@@ -63,9 +69,11 @@ class RemoteSearchDataSourceImpl extends RemoteDataSource {
     List<ActorEntity> movies = [];
     var data = await apiService.getSearchActor(query);
     for (var movie in data['results']) {
-      movies.add(
-        SearchActorModel.fromJson(movie),
-      );
+      if (movie['profile_path'] != null) {
+        movies.add(
+          SearchActorModel.fromJson(movie),
+        );
+      }
     }
     return movies;
   }

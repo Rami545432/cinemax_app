@@ -13,21 +13,23 @@ class MovieInfo extends StatelessWidget {
   final MovieDetailsEntity movieDetailsEntity;
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        MovieYearPublished(
+    return SizedBox(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          MovieYearPublished(
+            movieDetailsEntity: movieDetailsEntity,
+          ),
+          const CustomVerticalDivider(),
+          MovieDurationTime(
+            movieDetailsEntity: movieDetailsEntity,
+          ),
+          const CustomVerticalDivider(),
+          MovieGener(
           movieDetailsEntity: movieDetailsEntity,
-        ),
-        const CustomVerticalDivider(),
-        MovieDurationTime(
-          movieDetailsEntity: movieDetailsEntity,
-        ),
-        const CustomVerticalDivider(),
-        MovieGener(
-          movieDetailsEntity: movieDetailsEntity,
-        ),
-      ],
+                    ),
+        ],
+      ),
     );
   }
 }

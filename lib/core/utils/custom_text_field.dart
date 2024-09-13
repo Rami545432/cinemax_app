@@ -9,21 +9,30 @@ class CustomTextField extends StatelessWidget {
       this.onSaved,
       this.obscureText = false,
       this.icon,
-      this.onPressed});
+      this.onPressed,  this.controller});
   final String hintText, lable;
   final Function(String?)? onSaved;
   final bool obscureText;
   final Widget? icon;
   final Function()? onPressed;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
+      validator: (value) {
+        if ( value==null|| value.isEmpty) {
+          return 'Please enter Data';
+        }
+        return null;
+      },
       obscureText: obscureText,
-      onSaved: onSaved,
+      onFieldSubmitted: onSaved,
       style: AppStyles.textstyle12,
       decoration: InputDecoration(
-        suffixIcon: IconButton(onPressed: onPressed, icon: icon!),
+        suffixIcon:
+            IconButton(onPressed: onPressed, icon: icon ?? const Text('')),
         hintText: hintText,
         label: Text(
           lable,

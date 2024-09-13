@@ -23,7 +23,7 @@ class SearchDefaultComponets extends StatelessWidget {
                 height: 87,
               ),
               Text(
-                'Today',
+                'Trending Today',
                 style: AppStyles.textstyle16,
               ),
               SizedBox(
@@ -36,8 +36,9 @@ class SearchDefaultComponets extends StatelessWidget {
             ],
           ),
         ),
-        RecommendedForYouBlocBuilder(),
+        RecomendedForYouBlocBuilder(),
       ],
     );
   }
 }
+

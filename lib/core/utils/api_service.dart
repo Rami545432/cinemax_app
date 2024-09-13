@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 
 class ApiService {
@@ -10,15 +12,17 @@ class ApiService {
   final baseTrendingUrl = 'https://api.themoviedb.org/3/trending/movie/day';
 
   ApiService(this.dio);
-  Future<Map<String, dynamic>> getGeneralMovies(dynamic generId) async {
-    var response = await dio
-        .get('${baseUrlMoviePopular}api_key=$apiKey&with_genres=$generId&page=2');
+  Future<Map<String, dynamic>> getGeneralMovies(dynamic generId,
+      {int page = 10}) async {
+    var response = await dio.get(
+        '${baseUrlMoviePopular}api_key=$apiKey&with_genres=$generId&page=${(page / 10)}');
+    log('${baseUrlMoviePopular}api_key=$apiKey&with_genres=$generId&page=${(page / 10)}');
     return response.data;
   }
 
   Future<Map<String, dynamic>> getMovie(dynamic endpoint) async {
     var response = await dio.get(
-        '$baseUrlMovie$endpoint?api_key=$apiKey&language=en-US&append_to_response=credits,videos&page=3');
+        '$baseUrlMovie$endpoint?api_key=$apiKey&language=en-US&append_to_response=credits,videos&page=1');
     return response.data;
   }
 
@@ -34,9 +38,12 @@ class ApiService {
     return response.data;
   }
 
-  Future<Map<String, dynamic>> getRecommendedMovies(int movieId) async {
+  Future<Map<String, dynamic>> getRecommendedMovies(
+    int movieId,
+  ) async {
     var response =
         await dio.get('$baseUrlMovie$movieId/recommendations?api_key=$apiKey');
+
     return response.data;
   }
 

@@ -22,9 +22,13 @@ class IconTextRow extends StatelessWidget {
         const SizedBox(
           width: 5,
         ),
-        Text(
-          text,
-          style: AppStyles.textstyle12,
+        SizedBox(
+          width: 75,
+          child: Text(
+            
+            text,
+            style: AppStyles.textstyle12,
+          ),
         ),
       ],
     );

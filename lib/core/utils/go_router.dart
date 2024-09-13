@@ -1,6 +1,9 @@
 import 'package:cinemax_app/core/utils/bloc_provieders_views/newst_provieder.dart';
 import 'package:cinemax_app/core/utils/bloc_provieders_views/search_provider.dart';
 import 'package:cinemax_app/core/utils/get_it.dart';
+import 'package:cinemax_app/features/auth/data/repos/auth_repo_impl.dart';
+import 'package:cinemax_app/features/auth/domain/use_cases/register_account_use_case.dart';
+import 'package:cinemax_app/features/auth/presentaion/views_models/manger/sign_up_cubit/sign_up_cubit.dart';
 import 'package:cinemax_app/features/auth/presentaion/views_models/views/initial_auth_view.dart';
 import 'package:cinemax_app/features/auth/presentaion/views_models/views/new_password_view.dart';
 import 'package:cinemax_app/features/auth/presentaion/views_models/views/reset_password_view.dart';
@@ -8,11 +11,12 @@ import 'package:cinemax_app/features/auth/presentaion/views_models/views/sign_in
 import 'package:cinemax_app/features/auth/presentaion/views_models/views/sign_up_view.dart';
 import 'package:cinemax_app/features/auth/presentaion/views_models/views/verify_account_view.dart';
 import 'package:cinemax_app/features/home/data/repos/home_repo_impl.dart';
-import 'package:cinemax_app/features/home/domian/entites/entity.dart';
 import 'package:cinemax_app/features/home/domian/entites/movie_details_entity.dart';
+import 'package:cinemax_app/features/home/domian/uses_cases/fetch_most_popular.dart';
 
 import 'package:cinemax_app/features/home/domian/uses_cases/fetch_movie_details.dart';
 import 'package:cinemax_app/features/home/presentaion/manger/fetch_movie_details_cubit/fetch_movie_details_cubit.dart';
+import 'package:cinemax_app/features/home/presentaion/manger/fetch_popular_movie_cubit/fetch_popular_movies_cubit.dart';
 
 import 'package:cinemax_app/features/home/presentaion/views_models/views/see_all_view.dart';
 import 'package:cinemax_app/features/home/presentaion/views_models/widgets/youtube_player.dart';
@@ -42,6 +46,7 @@ abstract class Approuter {
   static const String kYoutubePlayer = '/youtubePlayerVideo';
   static const String kSeeAllView = '/seeAllview';
   static const String kActorSearchView = '/actorSearchview';
+  static const String kRecommendedSeeAllview = '/recomseeAll';
 
   static final GoRouter router = GoRouter(routes: [
     GoRoute(
@@ -62,7 +67,14 @@ abstract class Approuter {
     ),
     GoRoute(
       path: kSignUpView,
-      builder: (context, state) => const SignUpView(),
+      builder: (context, state) => BlocProvider(
+        create: (context) => SignUpCubit(
+          SignUpUseCase(
+            authRepo: AuthRepoImpl(),
+          ),
+        ),
+        child: const SignUpView(),
+      ),
     ),
     GoRoute(
       path: kSignInView,
@@ -109,8 +121,13 @@ abstract class Approuter {
     ),
     GoRoute(
       path: kSeeAllView,
-      builder: (context, state) => SeeAllView(
-        movieEntity: state.extra as List<MovieEntity>,
+      builder: (context, state) => BlocProvider(
+        create: (context) => FetchPopularMoviesCubit(
+          FetchMostPopularUseCase(
+            homeRepo: getIt.get<HomeRepoImpl>(),
+          ),
+        ),
+        child: const SeeAllView(),
       ),
     ),
     GoRoute(

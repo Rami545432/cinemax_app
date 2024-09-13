@@ -9,11 +9,15 @@ class FetchPopularMoviesCubit extends Cubit<FetchPopularMoviesState> {
       : super(FetchPopularMoviesInitial());
   final FetchMostPopularUseCase fetchMostPopularUseCase;
   MovieEntity? movieEntity;
-  Future<void> fetchPopularMovie(dynamic generId) async {
-    emit(
-      FetchPopularMoviesLoading(),
-    );
-    var result = await fetchMostPopularUseCase.call(generId);
+  Future<void> fetchPopularMovie(dynamic generId, {int page = 10}) async {
+    if (page == 10) {
+      emit(
+        FetchPopularMoviesLoading(),
+      );
+    } else {
+      emit(FetchPopularMoviesPaginationLoading());
+    }
+    var result = await fetchMostPopularUseCase.call(generId, page);
     result.fold((failure) {
       emit(
         FetchPopularMoviesFailure(errorMessage: failure.errorMessage),

@@ -13,6 +13,8 @@ class FetchPopularMovieSuccess extends FetchPopularMoviesState {
 
 class FetchPopularMoviesLoading extends FetchPopularMoviesState {}
 
+class FetchPopularMoviesPaginationLoading extends FetchPopularMoviesState {}
+
 class FetchPopularMoviesFailure extends FetchPopularMoviesState {
   final String errorMessage;
 

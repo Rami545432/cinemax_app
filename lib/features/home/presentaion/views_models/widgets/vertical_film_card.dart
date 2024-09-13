@@ -1,25 +1,30 @@
 import 'package:cinemax_app/constant.dart';
 import 'package:cinemax_app/core/utils/app_colors.dart';
 import 'package:cinemax_app/core/utils/app_styles.dart';
+import 'package:cinemax_app/core/utils/cubits/gener_cubit.dart';
 import 'package:cinemax_app/core/utils/go_router.dart';
 import 'package:cinemax_app/core/utils/rating.dart';
 import 'package:cinemax_app/features/home/domian/entites/entity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class VerticalFilmCard extends StatelessWidget {
-  const VerticalFilmCard({super.key, required this.movieEntity});
+  const VerticalFilmCard({super.key, required this.movieEntity,});
   final MovieEntity movieEntity;
+
   @override
   Widget build(BuildContext context) {
+    final generButtonText =
+        buttonTexts[BlocProvider.of<GenerCubit>(context).state];
     return GestureDetector(
       onTap: () {
-      GoRouter.of(context).push(Approuter.kDetailView, extra: movieEntity.movieId);
+        GoRouter.of(context).push(Approuter.kDetailView,extra: movieEntity.movieId);
       },
       child: Column(
         children: [
           Stack(
-          children: [
+            children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: Image(
@@ -57,7 +62,9 @@ class VerticalFilmCard extends StatelessWidget {
                         .copyWith(fontWeight: FontWeight.w600),
                   ),
                   Text(
-                    getGenreName(movieEntity.gener[0]),
+                    generButtonText == 'All'
+                        ? getGenreName(movieEntity.gener[0])
+                        : generButtonText,
                     style: AppStyles.textstyle12,
                   ),
                 ],
