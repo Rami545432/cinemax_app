@@ -17,19 +17,18 @@ class MovieRelatedImageStack extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(8),
           child: CachedNetworkImage(
-            fit: BoxFit.cover,
+              fit: BoxFit.cover,
               errorWidget: (context, url, error) {
                 return const Icon(Icons.add_ic_call_outlined);
               },
-              height: MediaQuery.of(context).size.height*0.25,
+              height: MediaQuery.of(context).size.height * 0.25,
               width: MediaQuery.of(context).size.width * 0.27,
               imageUrl: '$baseImageUrl${knownFor.posterPath}'),
         ),
         Positioned(
-          left: 45,
-          top: 6,
-          child: MovieActorRating(rating:knownFor.voteAverage??4.5)
-        ),
+            left: 45,
+            top: 6,
+            child: MovieActorRating(rating: knownFor.voteAverage ?? 4.5)),
       ],
     );
   }

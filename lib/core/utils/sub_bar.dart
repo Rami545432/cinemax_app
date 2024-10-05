@@ -16,7 +16,7 @@ class SubBar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-         Text(
+        Text(
           title,
           style: AppStyles.textstyle16,
         ),

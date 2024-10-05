@@ -14,17 +14,14 @@ class FilmCastInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-    
       children: [
         Container(
           margin: const EdgeInsets.only(bottom: 10),
           width: 50,
           height: 50,
           child: ClipRRect(
-            
             borderRadius: BorderRadius.circular(32),
             child: CachedNetworkImage(
-              
                 errorWidget: (context, url, error) {
                   return const Icon(Icons.cancel_rounded);
                 },

@@ -25,7 +25,6 @@ class IconTextRow extends StatelessWidget {
         SizedBox(
           width: 75,
           child: Text(
-            
             text,
             style: AppStyles.textstyle12,
           ),

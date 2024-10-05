@@ -10,7 +10,8 @@ import '../../domian/entites/entity.dart';
 import '../models/movie_model.dart';
 
 abstract class RemoteHomeDataSource {
-  Future<List<MovieEntity>> fetchMostPopularMovies(dynamic generId,{int page=1});
+  Future<List<MovieEntity>> fetchMostPopularMovies(dynamic generId,
+      {int page = 1});
   Future<List<MovieEntity>> fetchNewsetMovies();
   Future<List<MovieDetailsEntity>> fetchMovieDetails(int movieId);
 }
@@ -20,10 +21,11 @@ class RemoteHomeDataSourceImpl extends RemoteHomeDataSource {
 
   RemoteHomeDataSourceImpl({required this.apiService});
   @override
-  Future<List<MovieEntity>> fetchMostPopularMovies(dynamic generId,{int page=10}) async {
+  Future<List<MovieEntity>> fetchMostPopularMovies(dynamic generId,
+      {int page = 10}) async {
     List<MovieEntity> movies = [];
     log(page.toString());
-    var data = await apiService.getGeneralMovies(generId,page: page);
+    var data = await apiService.getGeneralMovies(generId, page: page);
     for (var movie in data['results']) {
       movies.add(
         MovieModel.fromJson(movie),
@@ -36,11 +38,10 @@ class RemoteHomeDataSourceImpl extends RemoteHomeDataSource {
   @override
   Future<List<MovieEntity>> fetchNewsetMovies() async {
     List<MovieEntity> movies = [];
-    var data = await apiService.getMovie('upcoming');
+    var data = await apiService.getMovieDetails('upcoming');
     for (var movie in data['results']) {
       if (movie['poster_path'] != null) {
         movies.add(MovieModel.fromJson(movie));
-       
       }
     }
     saveMoviesData(movies, newsetBox);
@@ -52,7 +53,7 @@ class RemoteHomeDataSourceImpl extends RemoteHomeDataSource {
   Future<List<MovieDetailsEntity>> fetchMovieDetails(int movieId) async {
     List<MovieDetailsEntity> movies = [];
 
-    var data = await apiService.getMovie(movieId);
+    var data = await apiService.getMovieDetails(movieId);
     movies.add(
       MovieDetailsModel.fromJson(data),
     );

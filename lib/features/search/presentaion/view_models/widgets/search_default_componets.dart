@@ -41,4 +41,3 @@ class SearchDefaultComponets extends StatelessWidget {
     );
   }
 }
-

@@ -29,7 +29,7 @@ class SearchImageStack extends StatelessWidget {
           left: 45,
           top: 6,
           child: Rating(
-            movieEntity: movieEntity,
+            rating: movieEntity.rating,
           ),
         ),
       ],

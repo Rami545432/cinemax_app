@@ -15,13 +15,15 @@ class HomeRepoImpl extends HomeRepo {
       {required this.remoteHomeDataSource, required this.localHomeDataSource});
   @override
   Future<Either<Failure, List<MovieEntity>>> fetchMostPopularMovies(
-      dynamic generId,{int page=10}) async {
+      dynamic generId,
+      {int page = 10}) async {
     try {
       var cachedMovies = localHomeDataSource.fetchMostPopularMovies(page: page);
       if (cachedMovies.isNotEmpty) {
         return right(cachedMovies);
       }
-      var movies = await remoteHomeDataSource.fetchMostPopularMovies(generId,page: page);
+      var movies = await remoteHomeDataSource.fetchMostPopularMovies(generId,
+          page: page);
       return right(movies);
     } catch (e) {
       if (e is DioException) {

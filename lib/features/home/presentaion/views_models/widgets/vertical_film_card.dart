@@ -10,7 +10,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class VerticalFilmCard extends StatelessWidget {
-  const VerticalFilmCard({super.key, required this.movieEntity,});
+  const VerticalFilmCard({
+    super.key,
+    required this.movieEntity,
+  });
   final MovieEntity movieEntity;
 
   @override
@@ -19,7 +22,8 @@ class VerticalFilmCard extends StatelessWidget {
         buttonTexts[BlocProvider.of<GenerCubit>(context).state];
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context).push(Approuter.kDetailView,extra: movieEntity.movieId);
+        GoRouter.of(context)
+            .push(Approuter.kDetailView, extra: movieEntity.movieId);
       },
       child: Column(
         children: [
@@ -37,7 +41,7 @@ class VerticalFilmCard extends StatelessWidget {
                 left: MediaQuery.of(context).size.width * 0.185,
                 top: 10,
                 child: Rating(
-                  movieEntity: movieEntity,
+                  rating: movieEntity.rating,
                 ),
               ),
             ],

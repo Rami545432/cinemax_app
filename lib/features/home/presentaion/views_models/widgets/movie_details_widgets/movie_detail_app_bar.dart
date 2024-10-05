@@ -1,14 +1,15 @@
+
 import 'package:cinemax_app/core/utils/app_colors.dart';
 import 'package:cinemax_app/core/utils/app_styles.dart';
-import 'package:cinemax_app/features/home/domian/entites/movie_details_entity.dart';
 import 'package:cinemax_app/features/home/presentaion/views_models/widgets/favorite_button.dart';
 import 'package:cinemax_app/features/home/presentaion/views_models/widgets/opcaity_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class MovieDetailsAppbar extends StatefulWidget {
-  const MovieDetailsAppbar({super.key, required this.movieEntity});
-  final MovieDetailsEntity movieEntity;
+  const MovieDetailsAppbar({super.key, required this.imageUrl, required this.title});
+  final String imageUrl;
+  final String title;
   @override
   State<MovieDetailsAppbar> createState() => _MovieDetailsAppbarState();
 }
@@ -19,6 +20,7 @@ class _MovieDetailsAppbarState extends State<MovieDetailsAppbar> {
 
   @override
   Widget build(BuildContext context) {
+   
     return PopScope(
       onPopInvokedWithResult: (didPop, result) {
         isPressed(context);
@@ -35,7 +37,7 @@ class _MovieDetailsAppbarState extends State<MovieDetailsAppbar> {
                   ? AppPrimaryColors.dark
                   : Colors.transparent),
           title: Text(
-            widget.movieEntity.moviTtitle,
+            widget.title,
             style: AppStyles.textstyle16,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -45,7 +47,7 @@ class _MovieDetailsAppbarState extends State<MovieDetailsAppbar> {
           expandedHeight: 550,
           flexibleSpace: FlexibleSpaceBar(
             background: OpacityDeatailMovieImage(
-              movieEntity: widget.movieEntity,
+              imageUrl: widget.imageUrl,
             ),
           )),
     );

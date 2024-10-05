@@ -18,16 +18,16 @@ class MovieInfo extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           MovieYearPublished(
-            movieDetailsEntity: movieDetailsEntity,
+            date: movieDetailsEntity.date,
           ),
           const CustomVerticalDivider(),
           MovieDurationTime(
-            movieDetailsEntity: movieDetailsEntity,
+            duration: movieDetailsEntity.duration,
           ),
           const CustomVerticalDivider(),
           MovieGener(
-          movieDetailsEntity: movieDetailsEntity,
-                    ),
+            geners: movieDetailsEntity.gener,
+          ),
         ],
       ),
     );

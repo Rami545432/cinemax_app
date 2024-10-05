@@ -3,10 +3,13 @@ import 'package:cinemax_app/features/auth/domain/entities/user_entity.dart'; // 
 import 'package:cinemax_app/features/auth/domain/repos/auth_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthRepoImpl extends AuthRepo {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-
+  final GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['profile', 'email']);
+  final fireBaseUser = FirebaseAuth.instance;
   @override
   Future<Either<Failure, UserData>> signUp({
     required String email,
@@ -18,8 +21,47 @@ class AuthRepoImpl extends AuthRepo {
       final fireBaseUser = userCredential.user;
 
       if (fireBaseUser != null) {
-       
-        final userData = UserData(email: fireBaseUser.email!, id: fireBaseUser.uid);
+        final userData = UserData(
+            email: fireBaseUser.email!,
+            id: fireBaseUser.uid,
+            emailVerify: fireBaseUser.emailVerified);
+        return right(userData);
+      } else {
+        return left(
+          FireBaseFailure(errorMessage: 'User not found'),
+        );
+      }
+    } catch (e) {
+      if (e is FirebaseAuthException) {
+        return left(
+          FireBaseFailure.fromAuthException(
+            e,
+          ),
+        );
+      }
+      return left(
+        FireBaseFailure(
+          errorMessage: e.toString(),
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserData>> signIn({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      UserCredential userCredential = await _firebaseAuth
+          .signInWithEmailAndPassword(email: email, password: password);
+      final fireBaseUser = userCredential.user;
+
+      if (fireBaseUser != null) {
+        final userData = UserData(
+            email: fireBaseUser.email!,
+            id: fireBaseUser.uid,
+            emailVerify: fireBaseUser.emailVerified);
         return right(userData);
       } else {
         return left(FireBaseFailure(errorMessage: 'User not found'));
@@ -40,27 +82,102 @@ class AuthRepoImpl extends AuthRepo {
   }
 
   @override
-  Future<Either<Failure, UserData>> signIn({
-    required String email,
-    required String password,
-  }) async {
-    try {
-      UserCredential userCredential = await _firebaseAuth
-          .signInWithEmailAndPassword(email: email, password: password);
-      final fireBaseUser = userCredential.user;
+  Future<Either<Failure, UserData>> signInWithGoolge() async {
+    final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
+    try {
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      var fireBaseUser = userCredential.user;
       if (fireBaseUser != null) {
-        final userData = UserData(email: fireBaseUser.email!, id: fireBaseUser.uid);
-        return right(userData);
+        final userdata = UserData(
+            emailVerify: fireBaseUser.emailVerified,
+            email: fireBaseUser.email!,
+            id: fireBaseUser.uid);
+        return right(userdata);
       } else {
-        return left(FireBaseFailure(errorMessage: 'User not found'));
+        return left(FireBaseFailure(errorMessage: 'User Not Found'));
       }
     } on FirebaseAuthException catch (e) {
       return left(
+        FireBaseFailure.fromAuthException(e),
+      );
+    } catch (e) {
+      return left(
         FireBaseFailure(
-          errorMessage: e.message ?? 'An error occurred',
+          errorMessage: e.toString(),
         ),
       );
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserData>> signInWithFacebook() async {
+    final LoginResult loginResult = await FacebookAuth.instance
+        .login(permissions: ['email', 'public_profile']);
+
+    try {
+      final OAuthCredential facebookAuthCredential =
+          FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
+
+      UserCredential userCredential =
+          await _firebaseAuth.signInWithCredential(facebookAuthCredential);
+
+      var fireBaseUser = userCredential.user;
+      if (fireBaseUser != null) {
+        final userData = await FacebookAuth.instance
+            .getUserData(fields: "id,name,picture.width(200)");
+        final String profilePictureUrl = userData['picture']['data']['url'];
+        final userdata = UserData(
+            emailVerify: fireBaseUser.emailVerified,
+            email: fireBaseUser.email!,
+            id: fireBaseUser.uid);
+        _firebaseAuth.currentUser!.updatePhotoURL(profilePictureUrl);
+        return right(userdata);
+      } else {
+        return left(FireBaseFailure(errorMessage: 'User Not Found'));
+      }
+    } on FirebaseAuthException catch (e) {
+      return left(
+        FireBaseFailure.fromAuthException(e),
+      );
+    } catch (e) {
+      return left(
+        FireBaseFailure(
+          errorMessage: e.toString(),
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> updateDisplayName(
+      {required String name}) async {
+    try {
+      final newName = await fireBaseUser.currentUser!.updateDisplayName(name);
+      return right(newName);
+    } catch (e) {
+      return left(
+        FireBaseFailure(
+          errorMessage: e.toString(),
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> verficationEmailBeforeUpdated(
+      {required String email}) async {
+    try {
+      final newEmail =
+          await fireBaseUser.currentUser!.verifyBeforeUpdateEmail(email);
+      return right(newEmail);
     } catch (e) {
       return left(
         FireBaseFailure(

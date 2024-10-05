@@ -22,9 +22,10 @@ class SearchViewBody extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: SecondaryButton(onTap: () {
-            GoRouter.of(context).push(Approuter.kActorSearchView);
-          },
+          child: SecondaryButton(
+            onTap: () {
+              GoRouter.of(context).push(Approuter.kActorSearchView);
+            },
             text: 'Search By Actor',
             style: TextStyle(color: AppPrimaryColors.blueAccent),
           ),

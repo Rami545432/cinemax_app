@@ -69,7 +69,8 @@ class FilmSearchResultCard extends StatelessWidget {
                           Text(
                             'Movie',
                             style: AppStyles.textstyle12.copyWith(
-                                fontWeight: FontWeight.w600, color: Colors.grey),
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey),
                           )
                         ],
                       ),

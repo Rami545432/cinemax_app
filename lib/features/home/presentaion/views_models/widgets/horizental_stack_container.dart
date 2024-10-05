@@ -16,7 +16,8 @@ class HorzientalStackContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context).push(Approuter.kDetailView, extra: movieEntity!.movieId);
+        GoRouter.of(context)
+            .push(Approuter.kDetailView, extra: movieEntity!.movieId);
       },
       child: Stack(children: [
         Container(

@@ -12,8 +12,9 @@ class SearchMovieSuccess extends SearchMovieState {
     this.suggestions,
   );
 }
+
 class SearchActorSuccess extends SearchMovieState {
-  final List<ActorEntity> suggestions;
+  final List<SearchActorEntity> suggestions;
 
   SearchActorSuccess(
     this.suggestions,

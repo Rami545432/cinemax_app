@@ -7,12 +7,11 @@ part 'gener_state.dart';
 
 class GenerCubit extends Cubit<int> {
   GenerCubit() : super(0);
-  int? selectedGenreIndex;
+
   final List<List<MovieEntity>> movieLists =
       List.generate(6, (_) => []); // Adjust size based on genres
 
   void selectGenre(int index) {
-
     emit(index);
   }
 
@@ -25,4 +24,6 @@ class GenerCubit extends Cubit<int> {
   List<MovieEntity> getMoviesForSelectedGenre() {
     return movieLists[state]; // Return movies for the currently selected genre
   }
+
+  
 }

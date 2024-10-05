@@ -10,7 +10,9 @@ class Credits {
   factory Credits.fromJson(Map<String, dynamic> json) => Credits(
         cast: (json['cast'] as List<dynamic>?)
             ?.map((e) => Cast.fromJson(e as Map<String, dynamic>))
-            .toList(),
+            .where((castNumber) {
+          return castNumber.profilePath != null;
+        }).toList(),
         crew: (json['crew'] as List<dynamic>?)
             ?.map((e) => Crew.fromJson(e as Map<String, dynamic>))
             .toList(),

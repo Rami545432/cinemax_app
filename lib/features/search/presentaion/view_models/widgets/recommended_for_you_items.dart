@@ -18,9 +18,8 @@ class RecommendedForYouItems extends StatelessWidget {
           child: SubBar(
             title: 'Recommended to you',
             textbutton: '',
-            
           ),
-      ),
+        ),
         const SizedBox(
           height: 16,
         ),

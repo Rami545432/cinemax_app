@@ -22,7 +22,7 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body:  MovieDetailsBody(),
+      body: MovieDetailsBody(),
     );
   }
 }

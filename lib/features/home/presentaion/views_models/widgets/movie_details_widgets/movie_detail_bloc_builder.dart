@@ -14,8 +14,9 @@ class MovieDetailsBlocBuilder extends StatelessWidget {
     return BlocBuilder<FetchMovieDetailsCubit, FetchMovieDetailsState>(
       builder: (context, state) {
         if (state is FetchMovieDetailsSuccess) {
-    
-          return  MovieDetailsListViewCompontes(movieDetailsEntity: state.movies[0],);
+          return MovieDetailsListViewCompontes(
+            movieDetailsEntity: state.movies[0],
+          );
         }
         if (state is FetchMovieDetailsFauilure) {
           Text(state.errorMessage);
@@ -27,4 +28,3 @@ class MovieDetailsBlocBuilder extends StatelessWidget {
     );
   }
 }
-

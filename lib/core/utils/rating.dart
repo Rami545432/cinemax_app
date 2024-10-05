@@ -1,13 +1,11 @@
 import 'dart:ui';
 
-import 'package:cinemax_app/features/home/domian/entites/entity.dart';
-import 'package:cinemax_app/features/home/domian/entites/movie_details_entity.dart';
 import 'package:flutter/material.dart';
 
 class Rating extends StatelessWidget {
-  const Rating({super.key, this.movieEntity, this.movieDetailsEntity});
-  final MovieEntity? movieEntity;
-  final MovieDetailsEntity? movieDetailsEntity;
+  const Rating({super.key, required this.rating});
+
+  final num rating;
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -27,7 +25,7 @@ class Rating extends StatelessWidget {
                 width: 5,
               ),
               Text(
-                movieEntity?.rating.toStringAsFixed(1) ?? '4.5',
+                rating.toStringAsFixed(1),
                 style: const TextStyle(
                     color: Colors.orange, fontWeight: FontWeight.w600),
               ),

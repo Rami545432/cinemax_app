@@ -5,9 +5,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 class FilmCardListViewLoading extends StatelessWidget {
   const FilmCardListViewLoading({
     super.key,
-  
   });
-  
 
   @override
   Widget build(BuildContext context) {

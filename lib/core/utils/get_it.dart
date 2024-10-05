@@ -5,6 +5,9 @@ import 'package:cinemax_app/features/home/data/repos/home_repo_impl.dart';
 import 'package:cinemax_app/features/search/data/data_sources/local_search_data_source.dart';
 import 'package:cinemax_app/features/search/data/data_sources/remote_search_data_source.dart';
 import 'package:cinemax_app/features/search/data/repos/search_repo_impl.dart';
+import 'package:cinemax_app/features/seires/data/data_soureces/local_series_tv_data_source.dart';
+import 'package:cinemax_app/features/seires/data/data_soureces/remote_seires_tv_data_source.dart';
+import 'package:cinemax_app/features/seires/data/repos/series_repo_impl.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -27,7 +30,16 @@ void serviceLocator() {
     SearchRepoImpl(
       remoteDataSource: RemoteSearchDataSourceImpl(
         apiService: getIt.get<ApiService>(),
-      ), localSearchDataSource: LocalSearchDataSourceImpl(),
+      ),
+      localSearchDataSource: LocalSearchDataSourceImpl(),
+    ),
+  );
+  getIt.registerSingleton<SeriesRepoImpl>(
+    SeriesRepoImpl(
+      LocalSeriesDataSourceImpl(),
+      remoteSeiresTvDataSource: RemoteSeiresTvDataSourceImpl(
+        apiService: getIt.get<ApiService>(),
+      ),
     ),
   );
 }

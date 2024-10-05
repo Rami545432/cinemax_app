@@ -1,5 +1,4 @@
 import 'package:cinemax_app/core/utils/app_styles.dart';
-import 'package:cinemax_app/core/utils/rating.dart';
 import 'package:flutter/material.dart';
 
 class WishCardColumnComponets extends StatelessWidget {
@@ -37,7 +36,7 @@ class WishCardColumnComponets extends StatelessWidget {
             const SizedBox(
               width: 8,
             ),
-            const Rating(),
+            // const Rating(),
             const SizedBox(
               width: 40,
             ),

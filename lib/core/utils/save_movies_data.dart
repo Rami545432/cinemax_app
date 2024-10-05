@@ -4,7 +4,7 @@ import 'package:hive/hive.dart';
 void saveMoviesData(
   List<MovieEntity> movies,
   String boxname,
-)  {
+) {
   var popularMovies = Hive.box<MovieEntity>(boxname);
-   popularMovies.addAll(movies);
+  popularMovies.addAll(movies);
 }

@@ -16,8 +16,9 @@ class TrailerButton extends StatelessWidget {
         width: 115,
         height: 55,
         decoration: BoxDecoration(
-            color: AppPrimaryColors.blueAccent,
-            borderRadius: BorderRadius.circular(32)),
+          color: AppPrimaryColors.blueAccent,
+          borderRadius: BorderRadius.circular(32),
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -26,7 +27,7 @@ class TrailerButton extends StatelessWidget {
               color: Colors.white,
             ),
             Text(
-              'Trailer',
+              'Watch',
               style: AppStyles.textstyle16
                   .copyWith(color: Colors.white, fontWeight: FontWeight.w500),
             ),

@@ -1,15 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cinemax_app/constant.dart';
-import 'package:cinemax_app/features/home/domian/entites/movie_details_entity.dart';
 import 'package:flutter/material.dart';
 
 class MoiveDetailsImage extends StatelessWidget {
   const MoiveDetailsImage({
     super.key,
-    required this.movieDetailsEntity,
+    required this.imageUrl,
   });
 
-  final MovieDetailsEntity movieDetailsEntity;
+final String imageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,7 @@ class MoiveDetailsImage extends StatelessWidget {
         },
         height: 287,
         width: 205,
-        imageUrl: '$baseImageUrl${movieDetailsEntity.image}',
+        imageUrl: '$baseImageUrl$imageUrl',
       ),
     );
   }

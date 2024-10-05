@@ -1,14 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cinemax_app/constant.dart';
-import 'package:cinemax_app/features/home/domian/entites/movie_details_entity.dart';
 import 'package:flutter/material.dart';
 
 class OpacityDeatailMovieImage extends StatelessWidget {
   const OpacityDeatailMovieImage({
     super.key,
-    required this.movieEntity,
+    required this.imageUrl,
   });
-  final MovieDetailsEntity? movieEntity;
+  final String? imageUrl;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,7 +29,7 @@ class OpacityDeatailMovieImage extends StatelessWidget {
             },
             fit: BoxFit.cover,
             imageUrl:
-                '$baseImageUrl${movieEntity?.image ?? movieEntity?.image}'),
+                '$baseImageUrl$imageUrl'),
       ),
     );
   }

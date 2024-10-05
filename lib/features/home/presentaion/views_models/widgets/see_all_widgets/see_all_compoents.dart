@@ -1,19 +1,22 @@
+import 'package:cinemax_app/core/utils/movie_gener.dart';
+import 'package:cinemax_app/core/utils/movie_year_published.dart';
 import 'package:cinemax_app/core/utils/pg_13_.dart';
-import 'package:cinemax_app/features/home/domian/entites/entity.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/utils/app_styles.dart';
 import '../../../../../../core/utils/custom_vertical_divider.dart';
-import 'see_all_date.dart';
-import 'see_all_gener.dart';
 
 class SeeAllComponetsInfo extends StatelessWidget {
   const SeeAllComponetsInfo({
     super.key,
-    required this.movieEntity,
+    required this.title,
+    required this.date,
+    required this.type,
+    this.geners,
   });
 
-  final MovieEntity movieEntity;
+  final String title, date, type;
+  final List<int>? geners;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +26,7 @@ class SeeAllComponetsInfo extends StatelessWidget {
         SizedBox(
           width: 200,
           child: Text(
-            movieEntity.moviTtitle,
+            title ,
             maxLines: 2,
             style: AppStyles.textstyle16,
             overflow: TextOverflow.ellipsis,
@@ -32,8 +35,8 @@ class SeeAllComponetsInfo extends StatelessWidget {
         const SizedBox(
           height: 12,
         ),
-        SeeAllYearPublished(
-          movieEntity: movieEntity,
+        MovieYearPublished(
+          date:date,
         ),
         const SizedBox(
           height: 12,
@@ -44,14 +47,14 @@ class SeeAllComponetsInfo extends StatelessWidget {
         ),
         Row(
           children: [
-            SeeAllMovieGener(
-              movieEntity: movieEntity,
+            MovieGener(
+              geners: geners,
             ),
             const CustomVerticalDivider(),
             Text(
-              'Movie',
-              style: AppStyles.textstyle12.copyWith(
-                  fontWeight: FontWeight.w600, color: Colors.white),
+              type,
+              style: AppStyles.textstyle12
+                  .copyWith(fontWeight: FontWeight.w600, color: Colors.white),
             )
           ],
         ),

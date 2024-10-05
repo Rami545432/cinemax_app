@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:cinemax_app/features/auth/domain/use_cases/register_account_use_case.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../domain/entities/user_entity.dart';

@@ -1,12 +1,11 @@
 import 'package:cinemax_app/core/utils/app_colors.dart';
 import 'package:cinemax_app/core/utils/app_styles.dart';
 import 'package:cinemax_app/core/utils/secondry_button.dart';
-import 'package:cinemax_app/features/home/domian/entites/movie_details_entity.dart';
 import 'package:flutter/material.dart';
 
 class MovieDescreption extends StatefulWidget {
-  const MovieDescreption({super.key, required this.movieDetailsEntity});
-  final MovieDetailsEntity movieDetailsEntity;
+  const MovieDescreption({super.key, required this.overview});
+  final String overview;
   @override
   State<MovieDescreption> createState() => _MovieDescreptionState();
 }
@@ -30,11 +29,11 @@ class _MovieDescreptionState extends State<MovieDescreption> {
           ),
           Text(
             maxLines:
-                isClicked ? widget.movieDetailsEntity.storyLine.length : 2,
+                isClicked ? widget.overview.length : 2,
             overflow: isClicked ? TextOverflow.ellipsis : TextOverflow.visible,
-            widget.movieDetailsEntity.storyLine,
+            widget.overview,
           ),
-          if (widget.movieDetailsEntity.storyLine.length > 3)
+          if (widget.overview.length > 3)
             SecondaryButton(
               onTap: () {
                 setState(() {

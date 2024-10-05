@@ -25,11 +25,17 @@ class SeeAllFilmCard extends StatelessWidget {
         child: Row(
           children: [
             SeeAllImageStack(
-              movieEntity: movieEntity,
+              imageUrl: movieEntity.image,
+              rating: movieEntity.rating,
             ),
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: SeeAllComponetsInfo(movieEntity: movieEntity)),
+                child: SeeAllComponetsInfo(
+                  title: movieEntity.moviTtitle,
+                  geners: movieEntity.gener,
+                  type: 'Movie',
+                  date: movieEntity.date,
+                )),
           ],
         ),
       ),

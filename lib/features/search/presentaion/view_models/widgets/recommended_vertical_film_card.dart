@@ -37,7 +37,7 @@ class RecommendedVerticalFilmCard extends StatelessWidget {
                 left: MediaQuery.of(context).size.width * 0.185,
                 top: 10,
                 child: Rating(
-                  movieEntity: movieEntity,
+                  rating: movieEntity.rating,
                 ),
               ),
             ],

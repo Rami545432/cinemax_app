@@ -40,7 +40,7 @@ class SeeAllBLocConsumer extends StatelessWidget {
             BlocProvider.of<GenerCubit>(context).getMoviesForSelectedGenre();
         if (state is FetchPopularMovieSuccess ||
             state is FetchPopularMoviesPaginationLoading) {
-          return SeeAllCustomScrollView(
+        return SeeAllCustomScrollView(
               scrollController: _scrollController, movies: movies);
         }
         return Center(

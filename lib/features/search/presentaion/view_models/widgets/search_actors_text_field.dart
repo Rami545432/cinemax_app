@@ -30,7 +30,6 @@ class _SearchActorsTextFieldState extends State<SearchActorsTextField> {
             child: SizedBox(
               height: 40,
               child: TextFormField(
-                
                 controller: _textEditingController,
                 onChanged: (value) {
                   setState(() {

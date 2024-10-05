@@ -1,14 +1,13 @@
-import 'package:cinemax_app/features/home/domian/entites/movie_details_entity.dart';
 import 'package:cinemax_app/features/home/presentaion/views_models/widgets/movie_details_widgets/movie_detail_app_bar.dart';
 import 'package:flutter/widgets.dart';
 
 class MovieDetaisAppBarComp extends StatelessWidget {
   const MovieDetaisAppBarComp({
-    super.key,
-    required this.movieDetailsEntity,
+    super.key, required this.imageurl, required this.title,
+    
   });
 
-  final MovieDetailsEntity movieDetailsEntity;
+ final String imageurl,title;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +17,8 @@ class MovieDetaisAppBarComp extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           slivers: [
             MovieDetailsAppbar(
-              movieEntity: movieDetailsEntity,
+              imageUrl: imageurl,
+              title: title,
             ),
           ]),
     );

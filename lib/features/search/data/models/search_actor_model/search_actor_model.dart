@@ -1,8 +1,8 @@
-import 'package:cinemax_app/features/search/domain/entities/search_entity.dart';
+import 'package:cinemax_app/features/search/domain/entities/search_actor_entity.dart';
 
 import 'known_for.dart';
 
-class SearchActorModel extends ActorEntity {
+class SearchActorModel extends SearchActorEntity {
   bool? adult;
   num? gender;
   int? id;
@@ -23,7 +23,13 @@ class SearchActorModel extends ActorEntity {
     this.popularity,
     this.profilePath,
     this.knownFor,
-  }) : super(actorImage: profilePath??'', actorName: name!, movietitle: '', movieInfo: knownFor!, data: '', rating: '') ;
+  }) : super(
+            actorImage: profilePath ?? '',
+            actorName: name!,
+            movietitle: '',
+            movieInfo: knownFor!,
+            data: '',
+            rating: '');
 
   factory SearchActorModel.fromJson(Map<String, dynamic> json) {
     return SearchActorModel(

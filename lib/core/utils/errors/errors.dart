@@ -58,6 +58,9 @@ class ServerFailure extends Failure {
 class FireBaseFailure extends Failure {
   FireBaseFailure({required super.errorMessage});
   factory FireBaseFailure.fromAuthException(FirebaseAuthException e) {
+    if (e.code == '') {
+      return FireBaseFailure(errorMessage: 'Please Use a Method to Sign Up');
+    }
     if (e.code == 'weak-password') {
       return FireBaseFailure(errorMessage: 'Too weak Passowrd');
     } else if (e.code == 'email-already-in-use') {

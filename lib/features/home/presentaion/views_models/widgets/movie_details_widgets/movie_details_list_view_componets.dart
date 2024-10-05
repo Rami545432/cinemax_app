@@ -20,8 +20,11 @@ class MovieDetailsListViewCompontes extends StatelessWidget {
       children: [
         Stack(
           children: [
-            MovieDetaisAppBarComp(movieDetailsEntity: movieDetailsEntity),
-            MoiveDetailsImage(movieDetailsEntity: movieDetailsEntity),
+            MovieDetaisAppBarComp(
+              title: movieDetailsEntity.moviTtitle,
+              imageurl: movieDetailsEntity.image,
+            ),
+            MoiveDetailsImage(imageUrl: movieDetailsEntity.image),
             MovieDataAndSharing(movieDetailsEntity: movieDetailsEntity),
           ],
         ),
@@ -29,7 +32,7 @@ class MovieDetailsListViewCompontes extends StatelessWidget {
           height: 24,
         ),
         MovieDescreption(
-          movieDetailsEntity: movieDetailsEntity,
+          overview: movieDetailsEntity.storyLine,
         ),
         const SizedBox(
           height: 24,

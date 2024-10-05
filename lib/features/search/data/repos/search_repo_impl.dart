@@ -2,13 +2,14 @@ import 'package:cinemax_app/core/utils/errors/errors.dart';
 import 'package:cinemax_app/features/home/domian/entites/entity.dart';
 import 'package:cinemax_app/features/search/data/data_sources/local_search_data_source.dart';
 import 'package:cinemax_app/features/search/data/data_sources/remote_search_data_source.dart';
-import 'package:cinemax_app/features/search/domain/entities/search_entity.dart';
+import 'package:cinemax_app/features/search/domain/entities/search_actor_entity.dart';
 import 'package:cinemax_app/features/search/domain/repo/search_repo.dart';
+import 'package:cinemax_app/features/seires/domain/entites/series_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
 class SearchRepoImpl extends SearchRepo {
-  final RemoteDataSource remoteDataSource;
+  final RemoteSearchDataSource remoteDataSource;
   final LocalSearchDataSource localSearchDataSource;
 
   SearchRepoImpl(
@@ -54,7 +55,6 @@ class SearchRepoImpl extends SearchRepo {
         ),
       );
     }
-    
   }
 
   @override
@@ -81,10 +81,31 @@ class SearchRepoImpl extends SearchRepo {
   }
 
   @override
-  Future<Either<Failure, List<ActorEntity>>> searchActor(String query) async {
+  Future<Either<Failure, List<SearchActorEntity>>> searchActor(
+      String query) async {
     try {
       var suggestions = await remoteDataSource.searchActors(query);
       return right(suggestions);
+    } catch (e) {
+      if (e is DioException) {
+        return left(
+          ServerFailure.fromDioError(e),
+        );
+      }
+      return left(
+        ServerFailure(
+          errorMessage: e.toString(),
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<SeriesEntity>>> searchTvShows(
+      String query) async {
+    try {
+      var results = await remoteDataSource.searchTvShows(query);
+      return right(results);
     } catch (e) {
       if (e is DioException) {
         return left(

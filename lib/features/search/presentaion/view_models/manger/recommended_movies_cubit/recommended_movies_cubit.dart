@@ -8,7 +8,7 @@ part 'recommended_movies_state.dart';
 class RecommendedMoviesCubit extends Cubit<RecommendedMoviesState> {
   RecommendedMoviesCubit(this.fetchRecommendedMoviesUseCase)
       : super(RecommendedMoviesInitial());
-      
+
   final FetchRecommendedMoviesUseCase fetchRecommendedMoviesUseCase;
   Future<void> fetchRecommmendedMovies(int moiveId) async {
     var results = await fetchRecommendedMoviesUseCase.call(moiveId);

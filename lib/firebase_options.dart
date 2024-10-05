@@ -67,6 +67,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '510131261228',
     projectId: 'cinemamaxapp-be698',
     storageBucket: 'cinemamaxapp-be698.appspot.com',
+    androidClientId:
+        '510131261228-2d0otuq9neknln573m4g4dj65pr5uj9r.apps.googleusercontent.com',
+    iosClientId:
+        '510131261228-fiq1edrco56abg0851v00dva4lgvmtu0.apps.googleusercontent.com',
     iosBundleId: 'com.example.cinemaxApp',
   );
 
@@ -76,6 +80,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '510131261228',
     projectId: 'cinemamaxapp-be698',
     storageBucket: 'cinemamaxapp-be698.appspot.com',
+    androidClientId:
+        '510131261228-2d0otuq9neknln573m4g4dj65pr5uj9r.apps.googleusercontent.com',
+    iosClientId:
+        '510131261228-fiq1edrco56abg0851v00dva4lgvmtu0.apps.googleusercontent.com',
     iosBundleId: 'com.example.cinemaxApp',
   );
 }

@@ -18,11 +18,9 @@ class LocalHomeDataSourceImpl extends LocalHomeDataSource {
 
     var length = cachedPopMovies.values.length;
     if (startIndex >= length) {
-      
       return [];
     }
 
-    
     endIndex = endIndex > length ? length : endIndex;
 
     return cachedPopMovies.values.toList().sublist(startIndex, endIndex);

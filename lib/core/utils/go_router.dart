@@ -1,9 +1,15 @@
 import 'package:cinemax_app/core/utils/bloc_provieders_views/newst_provieder.dart';
 import 'package:cinemax_app/core/utils/bloc_provieders_views/search_provider.dart';
 import 'package:cinemax_app/core/utils/get_it.dart';
+import 'package:cinemax_app/core/utils/navigation_views.dart';
 import 'package:cinemax_app/features/auth/data/repos/auth_repo_impl.dart';
+import 'package:cinemax_app/features/auth/domain/use_cases/facebook_sign_in_use_case.dart';
+import 'package:cinemax_app/features/auth/domain/use_cases/google_sign_in_use_case.dart';
 import 'package:cinemax_app/features/auth/domain/use_cases/register_account_use_case.dart';
+import 'package:cinemax_app/features/auth/domain/use_cases/sign_in_use_case.dart';
+import 'package:cinemax_app/features/auth/presentaion/views_models/manger/google_sign_in_cubit/google_sign_in_cubit.dart';
 import 'package:cinemax_app/features/auth/presentaion/views_models/manger/sign_up_cubit/sign_up_cubit.dart';
+import 'package:cinemax_app/features/auth/presentaion/views_models/views/email_reset_passoword_view.dart';
 import 'package:cinemax_app/features/auth/presentaion/views_models/views/initial_auth_view.dart';
 import 'package:cinemax_app/features/auth/presentaion/views_models/views/new_password_view.dart';
 import 'package:cinemax_app/features/auth/presentaion/views_models/views/reset_password_view.dart';
@@ -22,14 +28,26 @@ import 'package:cinemax_app/features/home/presentaion/views_models/views/see_all
 import 'package:cinemax_app/features/home/presentaion/views_models/widgets/youtube_player.dart';
 import 'package:cinemax_app/features/onBoarding/presentaion/view_models/widgets/page_view.dart';
 import 'package:cinemax_app/features/home/presentaion/views_models/views/movie_details_view.dart';
+import 'package:cinemax_app/features/profile/presentaion/views/edit_profile_view.dart';
+import 'package:cinemax_app/features/profile/presentaion/views/profile_view.dart';
 import 'package:cinemax_app/features/search/data/repos/search_repo_impl.dart';
 import 'package:cinemax_app/features/search/domain/use_case/search_actor_use_case.dart';
 import 'package:cinemax_app/features/search/presentaion/view_models/manger/search_actor_cubit/seach_actor_cubit.dart';
 import 'package:cinemax_app/features/search/presentaion/view_models/views/search_actors_view.dart';
+import 'package:cinemax_app/features/seires/data/repos/series_repo_impl.dart';
+import 'package:cinemax_app/features/seires/domain/use_cases/fetch_popular_use_case.dart';
+import 'package:cinemax_app/features/seires/domain/use_cases/fetch_tv_show_details_use_case.dart';
+import 'package:cinemax_app/features/seires/presentaion/manger/fetch_popular_tv_shows_cubit/fetch_popular_tv_shows_cubit.dart';
+import 'package:cinemax_app/features/seires/presentaion/manger/fetch_tv_show_details_cubit/fetch_tv_show_details_cubit.dart';
+import 'package:cinemax_app/features/seires/presentaion/views/see_all_popular_tv_view.dart';
+import 'package:cinemax_app/features/seires/presentaion/views/series_details_view.dart';
 import 'package:cinemax_app/features/splash/presentaion/views_models/views/splash_view.dart';
 import 'package:cinemax_app/features/wishList/presentaion/view_models/views/wish_list_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../features/auth/presentaion/views_models/manger/sign_in_cubit/sign_in_cubit.dart';
+import 'bloc_provieders_views/seires_tv_shows_providers.dart';
 
 abstract class Approuter {
   static const String kOnBoarding1 = '/onboarding1';
@@ -47,6 +65,14 @@ abstract class Approuter {
   static const String kSeeAllView = '/seeAllview';
   static const String kActorSearchView = '/actorSearchview';
   static const String kRecommendedSeeAllview = '/recomseeAll';
+  static const String kVerficationPasswordEmailView = '/verficationPassword';
+  static const String kProfileView = '/profileView';
+  static const String kEditProfileView = '/editProfileView';
+  static const String kCustomWebView = '/customWebView';
+  static const String kSerirsView = '/seriesView';
+  static const String kNavigationView = '/navigationView';
+  static const String kTvDetailsView = '/detailsTvView';
+  static const String kTvSeeAllPopularView = '/seeAllTvPopularView';
 
   static final GoRouter router = GoRouter(routes: [
     GoRoute(
@@ -63,7 +89,16 @@ abstract class Approuter {
     ),
     GoRoute(
       path: kInitialAuth,
-      builder: (context, state) => const InitialAuthView(),
+      builder: (context, state) => BlocProvider(
+        create: (context) => AuthSignUpCubit(
+            GoogleSignInUseCase(
+              authRepo: AuthRepoImpl(),
+            ),
+            FacebookSignInUseCase(
+              authRepo: AuthRepoImpl(),
+            )),
+        child: const InitialAuthView(),
+      ),
     ),
     GoRoute(
       path: kSignUpView,
@@ -78,7 +113,14 @@ abstract class Approuter {
     ),
     GoRoute(
       path: kSignInView,
-      builder: (context, state) => const SignInView(),
+      builder: (context, state) => BlocProvider(
+        create: (context) => SignInCubit(
+          SignInUseCase(
+            authRepo: AuthRepoImpl(),
+          ),
+        ),
+        child: const SignInView(),
+      ),
     ),
     GoRoute(
       path: kResetPasswordView,
@@ -136,6 +178,52 @@ abstract class Approuter {
         create: (context) => SearchActorCubit(
             SearchActorUseCase(searchRepo: getIt.get<SearchRepoImpl>())),
         child: const SearchActorsView(),
+      ),
+    ),
+    GoRoute(
+      path: kVerficationPasswordEmailView,
+      builder: (context, state) => EmailResetPassowordView(
+        email: state.extra as String,
+      ),
+    ),
+    GoRoute(
+      path: kEditProfileView,
+      builder: (context, state) => const EditProfileView(),
+    ),
+    GoRoute(
+      path: kProfileView,
+      builder: (context, state) => const ProfileView(),
+    ),
+    GoRoute(
+      path: kSerirsView,
+      builder: (context, state) => const SeiresTvShowsProviders(),
+    ),
+    GoRoute(
+      path: kNavigationView,
+      builder: (context, state) => const NavigationViews(),
+    ),
+    GoRoute(
+      path: kTvDetailsView,
+      builder: (context, state) => BlocProvider(
+        create: (context) => FetchTvShowDetailsCubit(
+          FetchTvShowDetailsUseCase(
+            seriesRepo: getIt.get<SeriesRepoImpl>(),
+          ),
+        ),
+        child: SeriesDetailsView(
+          tvId: state.extra as int,
+        ),
+      ),
+    ),
+    GoRoute(
+      path: kTvSeeAllPopularView,
+      builder: (context, state) => BlocProvider(
+        create: (context) => FetchPopularTvShowsCubit(
+          FetchPopularTvShowsUseCase(
+            seriesRepo: getIt.get<SeriesRepoImpl>(),
+          ),
+        ),
+        child: const SeeAllPopularTvView(),
       ),
     ),
   ]);

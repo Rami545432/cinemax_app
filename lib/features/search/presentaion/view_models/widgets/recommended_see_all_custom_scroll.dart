@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../core/utils/main_app_bar.dart';
 
-
 class RecommendedSeeAllCustomScrollView extends StatelessWidget {
   const RecommendedSeeAllCustomScrollView({
     super.key,

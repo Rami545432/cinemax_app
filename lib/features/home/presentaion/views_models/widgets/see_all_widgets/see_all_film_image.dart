@@ -1,15 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cinemax_app/constant.dart';
 import 'package:cinemax_app/core/utils/rating.dart';
-import 'package:cinemax_app/features/home/domian/entites/entity.dart';
 import 'package:flutter/material.dart';
 
 class SeeAllImageStack extends StatelessWidget {
   const SeeAllImageStack({
     super.key,
-    required this.movieEntity,
+    required this.imageUrl,
+    required this.rating,
   });
-  final MovieEntity movieEntity;
+  
+  final String imageUrl;
+  final num rating;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -17,19 +19,19 @@ class SeeAllImageStack extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(8),
           child: CachedNetworkImage(
-            fit: BoxFit.cover,
+              fit: BoxFit.cover,
               errorWidget: (context, url, error) {
                 return const Icon(Icons.add_ic_call_outlined);
               },
-              height: MediaQuery.of(context).size.height*0.25,
+              height: MediaQuery.of(context).size.height * 0.25,
               width: MediaQuery.of(context).size.width * 0.27,
-              imageUrl: '$baseImageUrl${movieEntity.image}'),
+              imageUrl: '$baseImageUrl$imageUrl'),
         ),
         Positioned(
           left: 45,
           top: 6,
           child: Rating(
-          movieEntity: movieEntity,
+            rating: rating,
           ),
         ),
       ],

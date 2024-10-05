@@ -25,6 +25,12 @@
             "request": "launch",
             "type": "dart"
         },
+        {
+            "name": "cinemax_app (Flutter)",
+            "program": "lib/main.dart",
+            "request": "launch",
+            "type": "dart"
+        },
         
     ]
 }

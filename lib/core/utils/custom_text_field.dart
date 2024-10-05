@@ -6,12 +6,13 @@ class CustomTextField extends StatelessWidget {
       {super.key,
       required this.hintText,
       required this.lable,
-      this.onSaved,
+      this.onFieldSubmitted,
       this.obscureText = false,
       this.icon,
-      this.onPressed,  this.controller});
+      this.onPressed,
+      this.controller});
   final String hintText, lable;
-  final Function(String?)? onSaved;
+  final Function(String?)? onFieldSubmitted;
   final bool obscureText;
   final Widget? icon;
   final Function()? onPressed;
@@ -22,14 +23,14 @@ class CustomTextField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       validator: (value) {
-        if ( value==null|| value.isEmpty) {
-          return 'Please enter Data';
+        if (value == null || value.isEmpty) {
+          return 'This Field is  Required ';
         }
         return null;
       },
       obscureText: obscureText,
-      onFieldSubmitted: onSaved,
-      style: AppStyles.textstyle12,
+      onFieldSubmitted: onFieldSubmitted,
+      style: AppStyles.textstyle14,
       decoration: InputDecoration(
         suffixIcon:
             IconButton(onPressed: onPressed, icon: icon ?? const Text('')),
@@ -41,6 +42,8 @@ class CustomTextField extends StatelessWidget {
         hintStyle: AppStyles.textstyle14,
         enabledBorder: borderPropreties(),
         focusedBorder: borderPropreties(),
+        errorBorder: borderPropreties(),
+        border: borderPropreties(),
       ),
     );
   }

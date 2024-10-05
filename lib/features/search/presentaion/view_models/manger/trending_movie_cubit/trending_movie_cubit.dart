@@ -8,7 +8,7 @@ part 'trending_movie_state.dart';
 class TrendingMovieCubit extends Cubit<TrendingMovieState> {
   TrendingMovieCubit(this.fetchTrendingMoviesUseCase)
       : super(TrendingMovieInitial());
-  
+
   final FetchTrendingMoviesUseCase fetchTrendingMoviesUseCase;
   Future<void> fetchTrendingMovies() async {
     var results = await fetchTrendingMoviesUseCase.call();
@@ -17,7 +17,6 @@ class TrendingMovieCubit extends Cubit<TrendingMovieState> {
         TrendingMovieFailure(errorMessage: failure.errorMessage),
       );
     }, (movies) {
-     
       emit(
         TrendingMovieSuccess(
           movies: movies,
@@ -25,5 +24,4 @@ class TrendingMovieCubit extends Cubit<TrendingMovieState> {
       );
     });
   }
-  
 }

@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:cinemax_app/features/search/domain/entities/search_entity.dart';
+import 'package:cinemax_app/features/search/domain/entities/search_actor_entity.dart';
 import 'package:cinemax_app/features/search/domain/use_case/search_actor_use_case.dart';
 import 'package:meta/meta.dart';
 

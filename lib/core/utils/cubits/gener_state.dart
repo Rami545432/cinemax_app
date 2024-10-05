@@ -4,5 +4,3 @@ part of 'gener_cubit.dart';
 abstract class GenerState {}
 
 class GenerInitial extends GenerState {}
-
-

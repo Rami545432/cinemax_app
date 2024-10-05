@@ -15,7 +15,7 @@ class SearchBox extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: GestureDetector(
-        onTap: () async{
+        onTap: () async {
           GoRouter.of(context).push(Approuter.kSearchView);
         },
         child: Container(
