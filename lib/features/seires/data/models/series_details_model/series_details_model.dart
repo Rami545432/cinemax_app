@@ -84,18 +84,21 @@ class SeriesDetailsModel extends SeriesEntityDetails {
     this.credits,
     this.videos,
   }) : super(
-    geners: genres?.map((gener)=>gener.id).whereType<int>().toList()??[27],
-    firstDate: firstAirDate!,
+            geners:
+                genres?.map((gener) => gener.id).whereType<int>().toList() ??
+                    [27],
+            firstDate: firstAirDate!,
             tvId: id!,
             tvTitle: name!,
             tvStory: overview!,
             tvPosterPath: posterPath!,
-            numOfEpisoide: numberOfEpisodes??0,
-            numOfSeason: numberOfSeasons??0,
+            numOfEpisoide: numberOfEpisodes ?? 0,
+            numOfSeason: numberOfSeasons ?? 0,
             season: seasons!,
             rating: voteAverage!,
             actorDetails: credits!.cast!,
-            videoKey: videos!.results!);
+            videoKey: videos!.results!,
+            runtime: lastEpisodeToAir?.runtime ?? 50);
 
   factory SeriesDetailsModel.fromJson(Map<String, dynamic> json) {
     return SeriesDetailsModel(

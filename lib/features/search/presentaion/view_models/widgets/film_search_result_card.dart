@@ -1,10 +1,10 @@
 import 'package:cinemax_app/core/utils/app_styles.dart';
 import 'package:cinemax_app/core/utils/custom_vertical_divider.dart';
 import 'package:cinemax_app/core/utils/go_router.dart';
+import 'package:cinemax_app/core/utils/gener.dart';
+import 'package:cinemax_app/core/utils/year_published.dart';
 import 'package:cinemax_app/core/utils/pg_13_.dart';
 import 'package:cinemax_app/features/home/domian/entites/entity.dart';
-import 'package:cinemax_app/features/home/presentaion/views_models/widgets/see_all_widgets/see_all_date.dart';
-import 'package:cinemax_app/features/home/presentaion/views_models/widgets/see_all_widgets/see_all_gener.dart';
 import 'package:cinemax_app/features/search/presentaion/view_models/widgets/stack_image_search.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -26,24 +26,29 @@ class FilmSearchResultCard extends StatelessWidget {
             child: Row(
               children: [
                 SearchImageStack(
-                  movieEntity: movieEntity,
+                  imageUrl: movieEntity.image,
+                  rating: movieEntity.rating,
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  padding: const EdgeInsets.only(left: 12),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        movieEntity.moviTtitle,
-                        maxLines: 1,
-                        style: AppStyles.textstyle16,
-                        overflow: TextOverflow.ellipsis,
+                      SizedBox(
+                        width: 180,
+                        child: Text(
+                          textAlign: TextAlign.start,
+                          movieEntity.moviTtitle,
+                          maxLines: 1,
+                          style: AppStyles.textstyle16,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                       const SizedBox(
                         height: 12,
                       ),
-                      SeeAllYearPublished(
-                        movieEntity: movieEntity,
+                      YearPublished(
+                        date: movieEntity.date,
                       ),
                       const SizedBox(
                         height: 12,
@@ -62,8 +67,8 @@ class FilmSearchResultCard extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          SeeAllMovieGener(
-                            movieEntity: movieEntity,
+                          Gener(
+                            geners: movieEntity.gener,
                           ),
                           const CustomVerticalDivider(),
                           Text(

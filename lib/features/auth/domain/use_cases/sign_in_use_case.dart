@@ -4,13 +4,13 @@ import 'package:cinemax_app/features/auth/domain/entities/user_entity.dart';
 import 'package:cinemax_app/features/auth/domain/repos/auth_repo.dart';
 import 'package:dartz/dartz.dart';
 
-class SignInUseCase extends UseCase<UserData, String> {
+class SignInUseCase extends UseCase<UserEntity, String> {
   final AuthRepo authRepo;
 
   SignInUseCase({required this.authRepo});
   @override
   // ignore: avoid_renaming_method_parameters
-  Future<Either<Failure, UserData>> call(
+  Future<Either<Failure, UserEntity>> call(
       [String? parameter, String? password]) async {
     return await authRepo.signIn(email: parameter!, password: password!);
   }

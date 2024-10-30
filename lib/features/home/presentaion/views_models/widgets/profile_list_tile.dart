@@ -31,13 +31,14 @@ class _ProfileListTileState extends State<ProfileListTile> {
         builder: (context, state) {
           if (state is FirebaseOpreationsSuccess) {
             return Text(
-              fireBaseUser.currentUser!.displayName.toString(),
+              fireBaseUser.currentUser?.displayName.toString()??'',
               style: AppStyles.textstyle16,
             );
           }
           return Text(
-            fireBaseUser.currentUser!.displayName.toString(),
-          );
+              fireBaseUser.currentUser?.displayName.toString()??'',
+              style: AppStyles.textstyle16,
+            );
         },
       ),
       leading: const ProfileImage(

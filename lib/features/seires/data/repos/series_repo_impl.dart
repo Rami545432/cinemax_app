@@ -2,6 +2,7 @@ import 'package:cinemax_app/core/utils/errors/errors.dart';
 import 'package:cinemax_app/features/seires/data/data_soureces/local_series_tv_data_source.dart';
 import 'package:cinemax_app/features/seires/data/data_soureces/remote_seires_tv_data_source.dart';
 import 'package:cinemax_app/features/seires/domain/entites/series_entity_details.dart';
+import 'package:cinemax_app/features/seires/domain/entites/series_season_details_entitiy.dart';
 import 'package:cinemax_app/features/seires/domain/repos/series_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -44,7 +45,7 @@ class SeriesRepoImpl extends SeriesRepo {
 
   @override
   Future<Either<Failure, List<SeriesEntity>>> fetchTopRatedTvShows(
-      {int page = 10}) async {
+      {int page = 1}) async {
     try {
       // var cachedTvShows =
       //     localSeriesTvDataSource.fetchTopRatedTvShows(page: page);
@@ -73,7 +74,6 @@ class SeriesRepoImpl extends SeriesRepo {
   Future<Either<Failure, List<SeriesEntity>>> fetchTrendingTvShows(
       {int page = 10}) async {
     try {
-      
       var tvShows =
           await remoteSeiresTvDataSource.fetchTrendingTvShows(page: page);
       return right(tvShows);
@@ -98,6 +98,27 @@ class SeriesRepoImpl extends SeriesRepo {
     try {
       var tvShow = await remoteSeiresTvDataSource.fetchTvShowDetail(tvid: tvid);
       return right(tvShow);
+    } catch (e) {
+      if (e is DioException) {
+        return left(
+          ServerFailure.fromDioError(e),
+        );
+      }
+      return left(
+        ServerFailure(
+          errorMessage: e.toString(),
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<SeriesSeasonDetailsEntitiy>>>
+      fetchTvShowSeasonDetails({required int tvid, required int season}) async {
+    try {
+      var results = await remoteSeiresTvDataSource.fetchTvShowSeasonDetails(
+          tvid: tvid, season: season);
+      return right(results);
     } catch (e) {
       if (e is DioException) {
         return left(

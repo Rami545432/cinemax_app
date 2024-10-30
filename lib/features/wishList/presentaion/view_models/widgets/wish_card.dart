@@ -9,17 +9,9 @@ class WishListCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    EdgeInsets padding;
-    if (screenWidth < 600) {
-      padding =
-          const EdgeInsets.symmetric(horizontal: 10, vertical: 16.0); // Mobile
-    } else {
-      padding = const EdgeInsets.symmetric(
-          horizontal: 16.0, vertical: 24.0); // Tablet or larger
-    }
+    
     return Padding(
-      padding: padding,
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 16.0),
       child: Container(
         height: MediaQuery.of(context).size.height * 0.15,
         width: MediaQuery.of(context).size.width * 1.5,

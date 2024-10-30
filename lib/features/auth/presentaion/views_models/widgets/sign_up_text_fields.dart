@@ -1,3 +1,4 @@
+import 'package:cinemax_app/constant.dart';
 import 'package:cinemax_app/core/utils/go_router.dart';
 import 'package:cinemax_app/core/utils/primary_button.dart';
 import 'package:cinemax_app/features/auth/presentaion/views_models/widgets/sign_up_text_field_column.dart';
@@ -20,6 +21,7 @@ class _SignUpTextFieldsState extends State<SignUpTextFields> {
   final TextEditingController emailContoller = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> _globalKey = GlobalKey();
+  
   @override
   void dispose() {
     nameContoller.dispose();
@@ -57,6 +59,7 @@ class _SignUpTextFieldsState extends State<SignUpTextFields> {
               await BlocProvider.of<SignUpCubit>(context).signUp(
                   email: emailContoller.text,
                   password: passwordController.text);
+                  fireBaseUser.currentUser!.sendEmailVerification();
             }
           },
         )

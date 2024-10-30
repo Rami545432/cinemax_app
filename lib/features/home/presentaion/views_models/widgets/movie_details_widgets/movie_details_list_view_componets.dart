@@ -1,8 +1,8 @@
 import 'package:cinemax_app/features/home/domian/entites/movie_details_entity.dart';
 import 'package:cinemax_app/features/home/presentaion/views_models/widgets/cast_container.dart';
-import 'package:cinemax_app/features/home/presentaion/views_models/widgets/movie_descreption.dart';
-import 'package:cinemax_app/features/home/presentaion/views_models/widgets/movie_details_widgets/movie_details_app_bar_comp.dart';
-import 'package:cinemax_app/features/home/presentaion/views_models/widgets/movie_details_widgets/movie_details_image.dart';
+import 'package:cinemax_app/core/utils/details_widgets/custom_descreption.dart';
+import 'package:cinemax_app/core/utils/details_widgets/details_view_app_bar_comp.dart';
+import 'package:cinemax_app/core/utils/details_widgets/details_view_image.dart';
 import 'package:flutter/material.dart';
 
 import 'movie_data_and_sharing.dart';
@@ -20,18 +20,18 @@ class MovieDetailsListViewCompontes extends StatelessWidget {
       children: [
         Stack(
           children: [
-            MovieDetaisAppBarComp(
+            DetalisViewAppBarCompoentes(
               title: movieDetailsEntity.moviTtitle,
               imageurl: movieDetailsEntity.image,
             ),
-            MoiveDetailsImage(imageUrl: movieDetailsEntity.image),
+            DetailsViewImage(imageUrl: movieDetailsEntity.image),
             MovieDataAndSharing(movieDetailsEntity: movieDetailsEntity),
           ],
         ),
         const SizedBox(
           height: 24,
         ),
-        MovieDescreption(
+        CustomDescreption(
           overview: movieDetailsEntity.storyLine,
         ),
         const SizedBox(

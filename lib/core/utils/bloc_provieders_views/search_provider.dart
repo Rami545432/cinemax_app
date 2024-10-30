@@ -6,7 +6,6 @@ import 'package:cinemax_app/features/search/domain/use_case/search_movie_use_cas
 import 'package:cinemax_app/features/search/domain/use_case/search_tv_show_use_case.dart';
 import 'package:cinemax_app/features/search/presentaion/view_models/manger/recommended_movies_cubit/recommended_movies_cubit.dart';
 import 'package:cinemax_app/features/search/presentaion/view_models/manger/search_movie_cubit/search_movie_cubit.dart';
-import 'package:cinemax_app/features/search/presentaion/view_models/manger/search_tv_show_cubit/search_tv_show_cubit.dart';
 import 'package:cinemax_app/features/search/presentaion/view_models/manger/trending_movie_cubit/trending_movie_cubit.dart';
 import 'package:cinemax_app/features/search/presentaion/view_models/views/search_view.dart';
 import 'package:flutter/material.dart';
@@ -29,13 +28,6 @@ class SearchMultiProviders extends StatelessWidget {
           ),
         ),
         BlocProvider(
-          create: (context) => SearchTvShowCubit(
-            SearchTvShowUseCase(
-              searchRepo: getIt.get<SearchRepoImpl>(),
-            ),
-          ),
-        ),
-        BlocProvider(
           create: (context) => TrendingMovieCubit(
             FetchTrendingMoviesUseCase(
               searchRepo: getIt.get<SearchRepoImpl>(),
@@ -43,12 +35,14 @@ class SearchMultiProviders extends StatelessWidget {
           )..fetchTrendingMovies(),
         ),
         BlocProvider(
-          create: (context) => SearchMovieCubit(
-            SearchMovieUseCase(
-              searchRepo: getIt.get<SearchRepoImpl>(),
-            ),
-          ),
-        ),
+            create: (context) => SearchMovieCubit(
+                  SearchMovieUseCase(
+                    searchRepo: getIt.get<SearchRepoImpl>(),
+                  ),
+                  SearchTvShowUseCase(
+                    searchRepo: getIt.get<SearchRepoImpl>(),
+                  ),
+                )),
       ],
       child: const SearchView(),
     );

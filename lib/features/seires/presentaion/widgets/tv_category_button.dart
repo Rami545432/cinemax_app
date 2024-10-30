@@ -3,10 +3,8 @@ import 'package:cinemax_app/features/seires/presentaion/manger/fetch_popular_tv_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 import '../../../../../constant.dart';
 import '../../../../core/utils/cubits/tv_gener_cubit/gener_tv_cubit.dart';
-
 
 class TvCategoryButton extends StatelessWidget {
   const TvCategoryButton({
@@ -22,7 +20,7 @@ class TvCategoryButton extends StatelessWidget {
             GestureDetector(
               onTap: () async {
                 context.read<GenerTvCubit>().selectTvGener(i);
-             
+
                 // ignore: use_build_context_synchronously
                 await BlocProvider.of<FetchPopularTvShowsCubit>(context)
                     .fetchPopularTvShows(

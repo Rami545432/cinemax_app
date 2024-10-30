@@ -13,7 +13,8 @@ class FetchPopularTvShowsUseCase extends UseCase<List<SeriesEntity>, dynamic> {
   // ignore: avoid_renaming_method_parameters
   Future<Either<Failure, List<SeriesEntity>>> call(
       // ignore: avoid_renaming_method_parameters
-      [dynamic generId, int page = 1]) async {
+      [dynamic generId,
+      int page = 1]) async {
     return await seriesRepo.fetchPopularTvShows(page: page, generId);
   }
 }

@@ -6,7 +6,7 @@ abstract class SignInState {}
 class SignInInitial extends SignInState {}
 
 class SignInSuccess extends SignInState {
-  final UserData userData;
+  final UserEntity userData;
 
   SignInSuccess({required this.userData});
 }

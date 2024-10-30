@@ -1,12 +1,13 @@
-import 'dart:developer';
+
 
 import 'package:cinemax_app/core/utils/main_app_bar.dart';
 import 'package:cinemax_app/core/utils/primary_button.dart';
+import 'package:cinemax_app/features/auth/presentaion/views_models/manger/sign_in_cubit/sign_in_cubit.dart';
 import 'package:cinemax_app/features/profile/presentaion/widgets/general_option.dart';
 import 'package:cinemax_app/features/profile/presentaion/widgets/more_option.dart';
 import 'package:cinemax_app/features/profile/presentaion/widgets/profile_container.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/utils/go_router.dart';
@@ -17,8 +18,8 @@ class ProfileViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fireBaseUser = FirebaseAuth.instance;
-    log(fireBaseUser.currentUser!.displayName.toString());
+  
+    
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: ListView(
@@ -47,7 +48,8 @@ class ProfileViewBody extends StatelessWidget {
             text: 'Log out',
             onTap: () async {
               GoRouter.of(context).pushReplacement(Approuter.kInitialAuth);
-              await FirebaseAuth.instance.signOut();
+             BlocProvider.of<SignInCubit>(context).signOut();
+          
             },
           ),
           const SizedBox(

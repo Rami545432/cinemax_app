@@ -6,19 +6,8 @@ abstract class SearchMovieState {}
 class SearchMovieInitial extends SearchMovieState {}
 
 class SearchMovieSuccess extends SearchMovieState {
-  final List<MovieEntity> suggestions;
-
-  SearchMovieSuccess(
-    this.suggestions,
-  );
-}
-
-class SearchActorSuccess extends SearchMovieState {
-  final List<SearchActorEntity> suggestions;
-
-  SearchActorSuccess(
-    this.suggestions,
-  );
+  final List<SearchResult> results;
+  SearchMovieSuccess({required this.results});
 }
 
 class SearchMovieFailure extends SearchMovieState {

@@ -30,6 +30,7 @@ class ApiService {
       {String type = 'movie'}) async {
     var response = await dio
         .get('$baseUrlMovie/search/$type?api_key=$apiKey&query=$query');
+    log('$baseUrlMovie/search/$type?api_key=$apiKey&query=$query');
     return response.data;
   }
 
@@ -50,22 +51,32 @@ class ApiService {
   Future<Map<String, dynamic>> getTrendingMovies(
       {String type = 'movie', int page = 10}) async {
     var response =
-        await dio.get('$baseUrlMovie/trending/$type/day?api_key=$apiKey');
+        await dio.get('$baseUrlMovie/trending/$type/week?api_key=$apiKey');
     return response.data;
   }
 
   Future<Map<String, dynamic>> getTopRated(
-      {String type = 'movie', int page = 10}) async {
-    var response =
-        await dio.get('$baseUrlMovie/$type/top_rated??api_key=$apiKey');
+      {String type = 'movie', int page = 1}) async {
+    var response = await dio
+        .get('$baseUrlMovie/$type/top_rated?api_key=$apiKey&page=$page');
+    log('$baseUrlMovie/$type/top_rated?api_key=$apiKey&page=$page');
     return response.data;
   }
+
   Future<Map<String, dynamic>> getGeneralTv(dynamic generId,
       {int page = 1, String type = 'movie'}) async {
     var response = await dio.get(
         '$baseUrlMovie/discover/$type?api_key=$apiKey&with_genres=$generId&page=${(page / 1)}');
     log('$baseUrlMovie/discover/$type?api_key=$apiKey&with_genres=$generId&page=${(page / 1)}');
     // log(response.data['results'].toString());
+    return response.data;
+  }
+
+  Future<Map<String, dynamic>> getSeasonDetails(
+      {required int tvid, required int season}) async {
+    var response =
+        await dio.get('$baseUrlMovie/tv/$tvid/season/$season?api_key=$apiKey');
+    log('$baseUrlMovie/tv/$tvid/season/$season?api_key=$apiKey');
     return response.data;
   }
 }

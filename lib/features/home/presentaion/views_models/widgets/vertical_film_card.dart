@@ -1,29 +1,35 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cinemax_app/constant.dart';
 import 'package:cinemax_app/core/utils/app_colors.dart';
 import 'package:cinemax_app/core/utils/app_styles.dart';
-import 'package:cinemax_app/core/utils/cubits/gener_cubit.dart';
-import 'package:cinemax_app/core/utils/go_router.dart';
 import 'package:cinemax_app/core/utils/rating.dart';
-import 'package:cinemax_app/features/home/domian/entites/entity.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class VerticalFilmCard extends StatelessWidget {
-  const VerticalFilmCard({
+class VerticalCard extends StatelessWidget {
+  const VerticalCard({
     super.key,
-    required this.movieEntity,
+    required this.id,
+    required this.imageUrl,
+    required this.title,
+    required this.gener,
+    required this.rating,
+    required this.locataion, required this.generState,
   });
-  final MovieEntity movieEntity;
+
+  final int id;
+  final String imageUrl, title, locataion;
+  final List<int> gener;
+  final num rating;
+  final int generState;
 
   @override
   Widget build(BuildContext context) {
     final generButtonText =
-        buttonTexts[BlocProvider.of<GenerCubit>(context).state];
+        buttonTexts[generState];
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context)
-            .push(Approuter.kDetailView, extra: movieEntity.movieId);
+        GoRouter.of(context).push(locataion, extra: id);
       },
       child: Column(
         children: [
@@ -31,8 +37,8 @@ class VerticalFilmCard extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(16),
-                child: Image(
-                  image: NetworkImage('$baseImageUrl${movieEntity.image}'),
+                child: CachedNetworkImage(
+                  imageUrl: '$baseImageUrl$imageUrl',
                   width: 135,
                   height: 178,
                 ),
@@ -41,7 +47,7 @@ class VerticalFilmCard extends StatelessWidget {
                 left: MediaQuery.of(context).size.width * 0.185,
                 top: 10,
                 child: Rating(
-                  rating: movieEntity.rating,
+                  rating: rating,
                 ),
               ),
             ],
@@ -59,7 +65,7 @@ class VerticalFilmCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    movieEntity.moviTtitle,
+                    title,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: AppStyles.textstyle14
@@ -67,7 +73,7 @@ class VerticalFilmCard extends StatelessWidget {
                   ),
                   Text(
                     generButtonText == 'All'
-                        ? getGenreName(movieEntity.gener[0])
+                        ? getGenreName(gener[0])
                         : generButtonText,
                     style: AppStyles.textstyle12,
                   ),

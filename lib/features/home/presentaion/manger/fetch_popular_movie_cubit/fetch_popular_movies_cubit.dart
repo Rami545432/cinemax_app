@@ -8,7 +8,7 @@ class FetchPopularMoviesCubit extends Cubit<FetchPopularMoviesState> {
   FetchPopularMoviesCubit(this.fetchMostPopularUseCase)
       : super(FetchPopularMoviesInitial());
   final FetchMostPopularUseCase fetchMostPopularUseCase;
- 
+
   Future<void> fetchPopularMovie(dynamic generId, {int page = 10}) async {
     if (page == 10) {
       emit(

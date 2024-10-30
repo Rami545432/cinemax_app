@@ -25,7 +25,7 @@ class SignInBlocListiner extends StatelessWidget {
       listener: (context, state) {
         if (state is SignInSuccess) {
           if (state.userData.emailVerify == true) {
-            GoRouter.of(context).push(Approuter.kHomeview);
+            GoRouter.of(context).push(Approuter.kNavigationView);
             showSnackBar(context, color: Colors.greenAccent, text: "Welcome");
           } else {
             showSnackBar(context,

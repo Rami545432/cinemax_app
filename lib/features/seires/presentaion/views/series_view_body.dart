@@ -5,8 +5,10 @@ import 'package:cinemax_app/features/seires/presentaion/widgets/popular_bloc_bui
 import 'package:cinemax_app/features/seires/presentaion/widgets/tv_categoies_sections.dart';
 import 'package:cinemax_app/features/seires/presentaion/widgets/tv_horizental_film_card.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-
+import '../../../../core/utils/go_router.dart';
+import '../widgets/tv_top_rated_bloc_builder.dart';
 
 class SeriesViewBody extends StatelessWidget {
   const SeriesViewBody({super.key});
@@ -14,7 +16,7 @@ class SeriesViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: const [
+      children: [
         SizedBox(
           height: 40,
         ),
@@ -36,13 +38,42 @@ class SeriesViewBody extends StatelessWidget {
           child: SubBar(title: 'Trending', textbutton: ''),
         ),
         TvHorzintalFilmCard(),
-        SizedBox(height: 40,),
+        SizedBox(
+          height: 40,
+        ),
         TvCategoiesSections(),
-         SizedBox(
+        SizedBox(
           height: 32,
         ),
-        TvPopularMoivesBlocBuilder()
-        
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 24),
+          child: SubBar(
+            onPressed: () {
+              GoRouter.of(context).push(
+                Approuter.kTvSeeAllPopularView,
+              );
+            },
+            title: 'Most popular',
+            textbutton: 'See All',
+          ),
+        ),
+        TvPopularBlocBuilder(),
+        SizedBox(
+          height: 32,
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 24),
+          child: SubBar(
+            title: 'Top Rated ',
+            textbutton: 'See All',
+            onPressed: () {
+              GoRouter.of(context).push(
+                Approuter.kTopRatedSeeAll,
+              );
+            },
+          ),
+        ),
+        TopRatedTvShowsBlocBuilder(),
       ],
     );
   }

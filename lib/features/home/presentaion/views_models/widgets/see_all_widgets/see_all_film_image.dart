@@ -9,7 +9,7 @@ class SeeAllImageStack extends StatelessWidget {
     required this.imageUrl,
     required this.rating,
   });
-  
+
   final String imageUrl;
   final num rating;
   @override

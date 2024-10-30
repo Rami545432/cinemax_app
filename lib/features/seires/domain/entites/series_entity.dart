@@ -20,7 +20,7 @@ class SeriesEntity {
       required this.tvFirstAirDate,
       required this.tvRating,
       required this.gener});
-        @override
+  @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     return other is SeriesEntity && other.tvId == tvId; // Compare IDs

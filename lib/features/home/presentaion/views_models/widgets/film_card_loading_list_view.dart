@@ -1,4 +1,4 @@
-import 'package:cinemax_app/features/home/presentaion/views_models/widgets/vertical_film_card_loading.dart';
+import 'package:cinemax_app/core/utils/skeletionzed_loading_cards/vertical_film_card_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 

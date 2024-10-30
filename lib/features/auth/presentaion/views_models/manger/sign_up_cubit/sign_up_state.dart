@@ -6,7 +6,7 @@ abstract class SignUpState {}
 class SignUpInitial extends SignUpState {}
 
 class SignUpSuccess extends SignUpState {
-  final UserData userData;
+  final UserEntity userData;
 
   SignUpSuccess({required this.userData});
 }

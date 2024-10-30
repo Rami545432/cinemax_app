@@ -10,6 +10,7 @@ class FetchTvShowDetailsCubit extends Cubit<FetchTvShowDetailsState> {
   FetchTvShowDetailsCubit(this.fetchTvShowDetailsUseCase)
       : super(FetchTvShowDetailsInitial());
   final FetchTvShowDetailsUseCase fetchTvShowDetailsUseCase;
+   
   Future<void> fetchTvShowDetail(int tvId) async {
     emit(
       FetchTvShowDetailsLoading(),

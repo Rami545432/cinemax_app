@@ -10,7 +10,7 @@ class FetchPopularTvShowsCubit extends Cubit<FetchPopularTvShowsState> {
   FetchPopularTvShowsCubit(this.fetchPopularTvShowsUseCase)
       : super(FetchPopularTvShowsInitial());
   final FetchPopularTvShowsUseCase fetchPopularTvShowsUseCase;
-  Future<void> fetchPopularTvShows(dynamic generId, {int page =1}) async {
+  Future<void> fetchPopularTvShows(dynamic generId, {int page = 1}) async {
     if (page == 1) {
       emit(FetchPopularTvShowsLoading());
     } else {

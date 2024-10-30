@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:cinemax_app/features/home/domian/entites/entity.dart';
 import 'package:cinemax_app/features/search/domain/use_case/fetch_recommended_movies.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
 part 'recommended_movies_state.dart';
@@ -10,6 +11,7 @@ class RecommendedMoviesCubit extends Cubit<RecommendedMoviesState> {
       : super(RecommendedMoviesInitial());
 
   final FetchRecommendedMoviesUseCase fetchRecommendedMoviesUseCase;
+  
   Future<void> fetchRecommmendedMovies(int moiveId) async {
     var results = await fetchRecommendedMoviesUseCase.call(moiveId);
     results.fold((failure) {

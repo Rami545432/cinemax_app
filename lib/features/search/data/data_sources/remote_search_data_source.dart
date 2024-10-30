@@ -1,3 +1,4 @@
+
 import 'package:cinemax_app/constant.dart';
 import 'package:cinemax_app/core/utils/api_service.dart';
 import 'package:cinemax_app/core/utils/save_movies_data.dart';
@@ -87,8 +88,8 @@ class RemoteSearchDataSourceImpl extends RemoteSearchDataSource {
   Future<List<SeriesEntity>> searchTvShows(String query) async {
     List<SeriesEntity> suggestions = [];
     var data = await apiService.searchMovie(type: 'tv', query);
-    for (var suggestion in data['results']) {
-      if (suggestion['profile_path'] != null) {
+    for (var suggestion in data["results"]) {
+      if (suggestion['poster_path'] != null) {
         suggestions.add(
           SeriesModel.fromJson(suggestion),
         );

@@ -1,4 +1,4 @@
-import 'package:cinemax_app/features/home/presentaion/views_models/widgets/horizental_car_bloc_builder.dart';
+import 'package:cinemax_app/features/home/presentaion/views_models/widgets/horizental_film_card_bloc_builder.dart';
 import 'package:cinemax_app/features/home/presentaion/views_models/widgets/smoth_indicator_card.dart';
 import 'package:flutter/material.dart';
 

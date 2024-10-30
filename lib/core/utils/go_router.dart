@@ -1,4 +1,4 @@
-import 'package:cinemax_app/core/utils/bloc_provieders_views/newst_provieder.dart';
+import 'package:cinemax_app/core/utils/bloc_provieders_views/home_view_provieder.dart';
 import 'package:cinemax_app/core/utils/bloc_provieders_views/search_provider.dart';
 import 'package:cinemax_app/core/utils/get_it.dart';
 import 'package:cinemax_app/core/utils/navigation_views.dart';
@@ -36,11 +36,14 @@ import 'package:cinemax_app/features/search/presentaion/view_models/manger/searc
 import 'package:cinemax_app/features/search/presentaion/view_models/views/search_actors_view.dart';
 import 'package:cinemax_app/features/seires/data/repos/series_repo_impl.dart';
 import 'package:cinemax_app/features/seires/domain/use_cases/fetch_popular_use_case.dart';
+import 'package:cinemax_app/features/seires/domain/use_cases/fetch_top_rated_use_case.dart';
 import 'package:cinemax_app/features/seires/domain/use_cases/fetch_tv_show_details_use_case.dart';
 import 'package:cinemax_app/features/seires/presentaion/manger/fetch_popular_tv_shows_cubit/fetch_popular_tv_shows_cubit.dart';
+import 'package:cinemax_app/features/seires/presentaion/manger/fetch_top_rated_tv_shows_cubit/fetch_top_rated_tv_shows_cubit.dart';
 import 'package:cinemax_app/features/seires/presentaion/manger/fetch_tv_show_details_cubit/fetch_tv_show_details_cubit.dart';
 import 'package:cinemax_app/features/seires/presentaion/views/see_all_popular_tv_view.dart';
 import 'package:cinemax_app/features/seires/presentaion/views/series_details_view.dart';
+import 'package:cinemax_app/features/seires/presentaion/views/top_rated_see_all_view.dart';
 import 'package:cinemax_app/features/splash/presentaion/views_models/views/splash_view.dart';
 import 'package:cinemax_app/features/wishList/presentaion/view_models/views/wish_list_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,6 +54,7 @@ import 'bloc_provieders_views/seires_tv_shows_providers.dart';
 
 abstract class Approuter {
   static const String kOnBoarding1 = '/onboarding1';
+  static const String kSpalshView = '/splashview';
   static const String kInitialAuth = '/initailauth';
   static const String kSignUpView = '/signupview';
   static const String kSignInView = '/signInview';
@@ -73,158 +77,190 @@ abstract class Approuter {
   static const String kNavigationView = '/navigationView';
   static const String kTvDetailsView = '/detailsTvView';
   static const String kTvSeeAllPopularView = '/seeAllTvPopularView';
+  static const String kTopRatedSeeAll = '/topRatedSeeAll';
 
-  static final GoRouter router = GoRouter(routes: [
-    GoRoute(
-      path: '/',
-      builder: (context, state) => const SplashView(),
-    ),
-    GoRoute(
-      path: kHomeview,
-      builder: (context, state) => const NewstMoiveProvider(),
-    ),
-    GoRoute(
-      path: kOnBoarding1,
-      builder: (context, state) => const OnBoardingTransistion(),
-    ),
-    GoRoute(
-      path: kInitialAuth,
-      builder: (context, state) => BlocProvider(
-        create: (context) => AuthSignUpCubit(
-            GoogleSignInUseCase(
-              authRepo: AuthRepoImpl(),
+  static final GoRouter router = GoRouter(
+      // initialLocation: '/',
+      // redirect: (context, state) {
+      //   final signInCubit = context.read<SignInCubit>();
+      //   final currentState = signInCubit.state;
+      //   if (currentState is SignInSuccess) {
+      //     return kNavigationView;
+      //   } else if (state.fullPath == '/' && currentState is SignInInitial) {
+      //     return kOnBoarding1;
+      //   } else if (state.fullPath == kOnBoarding1 &&
+      //       currentState is SignInSuccess) {
+      //     return kNavigationView;
+      //   }
+      //   return null;
+     
+      // },
+      routes: [
+        GoRoute(
+          path: '/',
+          builder: (context, state) => const SplashView(),
+        ),
+        GoRoute(
+          path: kHomeview,
+          builder: (context, state) => const HomeViewProviders(),
+        ),
+        GoRoute(
+          path: kOnBoarding1,
+          builder: (context, state) => const OnBoardingTransistion(),
+        ),
+        GoRoute(
+          path: kInitialAuth,
+          builder: (context, state) => BlocProvider(
+            create: (context) => AuthSignUpCubit(
+                GoogleSignInUseCase(
+                  authRepo: AuthRepoImpl(),
+                ),
+                FacebookSignInUseCase(
+                  authRepo: AuthRepoImpl(),
+                )),
+            child: const InitialAuthView(),
+          ),
+        ),
+        GoRoute(
+          path: kSignUpView,
+          builder: (context, state) => BlocProvider(
+            create: (context) => SignUpCubit(
+              SignUpUseCase(
+                authRepo: AuthRepoImpl(),
+              ),
             ),
-            FacebookSignInUseCase(
-              authRepo: AuthRepoImpl(),
-            )),
-        child: const InitialAuthView(),
-      ),
-    ),
-    GoRoute(
-      path: kSignUpView,
-      builder: (context, state) => BlocProvider(
-        create: (context) => SignUpCubit(
-          SignUpUseCase(
-            authRepo: AuthRepoImpl(),
+            child: const SignUpView(),
           ),
         ),
-        child: const SignUpView(),
-      ),
-    ),
-    GoRoute(
-      path: kSignInView,
-      builder: (context, state) => BlocProvider(
-        create: (context) => SignInCubit(
-          SignInUseCase(
-            authRepo: AuthRepoImpl(),
+        GoRoute(
+          path: kSignInView,
+          builder: (context, state) => BlocProvider(
+            create: (context) => SignInCubit(
+              SignInUseCase(
+                authRepo: AuthRepoImpl(),
+              ),
+            ),
+            child: const SignInView(),
           ),
         ),
-        child: const SignInView(),
-      ),
-    ),
-    GoRoute(
-      path: kResetPasswordView,
-      builder: (context, state) => const ResetPasswordView(),
-    ),
-    GoRoute(
-      path: kNewPasswordView,
-      builder: (context, state) => const NewPasswordView(),
-    ),
-    GoRoute(
-      path: kVerficationView,
-      builder: (context, state) => const VerifyAccountView(),
-    ),
-    GoRoute(
-      path: kSearchView,
-      builder: (context, state) => const SearchMultiProviders(),
-    ),
-    GoRoute(
-      path: kDetailView,
-      builder: (context, state) => BlocProvider(
-        create: (context) => FetchMovieDetailsCubit(
-          FetchMovieDetailsUseCase(
-            homeRepo: getIt.get<HomeRepoImpl>(),
+        GoRoute(
+          path: kResetPasswordView,
+          builder: (context, state) => const ResetPasswordView(),
+        ),
+        GoRoute(
+          path: kNewPasswordView,
+          builder: (context, state) => const NewPasswordView(),
+        ),
+        GoRoute(
+          path: kVerficationView,
+          builder: (context, state) => const VerifyAccountView(),
+        ),
+        GoRoute(
+          path: kSearchView,
+          builder: (context, state) => const SearchMultiProviders(),
+        ),
+        GoRoute(
+          path: kDetailView,
+          builder: (context, state) => BlocProvider(
+            create: (context) => FetchMovieDetailsCubit(
+              FetchMovieDetailsUseCase(
+                homeRepo: getIt.get<HomeRepoImpl>(),
+              ),
+            ),
+            child: MovieDetailsView(
+              movieEntity: state.extra as int,
+            ),
           ),
         ),
-        child: MovieDetailsView(
-          movieEntity: state.extra as int,
+        GoRoute(
+          path: kWishListView,
+          builder: (context, state) => const WishListView(),
         ),
-      ),
-    ),
-    GoRoute(
-      path: kWishListView,
-      builder: (context, state) => const WishListView(),
-    ),
-    GoRoute(
-      path: kYoutubePlayer,
-      builder: (context, state) => YoutubeVideoPlayer(
-        movieDetailsEntity: state.extra as MovieDetailsEntity,
-      ),
-    ),
-    GoRoute(
-      path: kSeeAllView,
-      builder: (context, state) => BlocProvider(
-        create: (context) => FetchPopularMoviesCubit(
-          FetchMostPopularUseCase(
-            homeRepo: getIt.get<HomeRepoImpl>(),
+        GoRoute(
+          path: kYoutubePlayer,
+          builder: (context, state) => YoutubeVideoPlayer(
+            movieDetailsEntity: state.extra as MovieDetailsEntity,
           ),
         ),
-        child: const SeeAllView(),
-      ),
-    ),
-    GoRoute(
-      path: kActorSearchView,
-      builder: (context, state) => BlocProvider(
-        create: (context) => SearchActorCubit(
-            SearchActorUseCase(searchRepo: getIt.get<SearchRepoImpl>())),
-        child: const SearchActorsView(),
-      ),
-    ),
-    GoRoute(
-      path: kVerficationPasswordEmailView,
-      builder: (context, state) => EmailResetPassowordView(
-        email: state.extra as String,
-      ),
-    ),
-    GoRoute(
-      path: kEditProfileView,
-      builder: (context, state) => const EditProfileView(),
-    ),
-    GoRoute(
-      path: kProfileView,
-      builder: (context, state) => const ProfileView(),
-    ),
-    GoRoute(
-      path: kSerirsView,
-      builder: (context, state) => const SeiresTvShowsProviders(),
-    ),
-    GoRoute(
-      path: kNavigationView,
-      builder: (context, state) => const NavigationViews(),
-    ),
-    GoRoute(
-      path: kTvDetailsView,
-      builder: (context, state) => BlocProvider(
-        create: (context) => FetchTvShowDetailsCubit(
-          FetchTvShowDetailsUseCase(
-            seriesRepo: getIt.get<SeriesRepoImpl>(),
+        GoRoute(
+          path: kSeeAllView,
+          builder: (context, state) => BlocProvider(
+            create: (context) => FetchPopularMoviesCubit(
+              FetchMostPopularUseCase(
+                homeRepo: getIt.get<HomeRepoImpl>(),
+              ),
+            ),
+            child: const SeeAllView(),
           ),
         ),
-        child: SeriesDetailsView(
-          tvId: state.extra as int,
-        ),
-      ),
-    ),
-    GoRoute(
-      path: kTvSeeAllPopularView,
-      builder: (context, state) => BlocProvider(
-        create: (context) => FetchPopularTvShowsCubit(
-          FetchPopularTvShowsUseCase(
-            seriesRepo: getIt.get<SeriesRepoImpl>(),
+        GoRoute(
+          path: kActorSearchView,
+          builder: (context, state) => BlocProvider(
+            create: (context) => SearchActorCubit(
+                SearchActorUseCase(searchRepo: getIt.get<SearchRepoImpl>())),
+            child: const SearchActorsView(),
           ),
         ),
-        child: const SeeAllPopularTvView(),
-      ),
-    ),
-  ]);
+        GoRoute(
+          path: kVerficationPasswordEmailView,
+          builder: (context, state) => EmailResetPassowordView(
+            email: state.extra as String,
+          ),
+        ),
+        GoRoute(
+          path: kEditProfileView,
+          builder: (context, state) => const EditProfileView(),
+        ),
+        GoRoute(
+          path: kProfileView,
+          builder: (context, state) => const ProfileView(),
+        ),
+        GoRoute(
+          path: kSerirsView,
+          builder: (context, state) => const SeiresTvShowsProviders(),
+        ),
+        GoRoute(
+          path: kNavigationView,
+          builder: (context, state) => const NavigationViews(),
+        ),
+        GoRoute(
+          path: kTvDetailsView,
+          builder: (context, state) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => FetchTvShowDetailsCubit(
+                  FetchTvShowDetailsUseCase(
+                    seriesRepo: getIt.get<SeriesRepoImpl>(),
+                  ),
+                ),
+              ),
+            ],
+            child: SeriesDetailsView(
+              tvId: state.extra as int,
+            ),
+          ),
+        ),
+        GoRoute(
+          path: kTvSeeAllPopularView,
+          builder: (context, state) => BlocProvider(
+            create: (context) => FetchPopularTvShowsCubit(
+              FetchPopularTvShowsUseCase(
+                seriesRepo: getIt.get<SeriesRepoImpl>(),
+              ),
+            ),
+            child: const SeeAllPopularTvView(),
+          ),
+        ),
+        GoRoute(
+          path: kTopRatedSeeAll,
+          builder: (context, state) => BlocProvider(
+            create: (context) => FetchTopRatedTvShowsCubit(
+              FetchTopRatedTvShowsUseCase(
+                seriesRepo: getIt.get<SeriesRepoImpl>(),
+              ),
+            ),
+            child: TopRatedSeeAllView(),
+          ),
+        ),
+      ]);
 }

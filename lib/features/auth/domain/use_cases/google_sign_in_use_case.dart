@@ -4,12 +4,12 @@ import 'package:cinemax_app/features/auth/domain/entities/user_entity.dart';
 import 'package:cinemax_app/features/auth/domain/repos/auth_repo.dart';
 import 'package:dartz/dartz.dart';
 
-class GoogleSignInUseCase extends UseCase<UserData, NoParam> {
+class GoogleSignInUseCase extends UseCase<UserEntity, NoParam> {
   final AuthRepo authRepo;
 
   GoogleSignInUseCase({required this.authRepo});
   @override
-  Future<Either<Failure, UserData>> call([NoParam? parameter]) async {
+  Future<Either<Failure, UserEntity>> call([NoParam? parameter]) async {
     return await authRepo.signInWithGoolge();
   }
 }

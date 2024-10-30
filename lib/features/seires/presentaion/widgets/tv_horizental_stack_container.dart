@@ -13,13 +13,13 @@ class TvHorzientalStackContainer extends StatelessWidget {
     super.key,
     required this.seriesEntity,
   });
-  final SeriesEntity? seriesEntity;
+  final SeriesEntity seriesEntity;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         GoRouter.of(context)
-            .push(Approuter.kTvDetailsView, extra: seriesEntity!.tvId);
+            .push(Approuter.kTvDetailsView, extra: seriesEntity.tvId);
       },
       child: Stack(children: [
         Container(
@@ -28,15 +28,13 @@ class TvHorzientalStackContainer extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(16),
             child: CachedNetworkImage(
-              
                 width: 400,
                 fit: BoxFit.fill,
                 errorWidget: (context, url, error) {
                   log(error.toString());
                   return const Icon(Icons.error);
                 },
-                imageUrl:
-                    '$baseImageUrl${seriesEntity?.tvBackDropPath ?? seriesEntity?.tvPosterPath}'),
+                imageUrl: '$baseImageUrl${seriesEntity.tvBackDropPath}'),
           ),
         ),
         Positioned(
@@ -47,7 +45,7 @@ class TvHorzientalStackContainer extends StatelessWidget {
             child: Text(
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              seriesEntity!.tvName,
+              seriesEntity.tvName,
               style: AppStyles.textstyle16,
               textAlign: TextAlign.left,
             ),
@@ -61,7 +59,7 @@ class TvHorzientalStackContainer extends StatelessWidget {
             child: Text(
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              'On ${seriesEntity!.tvFirstAirDate}',
+              'On ${seriesEntity.tvFirstAirDate}',
               style: AppStyles.textstyle16,
               textAlign: TextAlign.start,
             ),

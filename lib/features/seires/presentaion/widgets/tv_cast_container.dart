@@ -30,7 +30,8 @@ class TvCastContainer extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.only(right: 12),
                   child: FilmCastInfo(
-                      actorName: seriesEntityDetails.actorDetails[index].name ?? '',
+                      actorName:
+                          seriesEntityDetails.actorDetails[index].name ?? '',
                       actorImage:
                           seriesEntityDetails.actorDetails[index].profilePath ??
                               ''),

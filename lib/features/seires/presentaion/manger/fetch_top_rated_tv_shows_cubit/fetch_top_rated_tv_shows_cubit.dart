@@ -10,8 +10,8 @@ class FetchTopRatedTvShowsCubit extends Cubit<FetchTopRatedTvShowsState> {
   FetchTopRatedTvShowsCubit(this.fetchTopRatedTvShowsUseCase)
       : super(FetchTopRatedTvShowsInitial());
   final FetchTopRatedTvShowsUseCase fetchTopRatedTvShowsUseCase;
-  Future<void> fetchTopRatedTvShows({int page = 10}) async {
-    if (page == 10) {
+  Future<void> fetchTopRatedTvShows({int page = 1}) async {
+    if (page == 1) {
       emit(FetchTopRatedTvShowsLoading());
     } else {
       emit(FetchTopRatedTvShowsLoadingPagination());

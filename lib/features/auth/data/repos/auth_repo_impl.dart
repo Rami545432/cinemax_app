@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cinemax_app/core/utils/errors/errors.dart';
 import 'package:cinemax_app/features/auth/domain/entities/user_entity.dart'; // Make sure this is your domain User entity
 import 'package:cinemax_app/features/auth/domain/repos/auth_repo.dart';
@@ -11,7 +13,7 @@ class AuthRepoImpl extends AuthRepo {
   final GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['profile', 'email']);
   final fireBaseUser = FirebaseAuth.instance;
   @override
-  Future<Either<Failure, UserData>> signUp({
+  Future<Either<Failure, UserEntity>> signUp({
     required String email,
     required String password,
   }) async {
@@ -21,7 +23,7 @@ class AuthRepoImpl extends AuthRepo {
       final fireBaseUser = userCredential.user;
 
       if (fireBaseUser != null) {
-        final userData = UserData(
+        final userData = UserEntity(
             email: fireBaseUser.email!,
             id: fireBaseUser.uid,
             emailVerify: fireBaseUser.emailVerified);
@@ -48,7 +50,7 @@ class AuthRepoImpl extends AuthRepo {
   }
 
   @override
-  Future<Either<Failure, UserData>> signIn({
+  Future<Either<Failure, UserEntity>> signIn({
     required String email,
     required String password,
   }) async {
@@ -58,7 +60,7 @@ class AuthRepoImpl extends AuthRepo {
       final fireBaseUser = userCredential.user;
 
       if (fireBaseUser != null) {
-        final userData = UserData(
+        final userData = UserEntity(
             email: fireBaseUser.email!,
             id: fireBaseUser.uid,
             emailVerify: fireBaseUser.emailVerified);
@@ -82,7 +84,7 @@ class AuthRepoImpl extends AuthRepo {
   }
 
   @override
-  Future<Either<Failure, UserData>> signInWithGoolge() async {
+  Future<Either<Failure, UserEntity>> signInWithGoolge() async {
     final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
     try {
@@ -96,10 +98,11 @@ class AuthRepoImpl extends AuthRepo {
           await FirebaseAuth.instance.signInWithCredential(credential);
       var fireBaseUser = userCredential.user;
       if (fireBaseUser != null) {
-        final userdata = UserData(
+        final userdata = UserEntity(
             emailVerify: fireBaseUser.emailVerified,
             email: fireBaseUser.email!,
             id: fireBaseUser.uid);
+             log(fireBaseUser.uid);
         return right(userdata);
       } else {
         return left(FireBaseFailure(errorMessage: 'User Not Found'));
@@ -118,7 +121,7 @@ class AuthRepoImpl extends AuthRepo {
   }
 
   @override
-  Future<Either<Failure, UserData>> signInWithFacebook() async {
+  Future<Either<Failure, UserEntity>> signInWithFacebook() async {
     final LoginResult loginResult = await FacebookAuth.instance
         .login(permissions: ['email', 'public_profile']);
 
@@ -134,10 +137,11 @@ class AuthRepoImpl extends AuthRepo {
         final userData = await FacebookAuth.instance
             .getUserData(fields: "id,name,picture.width(200)");
         final String profilePictureUrl = userData['picture']['data']['url'];
-        final userdata = UserData(
+        final userdata = UserEntity(
             emailVerify: fireBaseUser.emailVerified,
             email: fireBaseUser.email!,
             id: fireBaseUser.uid);
+            log(fireBaseUser.uid);
         _firebaseAuth.currentUser!.updatePhotoURL(profilePictureUrl);
         return right(userdata);
       } else {

@@ -14,7 +14,7 @@ class Rating extends StatelessWidget {
         filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
         child: SizedBox(
           height: 24,
-          width: MediaQuery.of(context).size.width * 0.15,
+          width: MediaQuery.of(context).size.width * 0.18,
           child: Row(
             children: [
               const Icon(

@@ -4,10 +4,8 @@ import 'package:cinemax_app/features/seires/presentaion/widgets/tv_most_popular_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
-
-class TvPopularMoivesBlocBuilder extends StatelessWidget {
-  const TvPopularMoivesBlocBuilder({
+class TvPopularBlocBuilder extends StatelessWidget {
+  const TvPopularBlocBuilder({
     super.key,
   });
 
@@ -20,10 +18,10 @@ class TvPopularMoivesBlocBuilder extends StatelessWidget {
             tvShows: state.tvShows,
           );
         }
-       if (state is FetchPopularTvShowsFailure){
-        return Text(state.errorMessage);
-       }
-       return FilmCardListViewLoading();
+        if (state is FetchPopularTvShowsFailure) {
+          return Text(state.errorMessage);
+        }
+        return FilmCardListViewLoading();
       },
     );
   }

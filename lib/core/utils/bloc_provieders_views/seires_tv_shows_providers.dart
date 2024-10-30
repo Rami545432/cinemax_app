@@ -32,7 +32,7 @@ class SeiresTvShowsProviders extends StatelessWidget {
             FetchTopRatedTvShowsUseCase(
               seriesRepo: getIt.get<SeriesRepoImpl>(),
             ),
-          ),
+          )..fetchTopRatedTvShows(),
         ),
         BlocProvider(
           create: (context) => FetchTrendingTvShowCubit(

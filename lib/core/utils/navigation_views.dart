@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../constant.dart';
 import 'app_colors.dart';
-import 'bloc_provieders_views/newst_provieder.dart';
+import 'bloc_provieders_views/home_view_provieder.dart';
 import 'bloc_provieders_views/seires_tv_shows_providers.dart';
 
 class NavigationViews extends StatefulWidget {
@@ -17,7 +17,7 @@ class NavigationViews extends StatefulWidget {
 class _NavigationViewsState extends State<NavigationViews> {
   int selectedIndex = 0;
   List<Widget> body = const [
-    NewstMoiveProvider(),
+    HomeViewProviders(),
     WishListView(),
     SeiresTvShowsProviders(),
     ProfileView()

@@ -8,13 +8,13 @@ class SeriesEntityDetails {
   final String tvTitle;
   final String tvStory;
   final String tvPosterPath;
-final String firstDate;
+  final String firstDate;
   final num numOfEpisoide;
   final num numOfSeason;
   final List<Season> season;
   final num rating;
-    final List<Cast> actorDetails;
-
+  final List<Cast> actorDetails;
+final num runtime;
   final List<int> geners;
   final List<Result> videoKey;
 
@@ -30,5 +30,5 @@ final String firstDate;
       required this.actorDetails,
       required this.videoKey,
       required this.firstDate,
-      required this.geners});
+      required this.geners,required this.runtime});
 }

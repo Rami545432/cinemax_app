@@ -1,6 +1,6 @@
-class UserData {
-  final String email;
+class UserEntity {
+  final String? email;
   final String id;
-  final bool emailVerify;
-  UserData({required this.emailVerify, required this.email, required this.id});
+  final bool? emailVerify;
+  UserEntity({ this.emailVerify, this.email, required this.id});
 }

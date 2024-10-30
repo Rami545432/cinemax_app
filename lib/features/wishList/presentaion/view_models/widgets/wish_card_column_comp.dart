@@ -20,7 +20,7 @@ class WishCardColumnComponets extends StatelessWidget {
           height: 6,
         ),
         SizedBox(
-          width: 166,
+          width: 120,
           child: Text(
             'Spider-Man No Way Home',
             style: AppStyles.textstyle14.copyWith(fontWeight: FontWeight.w600),

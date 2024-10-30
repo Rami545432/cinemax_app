@@ -18,8 +18,6 @@ Future<void> hiveInitialize() async {
   await Hive.openBox<MovieEntity>(recommendedBox);
   final recommended = Hive.box<MovieEntity>(recommendedBox);
   await recommended.clear();
-   
-
 
 //  var details= await Hive.openBox<MovieDetailsEntity>(movieDetailtBox);
 //  await details.delete(movieDetailtBox);

@@ -28,8 +28,7 @@ class OpacityDeatailMovieImage extends StatelessWidget {
               return const Text('NO IMAGE');
             },
             fit: BoxFit.cover,
-            imageUrl:
-                '$baseImageUrl$imageUrl'),
+            imageUrl: '$baseImageUrl$imageUrl'),
       ),
     );
   }

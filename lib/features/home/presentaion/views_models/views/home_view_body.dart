@@ -5,7 +5,6 @@ import 'package:cinemax_app/core/utils/search_box.dart';
 import 'package:cinemax_app/features/home/presentaion/views_models/widgets/horizental_film_card.dart';
 import 'package:cinemax_app/features/home/presentaion/views_models/widgets/profile_list_tile.dart';
 
-
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
 

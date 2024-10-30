@@ -3,6 +3,8 @@ import 'package:cinemax_app/features/seires/presentaion/widgets/tv_horizental_st
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/utils/skeletionzed_loading_cards/horizental_card_laoding_page_view_builder.dart';
+
 class TvHorizentalFilmCardBlocBuilder extends StatelessWidget {
   const TvHorizentalFilmCardBlocBuilder({
     super.key,
@@ -32,7 +34,8 @@ class TvHorizentalFilmCardBlocBuilder extends StatelessWidget {
         if (state is FetchTrendingTvShowFailure) {
           return Text(state.errorMessage);
         }
-        return const Text('data');
+        return HorizentalCardLoadingPageViewBuilder(
+            pageController: _pageController);
       },
     );
   }

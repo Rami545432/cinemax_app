@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -15,8 +13,6 @@ class ProfileImage extends StatelessWidget {
   final double width, height;
   @override
   Widget build(BuildContext context) {
-    log(fireBaseUser.currentUser!.photoURL.toString());
-
     final String userImageUrl =
         FirebaseAuth.instance.currentUser?.photoURL.toString() ??
             defaultProfileImage;
@@ -25,7 +21,10 @@ class ProfileImage extends StatelessWidget {
       width: width,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(32),
-        child: CachedNetworkImage(imageUrl: userImageUrl),
+        child: CachedNetworkImage(imageUrl: userImageUrl,errorWidget: 
+        (context, url, error) {
+          return CachedNetworkImage(imageUrl:defaultProfileImage );
+        },),
       ),
     );
   }

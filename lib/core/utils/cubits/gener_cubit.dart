@@ -24,6 +24,4 @@ class GenerCubit extends Cubit<int> {
   List<MovieEntity> getMoviesForSelectedGenre() {
     return movieLists[state]; // Return movies for the currently selected genre
   }
-
-  
 }

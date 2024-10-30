@@ -33,7 +33,7 @@ class MovieDataAndSharing extends StatelessWidget {
             height: 24,
           ),
           FilmFeaturesOptions(
-           movieDetailsEntity: movieDetailsEntity,
+            movieDetailsEntity: movieDetailsEntity,
           ),
         ],
       ),

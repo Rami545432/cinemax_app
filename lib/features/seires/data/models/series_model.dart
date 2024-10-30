@@ -33,7 +33,14 @@ class SeriesModel extends SeriesEntity {
     this.voteAverage,
     this.voteCount,
     this.originCountry,
-  }) : super(tvId: id!, tvName: name!, tvPosterPath: posterPath!, tvBackDropPath: backdropPath??'', tvFirstAirDate: firstAirDate!, tvRating: voteAverage!,gener: genreIds!);
+  }) : super(
+            tvId: id!,
+            tvName: name!,
+            tvPosterPath: posterPath!,
+            tvBackDropPath: backdropPath ?? '',
+            tvFirstAirDate: firstAirDate!,
+            tvRating: voteAverage!,
+            gener: genreIds!);
 
   factory SeriesModel.fromJson(Map<String, dynamic> json) => SeriesModel(
         backdropPath: json['backdrop_path'] as String?,
@@ -45,7 +52,7 @@ class SeriesModel extends SeriesEntity {
         mediaType: json['media_type'] as String?,
         adult: json['adult'] as bool?,
         originalLanguage: json['original_language'] as String?,
-        genreIds:  (json['genre_ids'] as List<dynamic>?)
+        genreIds: (json['genre_ids'] as List<dynamic>?)
                 ?.map((gener) => gener as int)
                 .toList() ??
             [],

@@ -58,13 +58,13 @@ String getGenreName(int id) {
   switch (id) {
     case 10768:
       return "War & Politics";
-     case 10767:
+    case 10767:
       return "Talk";
     case 10763:
       return "News";
-      case 10762:
+    case 10762:
       return "Kids";
-      case 10766:
+    case 10759:
       return "Soap";
     case 10765:
       return "Sci-Fi & Fantasy";

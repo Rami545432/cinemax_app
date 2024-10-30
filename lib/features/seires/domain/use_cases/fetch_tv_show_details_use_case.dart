@@ -5,12 +5,14 @@ import 'package:dartz/dartz.dart';
 
 import '../entites/series_entity_details.dart';
 
-class FetchTvShowDetailsUseCase extends UseCase<List<SeriesEntityDetails>, int> {
+class FetchTvShowDetailsUseCase
+    extends UseCase<List<SeriesEntityDetails>, int> {
   final SeriesRepo seriesRepo;
 
   FetchTvShowDetailsUseCase({required this.seriesRepo});
   @override
-  Future<Either<Failure, List<SeriesEntityDetails>>> call([int? parameter]) async {
+  Future<Either<Failure, List<SeriesEntityDetails>>> call(
+      [int? parameter]) async {
     return await seriesRepo.fetchTvShowDetail(tvid: parameter!);
   }
 }
