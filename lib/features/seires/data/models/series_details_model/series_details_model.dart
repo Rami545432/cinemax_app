@@ -20,7 +20,7 @@ class SeriesDetailsModel extends SeriesEntityDetails {
   String? firstAirDate;
   List<Genre>? genres;
   String? homepage;
-  num? id;
+  int? id;
   bool? inProduction;
   List<dynamic>? languages;
   String? lastAirDate;
@@ -98,7 +98,7 @@ class SeriesDetailsModel extends SeriesEntityDetails {
             rating: voteAverage!,
             actorDetails: credits!.cast!,
             videoKey: videos!.results!,
-            runtime: lastEpisodeToAir?.runtime ?? 50);
+            runtime: lastEpisodeToAir?.runtime ?? 0);
 
   factory SeriesDetailsModel.fromJson(Map<String, dynamic> json) {
     return SeriesDetailsModel(

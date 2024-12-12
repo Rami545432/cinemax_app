@@ -21,10 +21,15 @@ class MovieDetailsListViewCompontes extends StatelessWidget {
         Stack(
           children: [
             DetalisViewAppBarCompoentes(
+              gener: movieDetailsEntity.gener[0].toString(),
+              movieId: movieDetailsEntity.movieId,
+              type: 'movie',
               title: movieDetailsEntity.moviTtitle,
               imageurl: movieDetailsEntity.image,
             ),
-            DetailsViewImage(imageUrl: movieDetailsEntity.image),
+            DetailsViewImage(
+              imageUrl: movieDetailsEntity.image,
+            ),
             MovieDataAndSharing(movieDetailsEntity: movieDetailsEntity),
           ],
         ),

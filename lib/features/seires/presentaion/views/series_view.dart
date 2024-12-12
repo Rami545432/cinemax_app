@@ -6,9 +6,9 @@ class SeriesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
-      child: Scaffold(
-        body: SeriesViewBody(),
+    return Scaffold(
+      body: SafeArea(
+        child: SeriesViewBody(),
       ),
     );
   }

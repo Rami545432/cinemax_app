@@ -3,7 +3,7 @@ import 'package:cinemax_app/features/home/presentaion/views_models/widgets/verti
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/utils/cubits/gener_cubit.dart';
+import '../../../../../core/utils/cubits/gener_cubit/gener_cubit.dart';
 import '../../../../../core/utils/go_router.dart';
 
 class FilmCardListView extends StatelessWidget {
@@ -26,7 +26,7 @@ class FilmCardListView extends StatelessWidget {
             padding: const EdgeInsets.only(right: 12),
             child: VerticalCard(
               generState: BlocProvider.of<GenerCubit>(context).state,
-              locataion: Approuter.kDetailView,
+              locataion: Approuter.kMovieDetailView,
               title: movieEntity[index].moviTtitle,
               gener: movieEntity[index].gener,
               id: movieEntity[index].movieId,

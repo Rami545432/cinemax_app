@@ -16,20 +16,18 @@ class EpisodeCardListViewBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return SizedBox(
-      height: seasons.length*250,
-      child: ListView.builder(
-        physics: NeverScrollableScrollPhysics(),
-        itemCount:seasons.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 16),
-            child: EpisodeCard(
-              seasonDetailsEntitiy: seasons[index],
-            ),
-          );
-        },
-      ),
+    return ListView.builder(
+      shrinkWrap: true,
+      physics:NeverScrollableScrollPhysics(),
+      itemCount:seasons.length,
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 16),
+          child: EpisodeCard(
+            seasonDetailsEntitiy: seasons[index],
+          ),
+        );
+      },
     );
   }
 }

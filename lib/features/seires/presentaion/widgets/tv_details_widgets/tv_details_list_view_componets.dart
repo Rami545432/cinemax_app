@@ -24,8 +24,14 @@ class TvDetailsListViewComponets extends StatelessWidget {
             DetalisViewAppBarCompoentes(
               imageurl: seriesEntityDetails.tvPosterPath,
               title: seriesEntityDetails.tvTitle,
+              gener: seriesEntityDetails.geners.isNotEmpty?seriesEntityDetails.geners[0].toString():'',
+              movieId: seriesEntityDetails.tvId,
+              type: 'tv',
             ),
-            DetailsViewImage(imageUrl: seriesEntityDetails.tvPosterPath),
+            DetailsViewImage(
+              imageUrl: seriesEntityDetails.tvPosterPath,
+            
+            ),
             TvDataAndSharing(seriesEntityDetails: seriesEntityDetails),
           ],
         ),

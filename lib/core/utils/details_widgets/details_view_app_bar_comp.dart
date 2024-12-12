@@ -5,10 +5,11 @@ class DetalisViewAppBarCompoentes extends StatelessWidget {
   const DetalisViewAppBarCompoentes({
     super.key,
     required this.imageurl,
-    required this.title,
+    required this.title, required this.movieId, required this.gener, required this.type,
   });
 
-  final String imageurl, title;
+  final String imageurl, title, gener, type;
+  final int  movieId;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +21,9 @@ class DetalisViewAppBarCompoentes extends StatelessWidget {
             DetailsViewAppbar(
               imageUrl: imageurl,
               title: title,
+              gener: gener,
+              movieId: movieId,
+              type: type,
             ),
           ]),
     );

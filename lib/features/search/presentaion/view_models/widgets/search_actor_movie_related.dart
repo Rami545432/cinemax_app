@@ -25,7 +25,7 @@ class SearchMovieRelatedCard extends StatelessWidget {
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {
-                  GoRouter.of(context).push(Approuter.kDetailView,
+                  GoRouter.of(context).push(Approuter.kMovieDetailView,
                       extra: actorEntity[index].id);
                 },
                 child: Padding(

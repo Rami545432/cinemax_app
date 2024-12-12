@@ -1,5 +1,5 @@
 import 'package:cinemax_app/constant.dart';
-import 'package:cinemax_app/core/utils/cubits/gener_cubit.dart';
+import 'package:cinemax_app/core/utils/cubits/gener_cubit/gener_cubit.dart';
 import 'package:cinemax_app/features/home/presentaion/manger/fetch_popular_movie_cubit/fetch_popular_movies_cubit.dart';
 import 'package:cinemax_app/features/home/presentaion/views_models/views/see_all_view_body.dart';
 import 'package:flutter/material.dart';
@@ -28,9 +28,9 @@ class _SeeAllViewState extends State<SeeAllView> {
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
-      child: Scaffold(
-        body: SeeAllViewBody(),
+    return Scaffold(
+      body: SafeArea(
+        child: SeeAllViewBody(),
       ),
     );
   }

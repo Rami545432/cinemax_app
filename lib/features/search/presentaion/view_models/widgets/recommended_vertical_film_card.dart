@@ -19,7 +19,7 @@ class RecommendedVerticalFilmCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         GoRouter.of(context)
-            .push(Approuter.kDetailView, extra: movieEntity.movieId);
+            .push(Approuter.kMovieDetailView, extra: movieEntity.movieId);
       },
       child: Column(
         children: [

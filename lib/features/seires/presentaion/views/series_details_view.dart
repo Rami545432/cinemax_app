@@ -24,10 +24,8 @@ class _SeriesDetailsViewState extends State<SeriesDetailsView> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: SeriesDetailsBody(),
-      ),
+    return Scaffold(
+      body: SeriesDetailsBody(),
     );
   }
 }

@@ -12,9 +12,11 @@ class CustomMaterialApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      
       routerConfig: Approuter.router,
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
+        
         scaffoldBackgroundColor: AppPrimaryColors.dark,
         appBarTheme: AppBarTheme(color: AppPrimaryColors.dark),
         textTheme:

@@ -18,7 +18,7 @@ class SeeAllFilmCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         GoRouter.of(context)
-            .push(Approuter.kDetailView, extra: movieEntity.movieId);
+            .push(Approuter.kMovieDetailView, extra: movieEntity.movieId);
       },
       child: Padding(
         padding: const EdgeInsets.only(left: 24, bottom: 16),

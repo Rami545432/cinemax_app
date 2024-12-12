@@ -21,7 +21,7 @@ class FilmSearchResultCard extends StatelessWidget {
           GestureDetector(
             onTap: () {
               GoRouter.of(context)
-                  .push(Approuter.kDetailView, extra: movieEntity.movieId);
+                  .push(Approuter.kMovieDetailView, extra: movieEntity.movieId);
             },
             child: Row(
               children: [

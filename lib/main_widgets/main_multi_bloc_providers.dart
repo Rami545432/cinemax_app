@@ -1,6 +1,9 @@
+import 'package:cinemax_app/features/wishList/data/repos/wish_list_repo_impl.dart';
+import 'package:cinemax_app/features/wishList/domain/use_cases/get_favorites_use_case.dart';
+import 'package:cinemax_app/features/wishList/presentaion/view_models/manger/get_favorite_cubit/get_favorites_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../core/utils/cubits/gener_cubit.dart';
+import '../core/utils/cubits/gener_cubit/gener_cubit.dart';
 import '../core/utils/cubits/tv_gener_cubit/gener_tv_cubit.dart';
 import '../core/utils/get_it.dart';
 import '../features/auth/data/repos/auth_repo_impl.dart';
@@ -21,6 +24,13 @@ class MainMultiProvieders extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+          create: (context) => GetFavoritesCubit(
+            GetFavoritesUseCase(
+              wishListRepo: getIt.get<WishListRepoImpl>(),
+            ),
+          ),
+        ),
         BlocProvider(
           create: (context) => FetchSeriesSeasonDetailsCubit(
             FetchSeriesSeasonDetailsUseCase(
@@ -49,4 +59,3 @@ class MainMultiProvieders extends StatelessWidget {
     );
   }
 }
-

@@ -11,6 +11,9 @@ import 'package:cinemax_app/features/seires/data/repos/series_repo_impl.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../features/wishList/data/remote_wish_list_data_source/remote_wish_list_data_source.dart';
+import '../../features/wishList/data/repos/wish_list_repo_impl.dart';
+
 GetIt getIt = GetIt.instance;
 void serviceLocator() {
   getIt.registerSingleton<ApiService>(
@@ -42,4 +45,7 @@ void serviceLocator() {
       ),
     ),
   );
+  getIt.registerSingleton<WishListRepoImpl>(WishListRepoImpl(
+    remoteWishListDataSource: RemoteWishListDataSourceImpl(),
+  ));
 }

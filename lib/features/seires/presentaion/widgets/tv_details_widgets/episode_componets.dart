@@ -1,4 +1,4 @@
-import 'package:cinemax_app/core/utils/details_widgets/custom_descreption.dart';
+import 'package:cinemax_app/core/utils/details_widgets/episode_descreption.dart';
 import 'package:flutter/material.dart';
 
 import '../../../domain/entites/series_season_details_entitiy.dart';
@@ -37,7 +37,7 @@ class EpisodeComponets extends StatelessWidget {
           SizedBox(
            
             width: 282,
-            child: CustomDescreption(overview: seasonDetailsEntitiy.episodeOverView),
+            child: EpisodeDescrepttion(overview: seasonDetailsEntitiy.episodeOverView),
           ),
           const SizedBox(
             height: 10,

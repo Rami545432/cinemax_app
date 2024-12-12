@@ -1,46 +1,33 @@
 import 'package:cinemax_app/core/utils/app_styles.dart';
-import 'package:cinemax_app/core/utils/go_router.dart';
+import 'package:cinemax_app/core/utils/navigation_views.dart';
 import 'package:cinemax_app/core/utils/small_icon_button.dart';
-import 'package:cinemax_app/features/auth/presentaion/views_models/manger/firebase_opreations_cubit/firebase_opreations_cubit.dart';
 import 'package:cinemax_app/features/profile/presentaion/widgets/profile_image.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
-class ProfileListTile extends StatefulWidget {
+import 'profile_list_tile_bloc_builder.dart';
+
+class ProfileListTile extends StatelessWidget {
   const ProfileListTile({
     super.key,
   });
 
   @override
-  State<ProfileListTile> createState() => _ProfileListTileState();
-}
-
-class _ProfileListTileState extends State<ProfileListTile> {
-  @override
   Widget build(BuildContext context) {
-    final fireBaseUser = FirebaseAuth.instance;
-
     return ListTile(
       onTap: () {
-        GoRouter.of(context).push(Approuter.kProfileView);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return NavigationViews(
+                viewindex: 3,
+              );
+            },
+          ),
+        );
       },
       contentPadding: const EdgeInsets.symmetric(horizontal: 24),
-      title: BlocBuilder<FirebaseOpreationsCubit, FirebaseOpreationsState>(
-        builder: (context, state) {
-          if (state is FirebaseOpreationsSuccess) {
-            return Text(
-              fireBaseUser.currentUser?.displayName.toString()??'',
-              style: AppStyles.textstyle16,
-            );
-          }
-          return Text(
-              fireBaseUser.currentUser?.displayName.toString()??'',
-              style: AppStyles.textstyle16,
-            );
-        },
-      ),
+      title: ProfileListTileBLocBuilder(),
       leading: const ProfileImage(
         width: 54,
         height: 54,
@@ -51,7 +38,16 @@ class _ProfileListTileState extends State<ProfileListTile> {
       ),
       trailing: SmalliconButton(
         onPressed: () {
-          GoRouter.of(context).push(Approuter.kWishListView);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return NavigationViews(
+                  viewindex: 1,
+                );
+              },
+            ),
+          );
         },
         icon: const Icon(
           Icons.favorite,

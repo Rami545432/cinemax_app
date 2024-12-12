@@ -46,7 +46,7 @@ class CustomContainerLastPage extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                GoRouter.of(context).push(Approuter.kInitialAuth);
+                GoRouter.of(context).pushReplacement(Approuter.kInitialAuth);
               },
               child: Image.asset(image),
             )

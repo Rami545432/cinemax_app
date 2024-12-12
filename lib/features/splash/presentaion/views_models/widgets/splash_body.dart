@@ -1,6 +1,8 @@
 import 'package:cinemax_app/constant.dart';
-import 'package:cinemax_app/features/splash/presentaion/views_models/widgets/text_animation.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../core/utils/app_colors.dart';
+import '../../../../../core/utils/app_styles.dart';
 
 class SplashBody extends StatelessWidget {
   const SplashBody({super.key});
@@ -15,7 +17,11 @@ class SplashBody extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
-          const TextAnimation(),
+          Text(
+            'CINEMAX',
+            style: AppStyles.textstyle28
+                .copyWith(color: AppPrimaryColors.blueAccent),
+          )
         ],
       ),
     );

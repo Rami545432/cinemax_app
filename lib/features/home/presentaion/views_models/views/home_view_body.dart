@@ -2,7 +2,7 @@ import 'package:cinemax_app/features/home/presentaion/views_models/widgets/categ
 import 'package:cinemax_app/features/home/presentaion/views_models/widgets/popular_movies_bloc_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:cinemax_app/core/utils/search_box.dart';
-import 'package:cinemax_app/features/home/presentaion/views_models/widgets/horizental_film_card.dart';
+import 'package:cinemax_app/features/home/presentaion/views_models/widgets/horizontal_film_card_widgets/horizental_film_card.dart';
 import 'package:cinemax_app/features/home/presentaion/views_models/widgets/profile_list_tile.dart';
 
 class HomeViewBody extends StatelessWidget {

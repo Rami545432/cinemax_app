@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class TvShowFeaturesOptions extends StatelessWidget {
   const TvShowFeaturesOptions({super.key, required this.seriesEntityDetails});
@@ -19,13 +18,9 @@ class TvShowFeaturesOptions extends StatelessWidget {
       children: [
         TrailerButton(
           onTap: () {
-            final Uri url = Uri.parse(
-                'https://vidsrc.xyz/embed/tv/${seriesEntityDetails.tvId}/1/1');
-            try {
-              launchUrl(url);
-            } catch (e) {
-              const Text('Sorry the Movie Not work try Again later !');
-            }
+            final tvUrl =
+                'https://vidsrc.xyz/embed/tv/${seriesEntityDetails.tvId}/1/1';
+            GoRouter.of(context).push(Approuter.kCustomWebView, extra: tvUrl);
           },
         ),
         CircleButton(

@@ -6,6 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'core/utils/app_colors.dart';
+import 'core/utils/bloc_provieders_views/home_view_provieder.dart';
+import 'core/utils/bloc_provieders_views/seires_tv_shows_providers.dart';
+import 'core/utils/bloc_provieders_views/wish_list_bloc_provider.dart';
+import 'features/profile/presentaion/views/profile_view.dart';
 
 Widget primaryPhoto() {
   return SvgPicture.asset('assets/images/live_tv_black_24dp1.svg');
@@ -188,3 +192,9 @@ List<Widget> selectedIcons = [
     color: AppPrimaryColors.blueAccent,
   )
 ];
+List<Widget> body = [
+    HomeViewProviders(),
+    WishListBlocProvider(),
+    SeiresTvShowsProviders(),
+    ProfileView()
+  ];

@@ -14,7 +14,8 @@ class VerticalCard extends StatelessWidget {
     required this.title,
     required this.gener,
     required this.rating,
-    required this.locataion, required this.generState,
+    required this.locataion,
+    required this.generState,
   });
 
   final int id;
@@ -25,8 +26,7 @@ class VerticalCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final generButtonText =
-        buttonTexts[generState];
+    final generButtonText = buttonTexts[generState];
     return GestureDetector(
       onTap: () {
         GoRouter.of(context).push(locataion, extra: id);
@@ -73,7 +73,7 @@ class VerticalCard extends StatelessWidget {
                   ),
                   Text(
                     generButtonText == 'All'
-                        ? getGenreName(gener[0])
+                        ? getGenreName(gener.isNotEmpty ? gener[0] : 27)
                         : generButtonText,
                     style: AppStyles.textstyle12,
                   ),

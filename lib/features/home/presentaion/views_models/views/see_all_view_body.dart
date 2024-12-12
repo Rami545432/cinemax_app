@@ -1,5 +1,5 @@
 import 'package:cinemax_app/constant.dart';
-import 'package:cinemax_app/core/utils/cubits/gener_cubit.dart';
+import 'package:cinemax_app/core/utils/cubits/gener_cubit/gener_cubit.dart';
 import 'package:cinemax_app/features/home/presentaion/manger/fetch_popular_movie_cubit/fetch_popular_movies_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

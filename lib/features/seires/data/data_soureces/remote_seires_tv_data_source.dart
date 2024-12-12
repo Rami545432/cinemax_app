@@ -1,3 +1,4 @@
+
 import 'package:cinemax_app/core/utils/api_service.dart';
 import 'package:cinemax_app/features/seires/data/models/series_details_model/series_details_model.dart';
 import 'package:cinemax_app/features/seires/data/models/series_model.dart';
@@ -28,9 +29,7 @@ class RemoteSeiresTvDataSourceImpl extends RemoteSeiresTvDataSource {
 
     var data = await apiService.getGeneralTv(type: 'tv', generId, page: page);
     for (var show in data["results"]) {
-      var allowedLanguages = ['US', 'GB', 'CN', 'IN', 'KR', 'FR'];
-      if (show['poster_path'] != null &&
-          allowedLanguages.contains(show["origin_country"])) {
+      if (show['poster_path'] != null && show['original_language'] != 'ja') {
         tvShows.add(
           SeriesModel.fromJson(show),
         );
@@ -58,10 +57,7 @@ class RemoteSeiresTvDataSourceImpl extends RemoteSeiresTvDataSource {
     List<SeriesEntity> tvShows = [];
     var data = await apiService.getTrendingMovies(type: 'tv', page: page);
     for (var show in data['results']) {
-      if (show['poster_path'] != null &&
-          show['original_language'] != 'ja' &&
-          show['backdrop_path'] != null &&
-          show['original_language'] != 'zh') {
+      if (show['poster_path'] != null && show['original_language'] != 'ja'&&show['backdrop_path'] != null&& show['original_language'] != 'zh' ) {
         tvShows.add(
           SeriesModel.fromJson(show),
         );
@@ -86,15 +82,16 @@ class RemoteSeiresTvDataSourceImpl extends RemoteSeiresTvDataSource {
     List<SeriesSeasonDetailsEntitiy> seasons = [];
     var data = await apiService.getSeasonDetails(tvid: tvid, season: season);
     for (var episode in data["episodes"]) {
+      
       if (episode['still_path'] != null) {
-        if (seasons.length <= 50) {
-          seasons.add(
-            SeriesSeasonDetailsModel.fromJson(episode),
-          );
-        }
+        if (seasons.length<=50) {
+  seasons.add(
+    SeriesSeasonDetailsModel.fromJson(episode),
+  );
+}
       }
     }
-
+    
     return seasons;
   }
 }

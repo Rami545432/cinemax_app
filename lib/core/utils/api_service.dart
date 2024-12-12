@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 
 class ApiService {
   final Dio dio;
-  final apiKey = '23e981c4511a42f47649472bd8b1bd50';
+  final apiKey = '';
 
   final baseUrlMovie = 'https://api.themoviedb.org/3';
 
@@ -13,7 +13,7 @@ class ApiService {
       {int page = 10, String type = 'movie'}) async {
     var response = await dio.get(
         '$baseUrlMovie/discover/$type?api_key=$apiKey&with_genres=$generId&page=${(page / 10)}');
-    log('$baseUrlMovie/discover/$type?api_key=$apiKey&with_genres=$generId&page=${(page / 10)}');
+
     return response.data;
   }
 
@@ -21,7 +21,6 @@ class ApiService {
       {String type = 'movie'}) async {
     var response = await dio.get(
         '$baseUrlMovie/$type/$endpoint?api_key=$apiKey&language=en-US&append_to_response=credits,videos&page=1');
-    log('$baseUrlMovie/$type/$endpoint?api_key=$apiKey&language=en-US&append_to_response=credits,videos&page=1');
 
     return response.data;
   }
@@ -59,7 +58,7 @@ class ApiService {
       {String type = 'movie', int page = 1}) async {
     var response = await dio
         .get('$baseUrlMovie/$type/top_rated?api_key=$apiKey&page=$page');
-    log('$baseUrlMovie/$type/top_rated?api_key=$apiKey&page=$page');
+
     return response.data;
   }
 
@@ -67,8 +66,7 @@ class ApiService {
       {int page = 1, String type = 'movie'}) async {
     var response = await dio.get(
         '$baseUrlMovie/discover/$type?api_key=$apiKey&with_genres=$generId&page=${(page / 1)}');
-    log('$baseUrlMovie/discover/$type?api_key=$apiKey&with_genres=$generId&page=${(page / 1)}');
-    // log(response.data['results'].toString());
+
     return response.data;
   }
 
@@ -76,7 +74,7 @@ class ApiService {
       {required int tvid, required int season}) async {
     var response =
         await dio.get('$baseUrlMovie/tv/$tvid/season/$season?api_key=$apiKey');
-    log('$baseUrlMovie/tv/$tvid/season/$season?api_key=$apiKey');
+
     return response.data;
   }
 }

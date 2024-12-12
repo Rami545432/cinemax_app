@@ -1,9 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 
-import '../../../features/home/domian/entites/entity.dart';
+import '../../../../features/home/domian/entites/entity.dart';
 
-part 'gener_state.dart';
+
 
 class GenerCubit extends Cubit<int> {
   GenerCubit() : super(0);

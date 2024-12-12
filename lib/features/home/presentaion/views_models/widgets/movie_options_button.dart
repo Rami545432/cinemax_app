@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class FilmFeaturesOptions extends StatelessWidget {
   const FilmFeaturesOptions({super.key, required this.movieDetailsEntity});
@@ -19,13 +18,17 @@ class FilmFeaturesOptions extends StatelessWidget {
       children: [
         TrailerButton(
           onTap: () {
-            final Uri url = Uri.parse(
-                'https://vidsrc.xyz/embed/movie/${movieDetailsEntity.movieId}');
-            try {
-              launchUrl(url);
-            } catch (e) {
-              const Text('Sorry the Movie Not work try Again later !');
-            }
+            final movieUrl =
+                'https://vidsrc.xyz/embed/movie/${movieDetailsEntity.movieId}';
+            // final Uri url = Uri.parse(
+            //     'https://vidsrc.xyz/embed/movie/${movieDetailsEntity.movieId}');
+            // try {
+            //   launchUrl(url);
+            // } catch (e) {
+            //   const Text('Sorry the Movie Not work try Again later !');
+            // }
+            GoRouter.of(context)
+                .push(Approuter.kCustomWebView, extra: movieUrl);
           },
         ),
         CircleButton(

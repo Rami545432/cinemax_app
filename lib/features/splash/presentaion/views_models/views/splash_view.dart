@@ -14,7 +14,7 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(Duration(milliseconds: 250), () {
       _checkUserLoggedIn();
     });
 
@@ -26,9 +26,9 @@ class _SplashViewState extends State<SplashView> {
       User? user = FirebaseAuth.instance.currentUser;
 
       if (user != null) {
-        GoRouter.of(context).push(Approuter.kNavigationView);
+        GoRouter.of(context).pushReplacement(Approuter.kNavigationView);
       } else {
-        GoRouter.of(context).push(Approuter.kOnBoarding1);
+        GoRouter.of(context).pushReplacement(Approuter.kOnBoarding1);
       }
     });
   }

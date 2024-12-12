@@ -32,18 +32,19 @@ class _CustomDescreptionState extends State<CustomDescreption> {
             overflow: isClicked ? TextOverflow.ellipsis : TextOverflow.visible,
             widget.overview,
           ),
-          if (widget.overview.length > 3)
-            SecondaryButton(
-              onTap: () {
-                setState(() {
-                  isClicked = !isClicked;
-                });
-              },
-              text: isClicked ? 'Less' : 'More',
-              style: AppStyles.textstyle14.copyWith(
-                  fontWeight: FontWeight.w400,
-                  color: AppPrimaryColors.blueAccent),
-            ),
+          widget.overview.length > 3
+              ? SecondaryButton(
+                  onTap: () {
+                    setState(() {
+                      isClicked = !isClicked;
+                    });
+                  },
+                  text: isClicked ? 'Less' : 'More',
+                  style: AppStyles.textstyle14.copyWith(
+                      fontWeight: FontWeight.w400,
+                      color: AppPrimaryColors.blueAccent),
+                )
+              : Text('')
         ],
       ),
     );

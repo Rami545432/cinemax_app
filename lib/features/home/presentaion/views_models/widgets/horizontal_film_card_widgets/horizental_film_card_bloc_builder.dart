@@ -1,10 +1,10 @@
 import 'package:cinemax_app/features/home/presentaion/manger/fetch_newst_movies_cubit/fetch_newset_movies_cubit.dart';
-import 'package:cinemax_app/features/home/presentaion/views_models/widgets/horizental_stack_container.dart';
+import 'package:cinemax_app/features/home/presentaion/views_models/widgets/horizontal_film_card_widgets/horizental_stack_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-import '../../../../../core/utils/skeletionzed_loading_cards/horizental_stack_container_loading.dart';
+import '../../../../../../core/utils/skeletionzed_loading_cards/horizental_stack_container_loading.dart';
 
 class HorizintalFilmCardBlocBuilder extends StatelessWidget {
   const HorizintalFilmCardBlocBuilder({

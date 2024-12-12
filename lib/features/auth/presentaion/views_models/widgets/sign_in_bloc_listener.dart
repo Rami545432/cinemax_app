@@ -47,6 +47,7 @@ class SignInBlocListiner extends StatelessWidget {
           if (_globalKey.currentState!.validate()) {
             BlocProvider.of<SignInCubit>(context).signIn(
                 email: emailContoller.text, password: passwordController.text);
+               
           }
         },
       ),

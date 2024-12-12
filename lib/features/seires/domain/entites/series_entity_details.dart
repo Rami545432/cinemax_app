@@ -4,7 +4,7 @@ import 'package:cinemax_app/features/seires/data/models/series_details_model/sea
 import '../../data/models/series_details_model/result.dart';
 
 class SeriesEntityDetails {
-  final num tvId;
+  final int tvId;
   final String tvTitle;
   final String tvStory;
   final String tvPosterPath;

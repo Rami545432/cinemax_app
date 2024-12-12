@@ -1,7 +1,7 @@
-
+import 'package:cinemax_app/core/utils/go_router.dart';
 import 'package:cinemax_app/features/seires/domain/entites/series_season_details_entitiy.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../core/utils/app_colors.dart';
 
@@ -21,14 +21,10 @@ class EpisodeCard extends StatelessWidget {
         var id = seasonDetailsEntitiy.tvId;
         var seasonNum = seasonDetailsEntitiy.seasonNum;
         var episodeNumber = seasonDetailsEntitiy.episodeNum;
+        var episodeUrl =
+            'https://vidsrc.xyz/embed/tv/$id/$seasonNum/$episodeNumber';
 
-        final Uri url = Uri.parse(
-            'https://vidsrc.xyz/embed/tv/$id/$seasonNum/$episodeNumber');
-        try {
-          launchUrl(url);
-        } catch (e) {
-          const Text('Sorry the Movie Not work try Again later !');
-        }
+        GoRouter.of(context).push(Approuter.kCustomWebView, extra: episodeUrl);
       },
       child: Container(
         height: null,

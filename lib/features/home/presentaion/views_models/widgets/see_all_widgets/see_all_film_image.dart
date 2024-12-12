@@ -23,8 +23,8 @@ class SeeAllImageStack extends StatelessWidget {
               errorWidget: (context, url, error) {
                 return const Icon(Icons.add_ic_call_outlined);
               },
-              height: MediaQuery.of(context).size.height * 0.25,
-              width: MediaQuery.of(context).size.width * 0.27,
+              height: MediaQuery.sizeOf(context).height * 0.25,
+              width: MediaQuery.sizeOf(context).width * 0.27,
               imageUrl: '$baseImageUrl$imageUrl'),
         ),
         Positioned(
